@@ -1,0 +1,29 @@
+<app-card>
+    <div class="row">
+      <div class="col-md-6 col-xl-6">
+        <h4>JOB PUBLISHED</h4>
+      </div>
+    </div>
+    <br>
+
+    <div class="row"> 
+      <div *ngFor="let job of editedrecruitment">
+      <div class="card card-blue total-card m-10">
+        <div class="card-block">
+          <div class="text-left">
+            <a [routerLink]="['../candidate-list']" [queryParams]="{id:job.jobId}">
+              <h4 style="font-size: 12px;">{{job.jobTitle}}</h4>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row" *ngIf="editedrecruitment.length ==0">
+    <div class="col-md-12">
+      <h1 class="text-center"><span class="text-c-pink" style="font-size:70px;">SORRY,</span><br>NO CURRENT VACANCIES !</h1>
+    </div>
+  </div>
+</app-card>

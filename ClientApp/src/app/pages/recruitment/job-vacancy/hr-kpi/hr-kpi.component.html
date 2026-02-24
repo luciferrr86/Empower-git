@@ -1,0 +1,32 @@
+<div class="card mt-3">
+    <div class="card-header">
+      <div class="card-header-left">
+        <h5>HR KPI</h5>
+      </div>
+      <button type="button" class="btn btn-primary btn-sm f-right" (click)="addHrKpi()" style="cursor: default">
+          Add Question
+        </button>
+    </div>
+    <div class="card-block">
+        <form [formGroup]="hrKpiForm" (ngSubmit)="save()">
+          <!--addresses-->
+  
+          <div formArrayName="hrKpi">
+            <div *ngFor="let kpi of hrKpi.controls; let i=index">
+              <div [formGroupName]="i" class="panel-body">
+                <hr-kpi-editor [group]="hrKpiForm.controls.hrKpi.controls[i]" (hrQuestionId)="removeHrKpi($event, i)" ></hr-kpi-editor>
+              </div>  
+            </div>
+          </div>
+  
+          <div class="row">
+              <div class="col-xs-12 col-sm-12 mb-2">
+                <div style="text-align: right;">
+                      <button type="submit" class="btn btn-primary pull-right" [disabled]="hrKpiForm.invalid">{{isSaving ? ('Please Wait...') : ('Save')}}</button>
+                </div>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  

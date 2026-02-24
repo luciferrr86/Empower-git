@@ -1,0 +1,59 @@
+<form class="form-horizontal" name="roleInfoForm" #roleInfoForm="ngForm" (ngSubmit)="save()">
+  <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+    <div class="app-modal-header">
+      <h4 class="modal-title">{{modalTitle}} Role</h4>
+      <button type="button" class="close basic-close" (click)="editorModal.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="app-modal-body">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <p>Role name
+            <input type="text" name="roleName" id="roleName" name="roleName" placeholder="Enter role name"
+              class="form-control" pattern="[a-zA-Z](.*[a-zA-Z ])?$" [(ngModel)]="roleEdit.name" #roleName="ngModel"
+              required minlength="2" maxlength="200" />
+            <span [hidden]="roleName.valid" class="messages text-danger">
+              Please enter role name
+            </span>
+          </p>
+        </div>
+        <div class="col-md-12">
+          <label class="col-form-label">Permission</label>
+          <div class="row well permissionsRow" style="height: 250px;overflow: scroll">
+            <ng-template ngFor let-permissionGroup [ngForOf]="allPermissions | groupBy: 'groupName'" let-i="index">
+              <div class="form-group col-sm-12 permissionsColumn">
+                <label class="col-md-4 control-label" for="checkboxes"
+                  (click)="toggleGroup(permissionGroup.key)">{{permissionGroup.key}}</label>
+                <div class="col-md-8">
+                  <div class="checkbox" *ngFor="let permission of permissionGroup.value">
+                    <label for="checkboxes-{{permission.value}}">
+                      <input name="permission" name="checkboxes-{{permission.value}}"
+                        id="checkboxes-{{permission.value}}" type="checkbox"
+                        [(ngModel)]="selectedValues[permission.value]"> {{permission.name}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="(i + 1) % 2 === 0" class="clearfix"></div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button (click)="selectAll()" type="button" class="btn btn-primary waves-effect">Select All</button>
+          <button (click)="selectNone()" type="button" class="btn btn-primary waves-effect">Select None</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-modal-footer">
+      <div class="col-md-12">
+        <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+        <button type="submit" [disabled]="!roleInfoForm.form.valid"
+          class="btn btn-primary waves-effect waves-light ">{{isSaving ? 'Saving...' : 'Save'}}</button>
+      </div>
+    </div>
+  </app-modal-basic>
+</form>

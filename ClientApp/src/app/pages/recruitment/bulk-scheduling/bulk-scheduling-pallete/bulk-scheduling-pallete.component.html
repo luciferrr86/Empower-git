@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-lg-12">
+    <app-card [title]="'Mass Interview Scheduling'">
+      <div class="row">
+        <div class="col-lg-12 col-xl-12">
+
+          <ngb-tabset>
+            <ngb-tab title="Interview Date & Venue">
+              <ng-template ngbTabContent>
+                <div [@fadeInOutTranslate] class="m-t-15">
+                  <div class="form-group">
+                    <mass-interview-schedule (change)="getId($event)"></mass-interview-schedule>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Select Room">
+              <ng-template ngbTabContent>
+                <div [@fadeInOutTranslate] class="m-t-15">
+                  <div class="form-group">
+                    <interview-rooms></interview-rooms>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Select Panel">
+              <ng-template ngbTabContent>
+                <div [@fadeInOutTranslate] class="m-t-15">
+                  <div class="form-group">
+                    <interview-panel></interview-panel>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Schedule Interview">
+              <ng-template ngbTabContent>
+                <div [@fadeInOutTranslate] class="m-t-15">
+                  <div class="form-group">
+                    <automatic-schedule></automatic-schedule>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="col-md-12">
+  <app-card>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <div _ngcontent-c12="" draggable="true" class="dragarea" ng-reflect-ng-class="dragarea">
+            <input type="file" id="file" (change)="handleFileInput($event)" accept=".xlsx,.xls">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="progress" *ngIf="current_progress>0">
+          <div id="dynamic" class="progress-bar progress-bar-striped bg-success"
+               role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" [style.width]="current_progress + '%'">
+            <span id="current-progress">{{current_progress}}% Complete</span>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="uploadComplete" class="col-md-4">
+        <div class="f-right">
+          <button class="btn btn-inverse" (click)="import()">Import Data</button>
+        </div>
+      </div>
+    </div>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th style="border-bottom:1px solid;border-left:1px solid;">Name</th>
+          <th style="border-bottom:1px solid;border-left:1px solid;">Job Type</th>
+          <th style="border-bottom:1px solid;border-left:1px solid;">Job Name</th>
+          <th style="border-bottom:1px solid;border-left:1px solid;">Email</th>
+          <th style="border-bottom:1px solid;border-left:1px solid;">L1ManagerId</th>
+          <!--<th style="border-bottom:1px solid;border-left:1px solid;">Feedback</th>-->
+          <th style="border-bottom:1px solid;border-left:1px solid;">Action</th>
+        </tr>
+        <tbody>
+          <tr *ngFor="let candidate of candidateBulkUpload;let i=index">
+            <td style="border-bottom:1px solid;border-left:1px solid;" *ngIf="candidate.isEdit; then editable; else readOnly;"></td>
+            <ng-template #readOnly>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{candidate.candidateName}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{candidate.jobName}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{candidate.jobTitle}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{candidate.email}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{candidate.level1ManagerId}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">
+                <button class="table-row-action edit-action btn btn-sm btn-primary" type="button" (click)="enableEdit(candidate.id)">Edit</button>&nbsp;
+
+              </td>
+            </ng-template>
+            <ng-template #editable>
+
+              <td style="border-bottom:1px solid;border-left:1px solid;"><input type="text" [(ngModel)]="candidateName" /></td>
+              <td style="border-bottom:1px solid;border-left:1px solid;"><input type="text" [(ngModel)]="jobName" /></td>
+              <td style="border-bottom:1px solid;border-left:1px solid;"><input type="text" [(ngModel)]="jobTitle" /></td>
+              <td style="border-bottom:1px solid;border-left:1px solid;"><input type="text" [(ngModel)]="email" /></td>
+              <td style="border-bottom:1px solid;border-left:1px solid;"><input type="text" [(ngModel)]="level1ManagerId" /></td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">
+                <button class="table-row-action edit-action btn btn-sm btn-primary" type="button" (click)="disableEdit(candidate.id)">Cancel</button>&nbsp;
+                <button class="table-row-action edit-action btn btn-sm btn-success" type="button" (click)="updateCandidateData(candidate.id)">Save</button>&nbsp;
+
+              </td>
+            </ng-template>
+          </tr>
+          <!--<tr class="text-left">
+        <td colspan="2"><button class="btn btn-sm btn-primary" type="button" (click)="addProductSpecification()">Add New Product Attribute</button></td>
+        <td colspan="9"></td>
+      </tr>-->
+        </tbody>
+      </table>
+    </div>
+   
+  </app-card>
+</div>
+
+
+<!--
+  </div>
+  </div>
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Excel Upload List'">
+      <div class="dt-responsive">
+        <ngx-datatable style="max-height: 500px; overflow:auto" class="data-table bootstrap material"
+          id="tblFailedEntry" name='testTable' [externalPaging]="true" [count]="count"
+          [loadingIndicator]="loadingIndicator" [rows]="rows" [rowHeight]="35" [headerHeight]="50" [footerHeight]="35"
+          [columns]="columns" [columnMode]="'force'">
+        </ngx-datatable>
+      </div>
+    </app-card>-->

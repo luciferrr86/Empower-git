@@ -1,0 +1,67 @@
+<div>
+  <form class="form-horizontal" name="templateInfoForm" #templateInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Template</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <label class="col-form-label">Template Name</label>
+            <input autofocus type="text" name="name" placeholder="Template Name" [(ngModel)]="template.templateName"
+              #name="ngModel" class="form-control" required>
+
+            <div [hidden]="name.valid" class="messages text-danger">
+              Please enter template name
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label class="col-form-label">Template Frequency</label>
+            <ng-select name="frequency" placeholder="Template Frequency" [options]="configurationList"
+              [(ngModel)]="template.timesheetConfigurationId" #frequency="ngModel" required>
+            </ng-select>
+            <div [hidden]="frequency.valid" class="messages text-danger">
+              Please select frequency
+            </div>
+          </div>
+          <div class="col-sm-6" *ngFor="let list of configurationList">
+            <div *ngIf="list.label ==='Weekly'">
+              <label class="col-form-label">Days</label>
+              <ng-select name="days" placeholder="Week Days" [options]="weekDaysList" [multiple]="true"
+                [(ngModel)]="template.selectedDays" #days="ngModel" disabled required>
+              </ng-select>
+            </div>
+            <div *ngIf="list.label ==='Daily'">
+              <label class="col-form-label">Days</label>
+              <ng-select name="days" placeholder="Week Days" [options]="weekDaysList" [multiple]="true"
+                [(ngModel)]="template.selectedDays" #days="ngModel" required>
+              </ng-select>
+              <div [hidden]="days.valid" class="messages text-danger">
+                Please select week days
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label class="col-form-label">Start Date</label>
+            <input type="date" class="form-control" id="startDate" name="startdate"
+              [ngModel]="template.startDate | date:'yyyy-MM-dd'" [value]="template.startDate | date:'yyyy-MM-dd'"
+              #startdate="ngModel" required (ngModelChange)="template.startDate = ($event)">
+            <div [hidden]="startdate.valid" class="messages text-danger">
+              Please select start Date
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Close</button>
+        <button type="submit" [disabled]="!templateInfoForm.form.valid" [disabled]="isSaving"
+          class="btn btn-primary waves-effect waves-light ">
+          {{isSaving ? 'Saving in...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

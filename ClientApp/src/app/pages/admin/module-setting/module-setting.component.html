@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-sm-12">
+            <div class="card mt-3">
+                    <div class="card-header">
+                      <div class="card-header-left">
+                        <h5>ADMIN CONFIGURATION</h5>
+                      </div>
+                    </div>
+                    <div class="card-block">                
+                      <squeezebox [multiple]="false">                            
+                            <sb-item class="accordion-panel" *ngFor="let item of appModule">
+                                <div class="row">
+                                    <div class="col-xs-11 col-sm-11 col-sm-11 col-md-11">
+                                        <sb-item-head class="accordion-heading accordion-msg">{{item.moduleName}}</sb-item-head>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-sm-1 col-md-1">
+                                            <ui-switch class="js-single " color="#4680ff" switchColor="#fff" size="small" [checked]="item.isActive" (change)="onModuleChange($event,item.id)"></ui-switch>
+                                    </div>
+                                </div>
+            
+                                <sb-item-body class="accordion-content">
+                                    <div class="accordion-desc">
+                                        <div class="row">
+                                            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4" *ngFor="let item1 of item.applicationModuleDetailModel" >
+                                                <label>{{item1.subModuleName}}</label><br>
+                                                <ui-switch class="js-single " color="#4680ff" switchColor="#fff" size="small" 
+                                                [checked]="item1.isActive" (change)="onSubModuleChange($event,item1.id)"></ui-switch>
+                                            </div>            
+                                        </div>
+                                        <br>
+                                    </div>
+                                </sb-item-body>
+                            </sb-item>
+            
+                        </squeezebox>
+                    </div>
+                  </div>
+      
+
+          
+       
+    </div>
+</div>

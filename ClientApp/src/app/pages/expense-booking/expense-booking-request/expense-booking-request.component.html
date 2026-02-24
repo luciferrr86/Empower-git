@@ -1,0 +1,258 @@
+<form name="expenseForm" #expenseForm="ngForm" (ngSubmit)="Submit()">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+        <h5 class="text">{{expanseTitle}}</h5>
+      </div>
+
+      <br>
+
+      <app-card>
+        <div class="dt-responsive preloader3">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <p>Category
+                <input type="text" [value]="requestEdit.category" disabled class="form-control" />
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <p>Sub Category
+                <input type="text" [value]="requestEdit.subCategory" disabled class="form-control" />
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <p>Item
+                <ng-select required name="item" placeholder="Item"
+                  [disabled]="requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'"
+                  [options]="itemList" [(ngModel)]="requestEdit.subCategoryItemId" #item="ngModel"> </ng-select>
+                <span [hidden]="item.valid || requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'"
+                  class="messages text-danger">
+                  Please select an item
+                </span>
+              </p>
+            </div>
+
+
+          </div>
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <p>From Date
+                <input type="date" required class="form-control"
+                  [disabled]="requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'" name="fromDate"
+                  placeholder="From Date" [ngModel]="requestEdit.fromDate | date:'yyyy-MM-dd'"
+                  [value]="requestEdit.fromDate | date:'yyyy-MM-dd'" #fromDate="ngModel"
+                  (ngModelChange)="requestEdit.fromDate = ($event)">
+                <span
+                  [hidden]="fromDate.valid || requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'"
+                  class="messages text-danger">
+                  Please select from date
+                </span>
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <p>To Date
+                <input type="date" required class="form-control"
+                  [disabled]="requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'" name="toDate"
+                  placeholder="To Date" [ngModel]="requestEdit.toDate | date:'yyyy-MM-dd'"
+                  [value]="requestEdit.toDate | date:'yyyy-MM-dd'" #toDate="ngModel"
+                  (ngModelChange)="requestEdit.toDate = ($event)">
+                <span
+                  [hidden]="toDate.valid || requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'"
+                  class="messages text-danger">
+                  Please select to date
+                </span>
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <p>Amount
+                <input autofocus required type="number" pattern="^[1-9]+[0-9]*$"
+                  [disabled]="requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'" name="amount"
+                  placeholder="Amount" [(ngModel)]="requestEdit.amount" #amount="ngModel" class="form-control">
+                <span
+                  [hidden]="amount.valid || requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'"
+                  class="messages text-danger">
+                  Please enter amount
+                </span>
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <p>Functional Department
+                <ng-select name="department"
+                  [disabled]="requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'" required
+                  placeholder="Department" [options]="departmentList" [(ngModel)]="requestEdit.departmentId"
+                  #department="ngModel"> </ng-select>
+                <span
+                  [hidden]="department.valid || requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'"
+                  class="messages text-danger">
+                  Please enter department
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="row" *ngIf="requestEdit?.expenseDocumentList?.length >0">
+            <!-- Multiple Open Accordion start -->
+            <div class="col-lg-12">
+              <app-card [title]="'Documents'" [blockClass]="'accordion-block scale-accordion'">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Download</th>
+                        <th
+                          *ngIf="requestEdit.status=='Saved'||requestEdit.status=='4'||requestEdit.status=='New'||requestEdit.status=='0'">
+                          Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let document of requestEdit.expenseDocumentList; let i=index">
+
+                        <td>{{document.fileName}} </td>
+
+                        <td>
+                          <a href="{{document.fileUrl}}" target="_blank"
+                            class="m-r-15 crm-action-edit text-muted text-primary">
+                            <i class="icofont icofont-arrow-down"></i></a>
+                        </td>
+                        <td>
+                          <a href="javascript:;"
+                            *ngIf="requestEdit.status=='Saved'||requestEdit.status=='4'||requestEdit.status=='New'||requestEdit.status=='0'"
+                            ngbTooltip="Delete" (click)="deleteDocument(document.expenseDocumentId)"
+                            class="m-r-15 crm-action-edit text-muted text-primary">
+                            <i class="icofont icofont-trash"></i>
+                          </a>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </app-card>
+            </div>
+          </div>
+          <div class="row" *ngIf="requestEdit?.expenseBookingDetail?.length >0">
+            <!-- Multiple Open Accordion start -->
+            <div class="col-lg-12">
+              <app-card [title]="'Remarks'" [blockClass]="'accordion-block scale-accordion'">
+                <squeezebox [multiple]="false">
+                  <sb-item class="accordion-panel"
+                    *ngFor="let commentData of requestEdit.expenseBookingDetail; let i=index">
+                    <sb-item-head class="accordion-heading accordion-msg project-task">
+
+                      <div class="clearfix task-contain">
+                        <h6 class="bg-c-blue d-inline-block text-center"> L{{commentData.level+1}} </h6>
+                        <span class="d-inline-block m-l-20">{{commentData.name}} </span>
+                        <span *ngIf="commentData.status=='Approved'" class="f-right label bg-c-green m-l-10 f-10">
+                          {{commentData.status}} </span>
+                        <span *ngIf="commentData.status=='Pending'" class="f-right label bg-c-yellow m-l-10 f-10">
+                          {{commentData.status}} </span>
+                        <span *ngIf="commentData.status=='Rejected'" class="f-right label bg-c-pink m-l-10 f-10">
+                          {{commentData.status}} </span>
+                      </div>
+                    </sb-item-head>
+                    <sb-item-body class="accordion-content">
+                      <div class="accordion-desc">
+                        <div class="row"
+                          *ngFor="let cooment of commentData.expenseBookingDetailApproverList; let i=index">
+                          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+                            <p>Employee Remarks
+                              <textarea class="form-control" [disabled]="true">{{cooment.employeeComment}}</textarea>
+                            </p>
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+                            <br>
+                            <p>Approver Comment
+                              <textarea class="form-control" [disabled]="true">{{cooment.managerComment}}</textarea>
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div *ngFor="let commentInviteData of commentData.expenseBookingIviteApproverList; let i=index">
+                        <div class="accordion-heading accordion-msg">
+                          <div class="clearfix">
+                            <span> {{commentInviteData.name}} </span>
+                            <span *ngIf="commentInviteData.status=='Approved'"
+                              class="f-right label bg-c-green m-l-10 f-10">
+                              {{commentInviteData.status}} </span>
+                            <span *ngIf="commentInviteData.status=='Pending'"
+                              class="f-right label bg-c-yellow m-l-10 f-10">
+                              {{commentInviteData.status}} </span>
+                            <span *ngIf="commentInviteData.status=='Rejected'"
+                              class="f-right label bg-c-pink m-l-10 f-10">
+                              {{commentInviteData.status}} </span>
+                          </div>
+                        </div>
+                        <div class="accordion-content">
+                          <div class="accordion-desc">
+
+                            <div class="row"
+                              *ngFor="let coomentInvite of commentInviteData.expenseBookingDetailIviteApproverList; let i=index">
+                              <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+                                <p>Employee Remarks<textarea class="form-control"
+                                    [disabled]="true">{{coomentInvite.employeeComment}}</textarea>
+
+                                </p>
+                              </div>
+                              <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+                                <p>Approver Comment
+                                  <textarea class="form-control"
+                                    [disabled]="true">{{coomentInvite.managerComment}}</textarea>
+                                </p>
+                              </div>
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </sb-item-body>
+                  </sb-item>
+                </squeezebox>
+              </app-card>
+            </div>
+          </div>
+          <div class="row"
+            *ngIf="requestEdit.status=='Saved'||requestEdit.status=='4'||requestEdit.status=='New'||requestEdit.status=='0'">
+            <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+              <p>Comments
+                <input autofocus type="text" required name="remarksEmployee" placeholder="Remarks"
+                  [(ngModel)]="requestEdit.remarks" #remarksEmployee="ngModel" class="form-control">
+                <span [hidden]="remarksEmployee.valid" class="messages text-danger">
+                  Please enter remarks
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="row"
+            *ngIf="requestEdit.status=='Saved'||requestEdit.status=='4'||requestEdit.status=='New'||requestEdit.status=='0'">
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <p>Upload
+                <expense-booking-upload (getId)=getDocumentId($event)></expense-booking-upload>
+              </p>
+            </div>
+            <div class="col-xs-8 col-sm-8 col-sm-8 col-md-8"
+              *ngIf="requestEdit.status=='Saved'||requestEdit.status=='4'||requestEdit.status=='New'||requestEdit.status=='0'">
+              <div class="f-right m-t-20">
+                <button type="button" (click)="Save()" [disabled]="!expenseForm.form.valid"
+                  class="btn btn-sm btn-success waves-effect">Save</button>
+                <button type="submit" [disabled]="!expenseForm.form.valid" class="btn btn-sm btn-info waves-effect">{{isSubmitting
+                ? 'Submitting...' : 'Submit'}}</button>
+                <button type="button" class="btn btn-sm btn-inverse waves-effect"
+                  [routerLink]="['/expense/expense-booking']">Back</button>
+              </div>
+            </div>
+          </div>
+          <div class="row  f-right">
+            <div class="col-md-12" *ngIf="requestEdit.status=='1'||requestEdit.status=='2'||requestEdit.status=='3'">
+              <button type="button" class="btn btn-sm btn-inverse waves-effect"
+                [routerLink]="['/expense/expense-booking']">Back</button>
+            </div>
+          </div>
+          <br>
+          <br>
+        </div>
+      </app-card>
+    </div>
+  </div>
+</form>

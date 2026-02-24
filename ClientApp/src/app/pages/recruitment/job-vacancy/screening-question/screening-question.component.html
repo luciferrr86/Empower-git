@@ -1,0 +1,33 @@
+
+<div class="card mt-3">
+    <div class="card-header">
+      <div class="card-header-left">
+        <h5>SCREENING QUESTION</h5>
+      </div>
+      <button type="button" class="btn btn-primary btn-sm f-right" (click)="addQuestion()">
+          Add Question
+        </button>
+    </div>
+    <div class="card-block">
+      <form [formGroup]="screeningForm" (ngSubmit)="save()">
+        <!--addresses-->
+
+        <div formArrayName="jobScreeningQuestion">
+          <div *ngFor="let question of jobScreeningQuestion.controls; let i=index">            
+            <div [formGroupName]="i">
+              <screening-editor [group]="screeningForm.controls.jobScreeningQuestion.controls[i]" (screeningId)="removeQuestion($event,i)"></screening-editor>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 mb-2">
+              <div style="text-align: right;">                  
+                    <button type="submit" class="btn btn-primary pull-right" [disabled]="screeningForm.invalid">{{isSaving ? ('Please Wait...') : ('Save')}}</button>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>

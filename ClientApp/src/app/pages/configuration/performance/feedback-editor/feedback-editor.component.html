@@ -1,0 +1,14 @@
+<div [formGroup]="feedbackOptionForm">
+    <h5 class="text-c-blue">Option Text</h5>
+    <button type="button" class="btn btn-danger close btn-outline-danger btn-icon"
+        (click)="removeFeedback(feedbackOptionForm.controls.id.value)" *ngIf="!isPerformanceStart"><i
+            class="icofont icofont-ui-delete"></i></button>
+    <textarea class="form-control" cols="5" placeholder="Organisational Behaviour" rows="5" formControlName="labelText"
+        required></textarea>
+    <input type="hidden" formControlName="id">
+    <div [hidden]="feedbackOptionForm.controls.labelText.valid" class="text-danger">
+        Feedback text is required
+    </div>
+
+    <br>
+</div>

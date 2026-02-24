@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="md-tabs">
+      <div *ngIf="hrView.isMidYearEnabled ;else midYearDisabled">
+        <div *ngIf="!hrView.isPerformanceStart && !hrView.isMidYearReviewCompleted;else midYearCompleted">
+          <button type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right"
+            (click)="performanceInvitation()" [disabled]="isInviting">
+            {{isInviting? ('Please Wait...') : ('INVITE MANAGER TO START MID YEAR REVIEW PROCESS')}} </button>
+        </div>
+        <ng-template #midYearCompleted>
+          <button type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right"
+            (click)="performanceReminder()" [disabled]="isInviting">
+            {{isInviting? ('Please Wait...') : ('START END YEAR REVIEW PROCESS')}} </button>
+        </ng-template>
+      </div>
+
+      <ng-template #midYearDisabled>
+        <div *ngIf="!hrView.isPerformanceStart">
+          <button type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right"
+            (click)="performanceInvitation()" [disabled]="isInviting">
+            {{isInviting? ('Please Wait...') : ('INVITE MANAGER TO START REVIEW PROCESS')}} </button>
+        </div>
+      </ng-template>
+      <ngb-tabset>
+        <ngb-tab title="Set Review Manager Status">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate]>
+              <manager-list></manager-list>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="My Review Employee Status">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate]>
+              <employee-list></employee-list>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

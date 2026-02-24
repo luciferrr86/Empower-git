@@ -1,0 +1,20 @@
+<div draggable="true" ngClass="{{dragAreaClass}}">
+      <!-- <a href="javascript:void(0)" (click)="file.click()" >
+        Click to browse 
+      </a>
+      Or Drag & Drop to upload your files -->
+
+        <input type="file"  multiple
+              #file 
+              [multiple]="(maxFiles > 3)"
+              (change) = "onFileChange($event)"
+              />
+</div>
+<div class="row error messages text-danger" *ngIf="errors.length > 0">    
+  <ul>
+    <li *ngFor="let err of errors">{{err}}</li>
+  </ul>
+</div>
+<div *ngIf="isShow"> 
+  <app-spinner></app-spinner>
+</div>

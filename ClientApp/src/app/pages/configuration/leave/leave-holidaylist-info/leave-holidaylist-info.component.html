@@ -1,0 +1,44 @@
+<div>
+
+  <form class="form-horizontal" name="holidayListInfoForm" #holidayListInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="''">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Holiday</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>Holiday Name
+              <input autofocus type="text" name="holidayname" placeholder="Holiday Name"
+                pattern="[a-zA-Z](.*[a-zA-Z ])?$" [(ngModel)]="holidayEdit.name" #holidayname="ngModel"
+                class="form-control" required>
+              <span [hidden]="holidayname.valid" class="messages text-danger">
+                Please enter holiday name
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-12">
+            <p>Holiday Date
+              <input type="date" class="form-control" id="holidayDate" name="holidaydate"
+                [ngModel]="holidayEdit.holidayDate | date:'yyyy-MM-dd'"
+                [value]="holidayEdit.holidayDate| date:'yyyy-MM-dd'" #holidaydate="ngModel" required
+                (ngModelChange)="holidayEdit.holidayDate = ($event)">
+              <span [hidden]="holidaydate.valid" class="messages text-danger">
+                please enter period Start date
+              </span>
+            </p>
+
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Close</button>
+        <button type="submit" [disabled]="!holidayListInfoForm.form.valid" [disabled]="isSaving"
+          class="btn btn-primary waves-effect waves-light ">
+          {{isSaving ? 'Saving in...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>

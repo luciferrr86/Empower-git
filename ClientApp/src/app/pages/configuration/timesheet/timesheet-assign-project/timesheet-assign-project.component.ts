@@ -1,0 +1,145 @@
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { TimesheetAssignProject, TimesheetAssignProjectViewModel, EmployeeListModel, EmployeeList, EmployeeListViewModel } from '../../../../models/configuration/timesheet/timesheet-assign-project.model';
+import { IOption } from 'ng-select';
+import { Router } from '@angular/router';
+import { TimesheetProjectService } from '../../../../services/configuration/timesheet/timesheet-project.service';
+import { AlertService } from '../../../../services/common/alert.service';
+import { Utilities } from '../../../../services/common/utilities';
+
+@Component({
+  selector: 'app-timesheet-assign-project',
+  templateUrl: './timesheet-assign-project.component.html',
+  styleUrls: ['./timesheet-assign-project.component.css']
+})
+export class TimesheetAssignProjectComponent implements OnInit {
+
+  loadingIndicator: boolean = true;
+  rows: EmployeeListModel[] = [];
+  employeeList: EmployeeList[] = [];
+  selected: string[] = [];
+  columns: any[] = [];
+  filterQuery: string = "";
+  pageNumber = 0;
+  count = 0;
+  pageSize = 10;
+
+  projectList: Array<IOption> = [];
+  public isSaving = false;
+  public assignProject: TimesheetAssignProject = new TimesheetAssignProject();
+
+  @ViewChild('indexSchedule')
+  indexSchedule: TemplateRef<any>;
+  @ViewChild('selectTemplate')
+  selectTemplate: TemplateRef<any>;
+  editorModal: ModalDirective;
+
+  constructor(private router: Router, private projectService: TimesheetProjectService, private alertService: AlertService) {
+      
+    this.projectService.getAssignProject(this.pageNumber, this.pageSize, this.filterQuery).subscribe(result => this.onSuccessfulDataLoad(result), error => this.onDataLoadFailed());
+  }
+
+  ngOnInit() {
+    this.columns = [
+      { prop: "index", name: '#', cellSchedule: this.indexSchedule, canAutoResize: false },
+      { prop: 'fullName', name: 'Employee Name' },
+      { prop: 'designation', name: 'Designation' },
+      { prop: 'selectTemplate', name: 'Select', cellTemplate: this.selectTemplate, resizeable: false, canAutoResize: false, sortable: false, draggable: false },
+    ];
+  }
+
+    getAssignProject(page?: number, pageSize?: number, name?: string) {
+    this.projectService.getAssignProject(page, pageSize, name).subscribe(result => this.onSuccessfulDataLoad(result), error => this.onDataLoadFailed());
+  }
+
+
+  getData(e) {
+    this.getAssignProject(this.pageNumber, e, this.filterQuery);
+  }
+  setPage(e) {
+    this.getAssignProject(e.offset, this.pageSize, this.filterQuery);
+  }
+  getFilteredData(filterString) {
+    this.getAssignProject(this.pageNumber, this.pageSize, filterString);
+
+  }
+
+  BackProjectList() {
+    this.router.navigate(['../configuration/timesheet/project'])
+  }
+
+    onSuccessfulDataLoad(assignProject: TimesheetAssignProjectViewModel) {
+    this.projectList = assignProject.projectList;
+    this.rows = assignProject.employeeList;
+    assignProject.employeeList.forEach((projects, index) => {
+      (<any>projects).index = index + 1;
+    });
+    this.count = assignProject.totalCount;
+    this.loadingIndicator = false;
+
+  }
+  onDataLoadFailed() {
+    this.alertService.showInfoMessage("Unable to retrieve list from the server");
+  }
+
+
+  onSelect(row) {
+    let itemExist = this.employeeList.find(m => m.employeeId == row.employeeId);
+    if (itemExist != undefined) {
+
+      for (let i = 0; i < this.employeeList.length; i++) {
+        if (this.employeeList[i].employeeId === row.employeeId) {
+          this.employeeList.splice(i, 1);
+          break;
+
+        }
+      }
+    }
+    else {
+      let employee = new EmployeeList();
+      employee.employeeId = row.employeeId;
+      this.employeeList.push(employee);
+    }
+
+  }
+
+  employeelist(id: string) {
+    this.projectService.getEmployeeByProjectId(id, this.pageNumber, this.pageSize, this.filterQuery).subscribe(result => this.onSuccessful(result), error => this.onDataLoadFailed());
+  }
+
+  Save() {
+    this.assignProject.employeelist = this.employeeList;
+    this.projectService.assignProject(this.assignProject).subscribe(sucess => this.saveSuccessHelper(), error => this.saveFailedHelper(error));
+
+  }
+
+    onSuccessful(employeelist: EmployeeListViewModel) {
+    this.rows = employeelist.employeeList;
+    employeelist.employeeList.forEach((projects, index) => {
+      (<any>projects).index = index + 1;
+    });
+
+    for (let i = 0; i < this.rows.length; i++) {
+      if (this.rows[i].projectId != '0') {
+        let employee = new EmployeeList();
+        employee.employeeId = this.rows[i].employeeId;
+        this.employeeList.push(employee);
+      }
+    }
+
+    this.count = employeelist.totalCount;
+    this.loadingIndicator = false;
+
+  }
+  private saveSuccessHelper() {
+    this.alertService.showSucessMessage("save successfully");
+    this.router.navigate(['../configuration/timesheet/project'])
+  }
+
+
+  private saveFailedHelper(error: any) {
+    this.isSaving = false;
+    let test = Utilities.getHttpResponseMessage(error);
+    this.alertService.showInfoMessage("Please try later" + test[0]);
+  }
+}

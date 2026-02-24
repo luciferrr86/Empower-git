@@ -1,0 +1,35 @@
+<div>
+  <form class="form-horizontal" name="feedbackInfoForm" #feedbackInfoForm="ngForm">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>Name
+              <input autofocus type="text" name="name" placeholder="Name" [(ngModel)]="feedback.name" #name="ngModel"
+                class="form-control" required>
+            </p>
+            <div [hidden]="name.valid" class="messages text-danger">
+              Please enter name
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <p>EmailId
+              <input autofocus type="text" name="emailId" placeholder="EmailId" [(ngModel)]="feedback.emailId"
+                #emailId="ngModel" class="form-control" required>
+            </p>
+            <div [hidden]="emailId.valid" class="messages text-danger">
+              Please enter emailId
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Close</button>
+      </div>
+    </app-modal-basic>
+  </form>

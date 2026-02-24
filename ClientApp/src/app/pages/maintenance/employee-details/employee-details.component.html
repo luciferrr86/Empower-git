@@ -1,0 +1,87 @@
+<form name="userInfoForm" #userInfoForm="ngForm" (ngSubmit)="save()">
+  <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+    <div class="app-modal-header">
+      <h4 class="modal-title">{{modalTitle}}</h4>
+      <button type="button" class="close basic-close" (click)="editorModal.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="app-modal-body">
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label class="col-form-label">Name</label>
+          <input autofocus type="text" name="fullName" placeholder="Enter full name" class="form-control"
+            [(ngModel)]="userEdit.fullName" disabled />
+        </div>>
+
+        <div class="col-sm-4">
+          <label class="col-form-label">Email</label>
+          <input autofocus type="text" name="email" placeholder="Enter email id" class="form-control"
+            [(ngModel)]="userEdit.email" disabled />
+        </div>
+
+        <div class="col-sm-4">
+          <label class="col-form-label">Contact</label>
+          <input autofocus type="text" name="contact" placeholder="Enter Contact" class="form-control"
+            [(ngModel)]="userEdit.phoneNumber" disabled />
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label class="col-form-label">Group</label>
+          <ng-select name="group" placeholder="Select Group" [options]="groupList" [(ngModel)]="userEdit.groupId"
+            disabled> </ng-select>
+        </div>
+
+        <div class="col-sm-4">
+          <label class="col-form-label">Designation</label>
+          <ng-select name="designation" placeholder="Select Designation" [options]="designationList"
+            [(ngModel)]="userEdit.designationId" disabled> </ng-select>
+        </div>
+
+        <div class="col-sm-4">
+          <label class="col-form-label">Title</label>
+          <ng-select name="title" placeholder="Select Title" [options]="titleList" [(ngModel)]="userEdit.titleId"
+            disabled> </ng-select>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label class="col-form-label">Reporting Head</label>
+          <ng-select name="manger" placeholder="Select Reporting Head" [options]="managerList"
+            [(ngModel)]="userEdit.managerId" disabled> </ng-select>
+        </div>
+
+        <div class="col-md-4">
+          <label class="col-form-label">Band</label>
+          <ng-select name="band" placeholder="Select Band" [options]="bandList" [(ngModel)]="userEdit.bandId" disabled>
+          </ng-select>
+        </div>
+        <div class="col-sm-4">
+          <label class="col-form-label">Role Access</label>
+          <ng-select name="role" placeholder="Select Role Acces" [options]="roleList" [(ngModel)]="userEdit.roleId"
+            disabled> </ng-select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label class="col-form-label">Date of Joining</label>
+          <input type="date" class="form-control" id="DOJ" name="doj" [ngModel]="userEdit.doj | date:'yyyy-MM-dd'"
+            [value]="userEdit.doj | date:'yyyy-MM-dd'" #doj="ngModel" (ngModelChange)="userEdit.doj = ($event)"
+            disabled>
+        </div>
+
+        <div class="col-sm-4">
+          <label class="col-form-label">Location</label>
+          <input autofocus type="text" name="location" placeholder="Enter Location" class="form-control"
+            [(ngModel)]="userEdit.location" disabled />
+        </div>
+      </div>
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" (click)="editorModal.hide()" class="btn btn-default" [disabled]="isSaving">Cancel</button>
+    </div>
+  </app-modal-basic>
+</form>

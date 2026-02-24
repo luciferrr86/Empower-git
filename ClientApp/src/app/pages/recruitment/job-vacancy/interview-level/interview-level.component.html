@@ -1,0 +1,38 @@
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="card-header-left">
+      <h5>Interview Level</h5>
+    </div>
+    <div class="card-header-right">
+      <button type="button" class="btn btn-primary" (click)="addInterViewLevel()" style="cursor: default">
+        Add Level
+      </button>
+    </div>
+  </div>
+  <div class="card-block">
+      <form [formGroup]="interviewLevelForm" (ngSubmit)="save(interviewLevelForm)">
+        <!--addresses-->
+
+        <div formArrayName="addresses">
+          <div *ngFor="let address of addresses.controls; let i=index" class="panel panel-primary mb-2">
+
+            <div class="panel-heading bg-primary">
+              <span>Interview Level {{i + 1}}</span>              
+            </div>
+            <div [formGroupName]="i" class="panel-body">
+              <interview-level-editor [group]="interviewLevelForm.controls.addresses.controls[i]"></interview-level-editor>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 mb-2">
+              <div style="text-align: right;">
+                    <button type="submit" class="btn btn-primary pull-right" [disabled]="!interviewLevelForm.valid">Submit</button>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>

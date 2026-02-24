@@ -1,0 +1,118 @@
+<div [formGroup]="goalForm" class="mt-2 ml-3 mr-3 mb-2">
+    <app-card>
+        <div class="dt-responsive">          
+
+            <div class="row">
+
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+                    <p>Performance Goal
+                        <ng-select  placeholder="Performance Goal"  [options]="performanceGoalList" formControlName="performanceGoalId" required>
+                        </ng-select>
+                        <span *ngIf="goalForm.controls.performanceGoalId.invalid" class="messages text-danger">
+                                Please select performance goal
+                            </span>
+                    </p>
+                    
+                </div>
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+                    <p>Start Goal
+                        <ng-select placeholder="First Quadrant" [options]="performanceQuadrantList"
+                            formControlName="firstQuadrantId" required> </ng-select>
+                            <span *ngIf="goalForm.controls.firstQuadrantId.invalid" class="messages text-danger">
+                                    Please select first quadrant
+                                </span>
+                    </p>
+                    
+                </div>
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+                    <p>End Goal
+                        <ng-select  placeholder="Second Quadrant" [options]="performanceQuadrantList"
+                            formControlName="secondQuadrantId" required> </ng-select>
+                            <span *ngIf="goalForm.controls.secondQuadrantId.invalid" class="messages text-danger">
+                                    Please select second quadrant
+                                </span>
+                    </p>
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4" *ngIf="isIndividualEnabled">
+                    <p>Individual Goal
+                        <ng-select  [multiple]="true"   (ngModelChange)="toggleGroup($event)" placeholder="Individual Goal" [options]="individualList"
+                            formControlName="setIndividual" required > </ng-select>
+                            <span *ngIf="goalForm.controls.setIndividual.invalid" class="messages text-danger">
+                                    Please select individual goal
+                                </span>
+                    </p>
+                    
+                </div>
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4" *ngIf="isGroupEnabled">
+                    <p>Group Goal
+                        <ng-select  [multiple]="true" (ngModelChange)="toggleIndividual($event)" placeholder="Group Goal" [options]="groupList"
+                            formControlName="setFunctionalGroupId" required> </ng-select>
+                            <span *ngIf="goalForm.controls.setFunctionalGroupId.invalid" class="messages text-danger">
+                                    Please select group goal
+                                </span>
+                    </p>
+                   
+                </div>
+
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4" *ngIf="isGroupEnabled">
+                    <p>Level
+                        <ng-select  placeholder="Level" [options]="levelList" formControlName="levelId"
+                            required> </ng-select>
+                            <span *ngIf="goalForm.controls.levelId.invalid" class="messages text-danger">
+                                    Please select level
+                                </span>
+                    </p>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+                    <p>Goal Measure
+                        <textarea class="form-control" cols="5" placeholder="Default textarea" rows="5" formControlName="goalMeasure" required></textarea>
+                        <span *ngIf="goalForm.controls.goalMeasure.invalid" class="text-danger">
+                                Goal measure is required
+                            </span>
+                    </p>                    
+                    <input type="hidden" formControlName="performanceGoalMeasureId">
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-danger close btn-outline-danger btn-icon" (click)="removeGoalMeasure(goalForm.controls.performanceGoalMeasureId.value)"
+                *ngIf="!isGoalReleased"><i class="icofont icofont-ui-delete"></i></button>
+
+        </div>
+    </app-card>
+</div>
+
+
+<form class="form-horizontal" name="setGoalInfoForm" #setGoalInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+        <div class="app-modal-header">
+            <h4 class="modal-title">Add Goal</h4>
+            <button type="button" class="close basic-close" (click)="editorModal.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="app-modal-body">
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <p>Goal Name
+                        <input autofocus type="text"  name="goalName" placeholder="Goal Name" #goalName="ngModel"
+                            [(ngModel)]="goal.goalName" class="form-control" required>
+                            <span *ngIf="goalName.invalid" class="messages text-danger">
+                                    Please enter goal name
+                                  </span>
+                        </p>
+                </div>
+            </div>
+        </div>
+        <div class="app-modal-footer">
+            <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Cancel</button>
+            <button type="submit" [ngClass]="{ 'disabled': setGoalInfoForm.invalid}" [disabled]="isSaving" class="btn btn-primary waves-effect waves-light ">{{isSaving
+                ? 'Saving in...' : 'Save'}}</button>
+        </div>
+    </app-modal-basic>
+</form>

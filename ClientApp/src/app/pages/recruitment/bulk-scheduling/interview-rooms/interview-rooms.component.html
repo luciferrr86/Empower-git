@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-6">
+        <h5 class="card-header-text">Interview Rooms</h5>
+      </div>
+      <div class="col-md-6">
+        <div style="text-align: right;">
+          <button type="button" class="btn btn-primary pull-right" (click)="newRoom()" data-dismiss="modal">add</button>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="card-block table-border-style">
+    <div class="table-responsive">
+      <table class="table table-styling">
+        <thead>
+          <tr class="table-primary">
+            <th>Room</th>
+            <th>Sart Time</th>
+            <th>End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let list of roomList">
+            <td>{{list.roomName}}</td>
+            <td>{{list.startTime}}</td>
+            <td>{{list.endTime}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<interview-rooms-editor #roomEditor></interview-rooms-editor>

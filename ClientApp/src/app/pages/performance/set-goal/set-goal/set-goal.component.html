@@ -1,0 +1,90 @@
+<ng-container *ngIf="isPerformanceStarted==false;else chkCEO">
+    <div class="row justify-content-md-center">
+
+        <div class="col-md-4">
+            <img class="img-fluid text-center" src="assets/images/configsetting.gif" />
+        </div>
+        <div class="col-md-12">
+            <h1 class="text-center"> Performance not yet started</h1>
+        </div>
+    </div>
+</ng-container>
+<ng-template #chkCEO>
+    <ng-container *ngIf="isCEO==false;else loadContent">
+        <ng-container *ngIf="isManagerRealeased==false;else loadContent">
+            <div class="row justify-content-md-center">
+                <div class="col-md-4">
+                    <img class="img-fluid text-center" src="assets/images/configsetting.gif" />
+                </div>
+                <div class="col-md-12">
+                    <h1 class="text-center">Manager not yet released</h1>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</ng-template>
+<ng-template #loadContent>
+
+    <form [formGroup]="setGoalForm" (ngSubmit)="saveGoal()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-primary background-primary">
+                    <small>Introduction : Goal should follow the S.M.A.R.T. model. They should be specific,
+                        measureable, attainable,
+                        and relavent to the job and time bound
+                    </small>
+                </div>
+                <app-card>
+
+                    <div class="dt-responsive">
+                        <div class="row">
+                            <div class="col-xs-5 col-sm-5 col-sm-5 col-md-5">
+                                <p>Filter By Functional Group
+                                    <ng-select name="group" placeholder="Functional Group" [options]="groupList"
+                                        formControlName="searchFunGroupId" (selected)="filterByGroup($event)" required>
+                                    </ng-select>
+                                </p>
+                            </div>
+                            <div class="col-xs-5 col-sm-5 col-sm-5 col-md-5">
+                                <p>Filter By Individual
+                                    <ng-select name="inidvidual" placeholder="Individual Manager"
+                                        [options]="individualList" formControlName="searchIndiGroupId" required>
+                                    </ng-select>
+                                </p>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-sm-2 col-md-2 mt-3">
+                                <button type="button" class="btn btn-sm btn-primary waves-effect">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </app-card>
+
+
+                <div formArrayName="lstSetGoal">
+                    <div *ngFor="let goal of lstSetGoal.controls; let i=index">
+                        <div [formGroupName]="i" class="panel-body">
+                            <button class="btn btn-sm btn-primary waves-effect" type="button" (click)="newGoalName(i)"
+                                *ngIf="!isGoalReleased">Add
+                                Goal</button>
+                            <set-goal-editor #goalEditor (getMeasureId)="removeGoalMeasure($event,i)"
+                                (getGoalId)="setGoalName($event)" [goalRelease]="isGoalReleased" [CEO]="isCEO"
+                                [goal]="performanceGoalList" [individual]="individualList" [group]="groupList"
+                                [level]="levelList" [quadrant]="performanceQuadrantList"
+                                [goallist]="setGoalForm.controls.lstSetGoal.controls[i]"></set-goal-editor>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <button class="btn btn-sm btn-primary waves-effect" type="button" (click)="addGoal()"
+                        *ngIf="!isGoalReleased">Add</button>
+                </div>
+
+                <button class="btn btn-sm btn-primary waves-effect" type="submit"
+                    *ngIf="lstSetGoal.controls.length>0 && !isGoalReleased">Save</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <button class="btn btn-sm btn-primary waves-effect" type="button" (click)="releaseGoal()"
+        *ngIf="lstSetGoal.controls.length>0 && !isGoalReleased">Release</button>
+</ng-template>

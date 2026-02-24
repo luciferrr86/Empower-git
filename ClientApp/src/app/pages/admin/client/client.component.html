@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-sm-12">
+      <form class="md-float-material" name="clientInfoForm" #clientInfoForm="ngForm" (ngSubmit)="save()">
+        <app-card [title]="'ADMIN CONFIGURATION'">
+          <div class="dt-responsive">
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <p>Full Name
+                  <input autofocus class="form-control" placeholder="Full Name" type="text" name="fullName" [(ngModel)]="client.fullName" #fullName="ngModel"
+                    required>
+                    <span [hidden]="fullName.valid" class="messages text-danger">
+                      Please enter full name
+                    </span>
+                </p>
+              
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <p>Functional Department
+                <input class="form-control" type="text" placeholder="Functional Department" name="department" [(ngModel)]="client.department" #department="ngModel"
+                  required>
+                  <span [hidden]="department.valid" class="messages text-danger">
+                    Please enter functional department
+                  </span>
+                </p>
+              
+              </div>
+              <div class="col-xs-4 col-sm-4  col-md-4">
+                <p>Functional Group
+                <input class="form-control" type="text" placeholder="Functional Group" name="group" [(ngModel)]="client.functionalGroup" #group="ngModel" required>
+                <span [hidden]="group.valid" class="messages text-danger">
+                  Please enter functional group
+                </span>
+                </p>
+              </div>
+              
+              <!-- <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+                <h5 class="text-c-blue">Client First Name</h5>
+                <input class="form-control" type="text" placeholder="Client First Name" name="firstname" [(ngModel)]="client.firstName" #firstname="ngModel" required>
+                <div [hidden]="firstname.valid" class="messages text-danger">
+                  Please enter firstname
+                </div>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+                <h5 class="text-c-blue">Client Last Name</h5>
+                <input class="form-control" type="text" placeholder="Client Last Name" name="lastname" [(ngModel)]="client.lastName" #lastname="ngModel" required>
+                <div [hidden]="lastname.valid" class="messages text-danger">
+                  Please enter lastname
+                </div>
+              </div> -->
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-4 col-sm-4  col-md-4">
+                <p>Client Work Email Id
+                <input class="form-control" type="text" name="emailid" placeholder="Client Work Email Id" [(ngModel)]="client.emailId" #emailid="ngModel" required>
+                <span [hidden]="emailid.valid" class="messages text-danger">
+                  Please enter emailid
+                </span>
+                </p>
+              </div>
+              <div class="col-xs-4 col-sm-4  col-md-4">
+                <p>Client Contact No
+                <input class="form-control" type="text" name="contact" placeholder="Client Contact No" [(ngModel)]="client.contactNo" #contact="ngModel" required>
+                <span [hidden]="contact.valid" class="messages text-danger">
+                  Please enter contactNo
+                </span>
+                </p>
+              </div>
+              <div class="col-xs-4 col-sm-4  col-md-4">
+                <p>Title
+                <input class="form-control" type="text" placeholder="Title" name="title" [(ngModel)]="client.title" #title="ngModel" required>
+                <span [hidden]="title.valid" class="messages text-danger">
+                  Please enter title
+                </span>
+                </p>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4  col-md-4">
+                  <p>Designation
+                  <input class="form-control" type="text" name="designation" placeholder="Designation" [(ngModel)]="client.designation" #designation="ngModel" required>
+                  <span [hidden]="designation.valid" class="messages text-danger">
+                    Please enter designation
+                  </span>
+                </p>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4">
+                  <p>Band
+                  <input class="form-control" type="text" name="band" placeholder="Band" [(ngModel)]="client.band" #band="ngModel" required>
+                  <span [hidden]="band.valid" class="messages text-danger">
+                    Please enter band
+                  </span>
+                  </p>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4">
+                  <p>Password
+                  <input class="form-control" type="password" placeholder="password" name="password" [(ngModel)]="client.password" #password="ngModel" required>
+                  <span [hidden]="password.valid" class="messages text-danger">
+                    Please enter password
+                  </span>
+                </p>
+                </div>
+              </div>            
+         
+            <br>
+            <div style="text-align: right;">
+              <button type="submit" [ngClass]="{ 'disabled': clientInfoForm.invalid}" [disabled]="isSaving" class="btn btn-primary waves-effect waves-light ">{{isSaving ? 'Saving in...' : 'Save'}}</button>             
+            </div>
+          </div>
+        </app-card>
+      </form>
+    </div>
+  </div>

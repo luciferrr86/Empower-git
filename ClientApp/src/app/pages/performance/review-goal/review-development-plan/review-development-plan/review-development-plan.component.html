@@ -1,0 +1,54 @@
+<div class="alert alert-primary background-primary">
+  <small>Set intruction text for Career Development Plan</small>
+</div>
+<form [formGroup]="developmentForm" (ngSubmit)="saveDevelopmentPlan()">
+  <app-card>
+    <h4>EMPLOYEE</h4>
+    <br>
+    <div formArrayName="employeeCareerDevList">
+      <div *ngFor="let emp of employeeCareerDevList.controls; let i=index">
+        <div [formGroupName]="i" class="row">
+          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+            <review-development-plan-editor [isEmployeeEditor]="true" [devPlanList]="developmentForm.controls.employeeCareerDevList.controls[i]"></review-development-plan-editor>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    <div class="sub-title">Attachment</div>
+    <ul class="list-group">
+      <li class="list-group-item">Attachment 1</li>
+    </ul>
+  </app-card>
+  <app-card>
+    <h4>Manager</h4>
+    <br>
+    <div formArrayName="managerCareerDevList">
+      <div *ngFor="let mgr of managerCareerDevList.controls; let i=index">
+        <button type="button" class="close basic-close pull-right" *ngIf="developmentForm.controls.employeeCareerDevList.controls.length > 1 && !developmentPlan.checkSaveSubmit.isMgrDevGoalSubmitted" (click)="removeEmployeeDevPlan(i)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div [formGroupName]="i" class="row">
+            <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+              <review-development-plan-editor [devPlanList]="developmentForm.controls.managerCareerDevList.controls[i]"
+                [isSubmit]="developmentPlan.checkSaveSubmit.isMgrDevGoalSubmitted"></review-development-plan-editor>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div style="text-align: right;">
+      <button class="btn btn-sm btn-primary waves-effect" type="button" (click)="addManagerDevPlan()" *ngIf="!developmentPlan.checkSaveSubmit.isMgrDevGoalSubmitted">Add</button>
+    </div>
+    <br>
+    <div class="sub-title">Attachment</div>
+    <ul class="list-group">
+      <li class="list-group-item">Attachment 1</li>
+    </ul>
+  </app-card>
+
+  <button class="btn btn-sm btn-primary waves-effect" type="submit" [disabled]="developmentForm.invalid" *ngIf="!developmentPlan.checkSaveSubmit.isMgrDevGoalSubmitted">{{isSaving? ('Please wait...'):('Save')}}</button>
+  <button class="btn btn-sm btn-primary waves-effect" type="button" [disabled]="developmentForm.invalid" (click)="submitDevelopmentPlan()"
+    *ngIf="developmentPlan.checkSaveSubmit.isMgrDevGoalSaved && !developmentPlan.checkSaveSubmit.isMgrDevGoalSubmitted">{{isSubmitting?('Please
+    wait...'):('Submit')}}</button>
+
+</form>

@@ -1,0 +1,48 @@
+
+<div class="row">
+  <div class="col-lg-3">
+    <div class="cover-profile">
+      <div class="profile-bg-img">
+        <div class="card">
+          <div class="card-body user-info">
+                  <profile-picture [isAdminPic]="isAdminProfilePic"></profile-picture>
+            <div class="col-md-12 text-center">
+              <br/>
+              <br/>
+              <div class="user-title">
+                <h2>{{fullName}}</h2>
+                <span class="text-black">{{role}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="md-tabs">
+      <ngb-tabset>
+
+        <ngb-tab title="Personal Info">
+          <ng-template ngbTabContent>
+            <personal-detail #personalEditor></personal-detail>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Educational Details">
+          <ng-template ngbTabContent>
+            <educational-detail #educationalEdit></educational-detail>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Professional Detail">
+          <ng-template ngbTabContent>
+            <professional-detail #professionalEditor></professional-detail>
+          </ng-template>
+        </ngb-tab>
+
+
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

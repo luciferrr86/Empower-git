@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Vacancy List'">
+      <div class="dt-responsive">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+            <div>
+              <label class="label-control">
+                Show
+                <select class="form-control input-sm full-data-show-entry" [(ngModel)]="pageSize"
+                        (ngModelChange)="getData($event)">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="25">25</option>
+                  <option [ngValue]="50">50</option>
+                  <option [ngValue]="100">100</option>
+                </select>
+                entries
+              </label>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <div style="text-align: right;">
+              <label>
+                Search:
+                <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search"
+                       placeholder="Search name" (ngModelChange)="getFilteredData($event)">
+              </label>
+              <button type="button" class="btn btn-sm btn-primary waves-effect" (click)="addVacancy()">
+                Add
+                Vacancy
+              </button>
+            </div>
+          </div>
+        </div>
+        <ngx-datatable class="data-table material" [externalPaging]="true" [count]="count" (page)='setPage($event)'
+                       [offset]="pageNumber" [limit]="pageSize" [loadingIndicator]="loadingIndicator" [rows]="rows" [rowHeight]="35"
+                       [headerHeight]="50" [footerHeight]="35" [columns]="columns" [columnMode]="'force'">
+        </ngx-datatable>
+
+        <ng-template #jdReasonTemplate let-row="row" let-value="value" let-i="index">
+          <td *ngIf="row.jdAvailable=='No'">
+            <a href="javascript:;" class="js-single"  (click)="jdReason(row.id)">{{row.jdAvailable}}</a>
+          </td>
+          <td *ngIf="row.jdAvailable=='Yes'">
+            <a href="javascript:;" class="js-single">{{row.jdAvailable}}</a>
+          </td>
+        </ng-template>
+        <ng-template #publishTemplate let-row="row" let-value="value" let-i="index">
+          <td>
+            <ui-switch class="js-single" [checked]="row.bIsPublished" (click)="published(row.id)" color="#4680ff"
+                       switchColor="#fff" size="small"></ui-switch>
+          </td>
+        </ng-template>
+
+
+        <ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <a href="javascript:;" (click)="editVaccancy(row.id)"
+               class="m-r-15 crm-action-edit text-muted text-primary">
+              <i class="icofont super icofont-ui-edit"></i>
+            </a>
+
+            <a href="javascript:;" (click)="deleteVacancy(row)" class="m-r-15 crm-action-delete text-muted text-danger">
+              <i class="icofont super icofont-delete-alt"></i>
+            </a>
+            <a href="javascript:;" class="m-r-15 crm-action-delete text-muted text-danger"
+               [routerLink]="['../candidate-list']" [queryParams]="{id:row.id}">
+              <i class="icofont super icofont-users-alt-3 icofont-2x"></i>
+            </a>
+          </td>
+        </ng-template>
+
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<app-file-upload [typeId]="1"   maxSize="2" fileExt="PDF, dOC, dOCX,jpg,jpeg,png,xls,xlsx"
+  (uploadStatus)="refreshDocument($event)">
+</app-file-upload>
+<br />
+<!-- <div class="row well" style="height:200px;overflow-y:scroll">
+  <div class="col-md-4" *ngFor="let data of url">
+    <a *ngIf="data!=null" class="btn btn-block btn-out-dashed btn-primary btn-square" target="_blank" href="{{data}}">Download</a>
+  </div> 
+</div> -->
+
+
+

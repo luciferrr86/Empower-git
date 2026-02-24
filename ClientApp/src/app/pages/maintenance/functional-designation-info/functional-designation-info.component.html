@@ -1,0 +1,36 @@
+<div>
+  <form class="form-horizontal" name="designationInfoForm" #designationInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="''">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Designation</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>Functional Designation Name
+              <input autofocus type="text" name="designationName" placeholder="Designation Name" minlength="2"
+                pattern="[a-zA-Z](.*[a-zA-Z ])?$" [(ngModel)]="designationEdit.name" #designationName="ngModel"
+                class="form-control" required>
+              <span *ngIf="designationName.errors">
+                <span class="messages text-danger" *ngIf="designationName.errors.required">Please enter
+                  designation</span>
+                <span class="messages text-danger" *ngIf="designationName.errors.pattern">Only alphabets are
+                  allowed</span>
+                <span class="messages text-danger" *ngIf="designationName.errors.minlength">Please enter atleast 2
+                  characters</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Close</button>
+        <button type="submit" [disabled]="!designationInfoForm.form.valid"
+          class="btn btn-primary waves-effect waves-light ">
+          {{isSaving ? 'Saving...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>

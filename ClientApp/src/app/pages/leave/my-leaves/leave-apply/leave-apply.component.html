@@ -1,0 +1,66 @@
+<div>
+  <form class="form-horizontal" name="leaveApplyInfoForm" #leaveApplyInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">Apply Leave</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>Leave Type
+              <ng-select name="type" placeholder="Leave Type" [options]="leavetypelist" [(ngModel)]="leave.leaveTypeId"
+                #type="ngModel" required> </ng-select>
+              <span [hidden]="type.valid" class="messages text-danger">
+                Please select leave type
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <p>Start Date
+              <input type="date" class="form-control" id="startDate" name="startdate"
+                [ngModel]="leave.startDate | date:'yyyy-MM-dd'" [value]="leave.startDate | date:'yyyy-MM-dd'"
+                #startdate="ngModel" required (ngModelChange)="leave.startDate = ($event)" [min]="minDate">
+              <span [hidden]="startdate.valid" class="messages text-danger">
+                Please enter start date
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <p>End Date
+              <input type="date" class="form-control" id="endDate" name="enddate"
+                [ngModel]="leave.endDate | date:'yyyy-MM-dd'" [value]="leave.endDate | date:'yyyy-MM-dd'"
+                #enddate="ngModel" required (ngModelChange)="leave.endDate = ($event)">
+              <span [hidden]="enddate.valid" class="messages text-danger">
+                Please enter end date
+              </span>
+            </p>
+          </div>
+          <!-- <div class="col-sm-12">
+            <p>No Of Days
+              <input autofocus type="text" name="days" placeholder="No Of Days" [(ngModel)]="leave.noOfDays" #days="ngModel"
+                class="form-control" required>
+            </p>
+          </div> -->
+          <div class="col-sm-12">
+            <p>Reason for Leave
+              <textarea autofocus type="text" name="reason" placeholder="Reason for Leave"
+                [(ngModel)]="leave.reasonForApply" #reason="ngModel" class="form-control" required></textarea>
+              <span [hidden]="reason.valid" class="messages text-danger">
+                Please enter reason
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Close</button>
+        <button type="submit" [disabled]="!leaveApplyInfoForm.form.valid"
+          class="btn btn-primary waves-effect waves-light ">
+          {{isSaving ? 'Saving' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="page-header card">
+    <div class="row align-items-end">
+      <div class="col-lg-8">
+        <div class="page-header-title">
+          <i class="icofont icofont-law-document bg-c-blue"></i>
+          <div class="d-inline">
+            <h4>APPLICATION FORM</h4>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="col-md-12" align="center">
+        <h4><i class="icofont icofont-ui-user text-c-blue"></i> {{applicationForm.jobTitle}}</h4>
+        <hr>
+        <div class="row m-b--20">
+          <div class="col-md-4">
+            <h5><i class="icofont icofont-location-pin text-c-green"></i> {{applicationForm.jobLocation}}</h5>
+
+          </div>
+          <div class="col-md-4">
+            <h5><i class="icofont  icofont-check text-c-pink"></i> {{applicationForm.jobType}}</h5>
+
+          </div>
+          <div class="col-md-4">
+            <h5><i class="icofont icofont-calendar text-warning"></i>
+              {{applicationForm.publishedDate| date: 'dd/MM/yyyy'}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <question-editor [jobVaccancyId]="jobId" [model]="questionModel"></question-editor>
+
+</div>

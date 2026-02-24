@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Approved Request'">
+      <div class="dt-responsive">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+            <div>
+              <label class="label-control">Show
+                <select class="form-control input-sm full-data-show-entry" (ngModelChange)="getFilteredData($event)"
+                  [(ngModel)]="pageSize" (ngModelChange)="getData($event)">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="25">25</option>
+                  <option [ngValue]="50">50</option>
+                  <option [ngValue]="100">100</option>
+                </select>
+                entries
+              </label>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <div style="text-align: right;">
+              <button type="button" class="btn btn-sm btn-inverse waves-effect f-right"
+                (click)="getApprovedExcelManager()">Download Excel</button>
+            </div>
+
+          </div>
+        </div>
+        <ngx-datatable class="data-table material" [scrollbarH]="true" [externalPaging]="true" [count]="count"
+          (page)='setPage($event)' [offset]="pageNumber" [limit]="pageSize" [loadingIndicator]="loadingIndicator"
+          [rows]="rows" [rowHeight]="35" [headerHeight]="50" [footerHeight]="35" [columns]="columns"
+          [columnMode]="'force'">
+        </ngx-datatable>
+
+        <ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <!-- <a href="javascript:;" (click)="approveStatus(1,row.id)" class="m-r-15 crm-action-edit  text-primary">
+              <i class="icofont icofont-ui-check"></i>
+            </a>
+            <a href="javascript:;" (click)="rejectStatus(2,row.id)" class="m-r-15 crm-action-edit  text-primary">
+              <i class="icofont icofont-ui-close"></i>
+            </a> -->
+            <a href="javascript:;" *ngIf="!row.isInvite" [routerLink]="['../request-detail']"
+              [queryParams]="{requestid:row.id}" class="m-r-15 crm-action-edit  text-primary">
+              <i class="icofont icofont-eye"></i>
+            </a>
+            <a href="javascript:;" *ngIf="row.isInvite" [routerLink]="['../invite-request-detail']"
+              [queryParams]="{requestid:row.id}" class="m-r-15 crm-action-edit  text-primary">
+              <i class="icofont icofont-eye"></i>
+            </a>
+          </td>
+        </ng-template>
+      </div>
+      <br />
+      <button type="button" class="btn btn-sm btn-inverse waves-effect f-right"
+        [routerLink]="['/expense/expense-booking']">Back</button><br>
+
+
+    </app-card>
+  </div>
+</div>
+
+<!-- modal static-->

@@ -1,0 +1,17 @@
+<div [formGroup]="devPlanForm" class="row">
+    <div class="col-xs-6 col-sm-6 col-sm-6 col-md-6">
+      <textarea class="form-control" cols="5" placeholder="Asp.net core technology, entity framework as well angular2, typescript been improved  "
+      formControlName="skillText" rows="5" required ></textarea>
+        <div *ngIf="devPlanForm.controls.skillText.invalid" class="messages text-danger">
+            Please enter training classes
+          </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-sm-6 col-md-6">
+      <textarea class="form-control" cols="5" placeholder="Mobile development as well Artificial Intellegence" rows="5" 
+      formControlName="careerInterestText" required></textarea>
+      
+      <div *ngIf="devPlanForm.controls.careerInterestText.invalid" class="messages text-danger">
+          Please enter training classes
+        </div>
+    </div>
+  </div>

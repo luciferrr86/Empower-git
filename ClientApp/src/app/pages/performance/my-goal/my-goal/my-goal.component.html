@@ -1,0 +1,49 @@
+<ng-template *ngIf="isPerformanceStarted; then chkManagerRelease ; else performanceNotStarted "></ng-template>
+<ng-template #chkManagerRelease *ngIf="isManagerReleased ; then loadWizard; else managerNotReleased">
+</ng-template>
+<ng-template #loadWizard>
+  <form-wizard>
+    <wizard-step [title]="'EMPLOYEE DETAILS'">
+      <br>
+      <emp-detail></emp-detail>
+    </wizard-step>
+    <wizard-step [title]="'PERFORMANCE GOAL'">
+      <br>
+      <performance-goal></performance-goal>
+    </wizard-step>
+    <wizard-step [title]="'TRAINNING & CLASSES'">
+      <br>
+      <training-classes></training-classes>
+    </wizard-step>
+    <wizard-step [title]="'DEVELOPMENT PLAN'">
+      <br>
+      <development-plan></development-plan>
+    </wizard-step>
+    <wizard-step [title]="'REVIEW RATING'">
+      <div>
+        <rating></rating>
+      </div>
+    </wizard-step>
+  </form-wizard>
+</ng-template>
+<ng-template #managerNotReleased>
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <img class="img-fluid text-center" src="assets/images/configsetting.gif" />
+    </div>
+    <div class="col-md-12">
+      <h1 class="text-center">Manager not yet released</h1>
+    </div>
+  </div>
+</ng-template>
+<ng-template #performanceNotStarted>
+  <div class="row justify-content-md-center">
+
+    <div class="col-md-4">
+      <img class="img-fluid text-center" src="assets/images/configsetting.gif" />
+    </div>
+    <div class="col-md-12">
+      <h1 class="text-center"> Performance not yet started</h1>
+    </div>
+  </div>
+</ng-template>

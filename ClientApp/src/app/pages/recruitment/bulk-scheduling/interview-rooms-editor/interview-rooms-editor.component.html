@@ -1,0 +1,68 @@
+<div>
+  <form class="form-horizontal" name="roomInfoForm" #roomInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Room</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Room Name" name="roomname"
+                [(ngModel)]="roomEdit.roomName" #roomname="ngModel" required>
+            </div>
+            <div [hidden]="roomname.valid" class="messages text-danger">
+              please add room name
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <input type="time" class="form-control" placeholder="HH:MM" name="starttime"
+                [(ngModel)]="roomEdit.startTime" #starttime="ngModel" required>
+            </div>
+            <div [hidden]="starttime.valid" class="messages text-danger">
+              please select starttime
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="form-group">
+              <p class="text-c-blue">to</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <input type="time" class="form-control" placeholder="HH:MM" name="endtime" [(ngModel)]="roomEdit.endTime"
+                #endtime="ngModel" required>
+            </div>
+            <div [hidden]="endtime.valid" class="messages text-danger">
+              please select endtime
+            </div>
+          </div>
+          <!-- <div class="col-sm-2">
+            <div class="form-group">
+              <p class="text-c-blue">Duration</p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="hh:mm"name="duration" [(ngModel)]="roomEdit.duration" #duration="ngModel"
+              required>
+            </div>
+            <div [hidden]="duration.valid" class="messages text-danger">
+                please select duration
+              </div>
+          </div> -->
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+        <button type="submit" [ngClass]="{ 'disabled': roomInfoForm.invalid}" [disabled]="isSaving"
+          class="btn btn-primary waves-effect waves-light ">{{isSaving
+          ? 'Saving in...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

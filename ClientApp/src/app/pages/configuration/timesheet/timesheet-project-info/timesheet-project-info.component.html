@@ -1,0 +1,98 @@
+<div>
+  <form class="form-horizontal" name="projectInfoForm" #projectInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Project</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <p>Project Name
+              <input autofocus type="text" name="projectname" placeholder="Project Name"
+                [(ngModel)]="project.projectName" #projectname="ngModel" class="form-control" required>
+              <span [hidden]="projectname.valid" class="messages text-danger">
+                Please enter project name
+              </span>
+            </p>
+
+          </div>
+          <div class="col-sm-4">
+            <p>Client
+              <ng-select name="client" placeholder="Client" [options]="clientList" [(ngModel)]="project.clientId"
+                #client="ngModel" required>
+              </ng-select>
+              <span [hidden]="client.valid" class="messages text-danger">
+                Please select client
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-4">
+            <p>Status
+              <input autofocus type="text" name="status" placeholder="Status" [(ngModel)]="project.status"
+                #status="ngModel" class="form-control" required>
+              <span [hidden]="status.valid" class="messages text-danger">
+                Please enter no of status
+              </span>
+            </p>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <p>Manager
+              <!-- <ng-select name="manager" placeholder="Manager" [options]="managerList" [(ngModel)]="project.managerId" #manager="ngModel"
+                required> </ng-select> -->
+              <ng-select name="manager" placeholder="Manager" [options]="managerList" [(ngModel)]="project.managerId"
+                #manager="ngModel" required>
+              </ng-select>
+              <span [hidden]="manager.valid" class="messages text-danger">
+                Please select manager
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-4">
+            <p>Start Date
+              <input type="date" class="form-control" id="startDate" name="startdate"
+                [ngModel]="project.startDate | date:'yyyy-MM-dd'" [value]="project.startDate | date:'yyyy-MM-dd'"
+                #startdate="ngModel" required (ngModelChange)="project.startDate = ($event)">
+              <span [hidden]="startdate.valid" class="messages text-danger">
+                please enter start date
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-4">
+            <p>EndDate Date
+              <input type="date" class="form-control" id="endDate" name="enddate"
+                [ngModel]="project.endDate | date:'yyyy-MM-dd'" [value]="project.endDate | date:'yyyy-MM-dd'"
+                #enddate="ngModel" required (ngModelChange)="project.endDate = ($event)">
+              <span [hidden]="enddate.valid" class="messages text-danger">
+                please enter end date
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p>Description
+              <textarea autofocus type="text" name="description" rows="3" placeholder="Description"
+                [(ngModel)]="project.description" #description="ngModel" class="form-control" required></textarea>
+              <span [hidden]="description.valid" class="messages text-danger">
+                Please enter description
+              </span>
+            </p>
+
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+        <button type="submit" [disabled]="!projectInfoForm.form.valid" [disabled]="isSaving"
+          class="btn btn-primary waves-effect waves-light ">{{isSaving
+          ? 'Saving in...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

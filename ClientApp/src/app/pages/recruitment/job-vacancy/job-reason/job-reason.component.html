@@ -1,0 +1,73 @@
+<form-wizard>
+  <wizard-step [title]="'1.JD REASON'">
+    <div class="row">
+      <div class="col-md-12">
+        <app-card>
+          <form [formGroup]="job" name="job" #jobForm="ngForm" (ngSubmit)="saveReason()">
+            <div class="app-modal-body">
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <label class="col-form-label">Reason</label>
+                  <input autofocus type="text" placeholder="Enter Reason" class="form-control" formControlName="reason" />
+                  <div [hidden]="job.controls.reason.valid" class="messages text-danger">
+                    Please enter reason
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="col-xs-12 col-sm-12 mb-2">
+                    <div style="text-align: right;">
+
+                      <button type="submit" class="btn btn-primary"
+                              [disabled]="job.invalid">
+                        {{isSaving ? ('Please Wait...') : ('Save')}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </form>
+        </app-card>
+      </div>
+    </div>
+  </wizard-step>
+  <wizard-step [title]="'2.SEND JD REQUIRED MAIL'">
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <app-card>
+          <div class="app-modal-body">
+            <div class="form-group row">
+              <div class="input-group">
+                <label class="form-control">
+                  Search:
+                  <ng-select name="email" style="background:#fff;" [multiple]="true" placeholder="Search Emails"
+                             [options]="emailObjects" required [(ngModel)]="selectedEmail">
+                  </ng-select>
+                </label> 
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-sm btn-primary waves-effect" (click)="addDirectory()">
+                    Add
+                    Emails
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <button type="button" class="btn btn-sm btn-primary waves-effect" (click)="sendEmails()"> {{isSaving ? ('Sending...') : ('Send Mail')}}</button>
+
+          </div>
+        </app-card>
+
+      </div>
+
+    </div>
+  </wizard-step>
+
+</form-wizard>
+<directory #manageDir (parentFun)="parentFun()"></directory>
+

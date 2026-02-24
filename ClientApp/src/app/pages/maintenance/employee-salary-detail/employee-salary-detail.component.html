@@ -1,0 +1,196 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Employee Salary Detail'">
+      
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="month">Month:</label>
+            <div class="form-line">
+              <input type="text" name="Month" id="month" [(ngModel)]="empSalaryDetail.month" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="year">Year:</label>
+            <div class="form-line">
+              <input type="number" name="Year" id="year" [(ngModel)]="empSalaryDetail.year" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="totalDaysOfMonth">TotalDaysOfMonth:</label>
+            <div class="form-line">
+              <input type="number" name="TotalDaysOfMonth" id="totalDaysOfMonth" [(ngModel)]="empSalaryDetail.totalDaysOfMonth" class="form-control" disabled>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="allowedLeave">AllowedLeave:</label>
+            <div class="form-line">
+              <input type="number" name="AllowedLeave" id="allowedLeave" [(ngModel)]="empSalaryDetail.allowedLeave" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="leaveTaken">LeaveTaken:</label>
+            <div class="form-line">
+              <input type="number" name="LeaveTaken" id="leaveTaken" [(ngModel)]="empSalaryDetail.leaveTaken" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="workedDays">WorkedDays:</label>
+            <div class="form-line">
+              <input type="number" name="WorkedDays" id="workedDays" [(ngModel)]="empSalaryDetail.workedDays" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="basicSalary">BasicSalary:</label>
+            <div class="form-line">
+              <input type="number" name="BasicSalary" id="basicSalary" [(ngModel)]="empSalaryDetail.basicSalary" class="form-control" disabled>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="dA">DA:</label>
+            <div class="form-line">
+              <input type="number" name="DA" id="dA" [(ngModel)]="empSalaryDetail.da" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="hRA">HRA:</label>
+            <div class="form-line">
+              <input type="number" name="HRA" id="hRA" [(ngModel)]="empSalaryDetail.hra" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="conveyance">Conveyance:</label>
+            <div class="form-line">
+              <input type="number" name="Conveyance" id="conveyance" [(ngModel)]="empSalaryDetail.conveyance" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="medicalExpenses">MedicalExpenses:</label>
+            <div class="form-line">
+              <input type="number" name="MedicalExpenses" id="medicalExpenses" [(ngModel)]="empSalaryDetail.medicalExpenses" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="special">Special:</label>
+            <div class="form-line">
+              <input type="number" name="Special" id="special" [(ngModel)]="empSalaryDetail.special" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="bonus">Bonus:</label>
+            <div class="form-line">
+              <input type="number" name="Bonus" id="bonus" [(ngModel)]="empSalaryDetail.bonus" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="tA">TA:</label>
+            <div class="form-line">
+              <input type="number" name="TA" id="tA" [(ngModel)]="empSalaryDetail.ta" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="total">Total:</label>
+            <div class="form-line">
+              <input type="number" name="Total" id="total" [(ngModel)]="empSalaryDetail.total" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="contributionToPf">ContributionToPf:</label>
+            <div class="form-line">
+              <input type="number" name="ContributionToPf" id="contributionToPf" [(ngModel)]="empSalaryDetail.contributionToPf" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="professionTax">ProfessionTax:</label>
+            <div class="form-line">
+              <input type="number" name="ProfessionTax" id="professionTax" [(ngModel)]="empSalaryDetail.professionTax" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="tDS">TDS:</label>
+            <div class="form-line">
+              <input type="number" name="TDS" id="tDS" [(ngModel)]="empSalaryDetail.tds" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="salaryAdvance">SalaryAdvance:</label>
+            <div class="form-line">
+              <input type="number" name="SalaryAdvance" id="salaryAdvance" [(ngModel)]="empSalaryDetail.salaryAdvance" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="salaryTotal">SalaryTotal:</label>
+            <div class="form-line">
+              <input type="number" name="SalaryTotal" id="salaryTotal" [(ngModel)]="empSalaryDetail.salaryTotal" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="netPayable">NetPayable:</label>
+            <div class="form-line">
+              <input type="number" name="NetPayable" id="netPayable" [(ngModel)]="empSalaryDetail.netPayable" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="medicalBillAmount">MedicalBillAmount:</label>
+            <div class="form-line">
+              <input type="number" name="MedicalBillAmount" id="medicalBillAmount" [(ngModel)]="empSalaryDetail.medicalBillAmount" class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </app-card>
+  </div>
+</div>
+

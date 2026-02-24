@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Employee Attendance'">
+      <form>
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="month">Month:</label>
+              <div class="form-line">
+                <select [(ngModel)]="empSal.month" name="month" title="Month" style="padding:0.5rem 1.75rem 4px 9px;">
+                  <option *ngFor="let month of months" [value]="month.id">
+                    {{month.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="year">Year:</label>
+              <div class="form-line">
+                <select [(ngModel)]="empSal.year" name="year" title="Year" style="padding:0.5rem 4.75rem 4px 9px;">
+                  <option *ngFor="let year of years" [value]="year">
+                    {{year}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-sm btn-primary waves-effect" (click)='viewAttSummary()'>
+            View Attendance Summary
+          </button>
+        </div>
+      </form>
+
+    </app-card>
+    <app-card>
+      <div style="width:100%; overflow-x:scroll">
+        <table style="width:100%">
+          <tr>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Name</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Days Worked</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Leave Taken</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">OnDuty</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">WeeklyOff</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Holidays</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Unpaid</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Paid Days</th>
+          </tr>
+          <tbody>
+            <tr *ngFor="let emp of employees">
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.employeeName}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.daysWorked}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.leaveTaken}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.onDuty}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.weeklyOff}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.holidays}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.unpaid}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.paidDays}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+
+
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Check Salary Of Employees'">
+      <form #checkSalaryForm="ngForm" (ngSubmit)="checkEmpSal(checkSalaryForm)">
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="month">Month:</label>
+              <div class="form-line">
+                <select [(ngModel)]="empSal.month" name="month" title="Month" style="padding:0.5rem 1.75rem 4px 9px;">
+                  <option *ngFor="let month of months" [value]="month.id">
+                    {{month.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="year">Year:</label>
+              <div class="form-line">
+                <select [(ngModel)]="empSal.year" name="year" title="Year" style="padding:0.5rem 4.75rem 4px 9px;">
+                  <option *ngFor="let year of years" [value]="year">
+                    {{year}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-sm btn-primary waves-effect">
+            Check Salary
+          </button>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <app-card>
+      <div class="widget-box">
+        <div class="widget-header">
+          <h6 class="row panel-heading bg-primary">Filter Your Search</h6>
+
+          <span class="widget-toolbar">
+            <a href="#" data-action="collapse">
+              <i class="ace-icon fa fa-chevron-up"></i>
+            </a>
+
+            <a href="#" data-action="close">
+              <i class="ace-icon fa fa-times"></i>
+            </a>
+          </span>
+        </div>
+        <div class="widget-body">
+          <div class="widget-main">
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <label for="form-field-select-2">Employee Name</label>
+                <input type="text" class="form-control" placeholder="Search Name " [(ngModel)]="filterEmployeeName">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div style="margin-top:10px;float:right;padding-bottom:0;">
+                <button class="btn btn-info btn-sm" type="submit" name="Command" value="Search"
+                  (click)="getFilterResult()">
+                  <i class="ace-icon fa fa-search"></i>
+                  Search
+                </button>
+                &nbsp;
+                <button class="btn btn-default btn-sm" (click)="resetFilter()">Reset</button>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Employees List'">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+          <label class="label-control">
+            Show
+            <select class="form-control input-sm full-data-show-entry" (change)="handlePageChange($event)">
+              <option *ngFor="let size of pageContent" [ngValue]="size">
+                {{ size }}
+              </option>
+            </select>
+            entries
+          </label>
+        </div>
+      </div>
+      <br>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th>Leave Taken</th>
+            <!-- <th>TDS</th> -->
+            <th>Earnings</th>
+            <th>Deductions</th>
+            <th>Net Payable</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of chkSalary">
+            <td>{{emp.employeeName}}</td>
+            <td>{{emp.leaveTaken}}</td>
+            <!-- <td>{{emp.tds}}</td> -->
+            <td>{{emp.total+emp.totalDeductions}}</td>
+            <td>{{emp.totalDeductions}}</td>
+            <td>{{emp.total}}</td>
+            <td>
+
+              <a href="javascript:;" ngbTooltip="View Salary" container="body" (click)="viewSalary(emp.id)"
+                class="crm-action-delete text-primary">
+                <i class="icofont icofont-file-document"></i>
+              </a>
+              <a href="javascript:;" ngbTooltip="Add Salary" container="body" (click)="salaryInfo(emp.userId)"
+                class="crm-action-delete text-muted text-success">
+                <i class="icofont icofont-cur-dollar"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-card>
+  </div>
+</div>

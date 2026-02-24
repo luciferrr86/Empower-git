@@ -1,0 +1,63 @@
+<div>
+  <form class="form-horizontal" name="leaveDetailsInfoForm" #leaveDetailsInfoForm="ngForm" (ngSubmit)="approve()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">LEAVE DETAILS</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Leave Start Date
+              <input class="form-control" name="startdate" placeholder="StartDate"
+                value="{{ manageLeaveDetail.startDate | date: 'dd/MM/yyyy' }}" disabled="true">
+
+          </div>
+          <div class="col-sm-6">
+            <p>Leave End Date
+              <input class="form-control" name="enddate" placeholder="Enddate"
+                value="{{ manageLeaveDetail.endDate | date: 'dd/MM/yyyy' }}" disabled="true">
+
+          </div>
+          <div class="col-sm-6">
+            <p>No Of Days
+              <input autofocus type="text" name="days" placeholder="No Of Days" [(ngModel)]="manageLeaveDetail.noOfDays"
+                #days="ngModel" disabled="true" class="form-control">
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <p>Manager Name
+              <input autofocus type="text" name="manager" placeholder="manager"
+                [(ngModel)]="manageLeaveDetail.managerName" #manager="ngModel" disabled="true" class="form-control">
+
+            </p>
+          </div>
+          <div class="col-sm-12">
+            <p>Reason for Leave
+              <textarea autofocus type="text" name="reason" placeholder="Reason for Leave"
+                [(ngModel)]="manageLeaveDetail.reasonForApply" #reason="ngModel" class="form-control"
+                disabled="true"></textarea>
+            </p>
+          </div>
+          <div class="col-sm-12">
+
+            <p>Manager Comment
+              <textarea autofocus type="text" name="comment" placeholder="Manager Comments"
+                [(ngModel)]="manageLeaveDetail.managerComment" #comment="ngModel" class="form-control"
+                required></textarea>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button *ngIf="!manageLeaveDetail.view" type="submit" [disabled]="!leaveDetailsInfoForm.form.valid"
+          class="btn btn-primary waves-effect waves-light">Approve</button>
+        <button *ngIf="!manageLeaveDetail.view" type="button" [disabled]="!leaveDetailsInfoForm.form.valid"
+          class="btn btn-default waves-effect" (click)="reject()">Reject</button>
+        <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Close</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

@@ -1,0 +1,39 @@
+<div [formGroup]="professionalForm" class="mt-2 ml-2 mb-2">
+  <div class="row">
+    <div class="col-lg-3">
+      <p>Company Name
+        <input type="text" placeholder="CompanyName"  formControlName="companyName">
+      </p>
+      <div [hidden]="professionalForm.controls.companyName.valid"  class="text-danger">
+        Please enter company name
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <p>Designation
+        <input class="form-control" placeholder="Designation" type="text" formControlName="designation">
+      </p>
+      <div [hidden]="professionalForm.controls.designation.valid" class="text-danger">
+        Please enter designation
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <p>From date
+        <input class="form-control" placeholder="From date" type="date" formControlName="doj">
+      </p>
+      <div [hidden]="professionalForm.controls.doj.valid" class="text-danger">
+        Please select fromdate
+      </div>
+    </div>
+    <div class="col-lg-3">
+
+      <p>To date
+        <input class="form-control" placeholder="To date" type="date" formControlName="dor">
+      </p>
+      <div [hidden]="professionalForm.controls.dor.valid" class="text-danger">
+        Please select todate
+      </div>
+
+    </div>
+  </div>
+</div>
+

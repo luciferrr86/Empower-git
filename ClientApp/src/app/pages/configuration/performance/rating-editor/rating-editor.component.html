@@ -1,0 +1,24 @@
+<div [formGroup]="ratingOptionForm">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+      <app-card>
+        <button type="button" class="btn btn-danger close btn-outline-danger btn-icon"
+          (click)="removeRating(ratingOptionForm.controls.id.value)" *ngIf="!isPerformanceStart"><i
+            class="icofont icofont-ui-delete"></i></button>
+        <h5 class="text-c-blue">Option Text</h5>
+        <input class="form-control" type="text" formControlName="ratingName" required>
+        <div [hidden]="ratingOptionForm.controls.ratingName.valid" class="text-danger">
+          Feedback text is required
+        </div>
+        <br>
+        <h5 class="text-c-blue">Description</h5>
+        <textarea class="form-control" cols="5" placeholder="Default textarea" rows="5"
+          formControlName="ratingDescription" required></textarea>
+        <div [hidden]="ratingOptionForm.controls.ratingDescription.valid" class="text-danger">
+          Feedback text is required
+        </div>
+        <input type="hidden" formControlName="id">
+      </app-card>
+    </div>
+  </div>
+</div>

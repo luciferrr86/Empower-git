@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Set Frequency Timesheet'">
+      <div class="dt-responsive">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+            <div class="form-radio">
+              <form class="form-horizontal" (ngSubmit)="save()">
+                <div class="radio radio-inline">
+                  <label>
+                    <input name="options" type="radio" [(ngModel)]="configuration.timeSheetFrequency" [value]="1"
+                      [checked]="configuration.timeSheetFrequency==1" />
+                    <i class="helper"></i>Daily
+                  </label>
+                </div>
+                <div class="radio radio-inline">
+                  <label>
+                    <input name="options1" type="radio" [(ngModel)]="configuration.timeSheetFrequency" [value]="2"
+                      [checked]="configuration.timeSheetFrequency==2" />
+                    <i class="helper"></i>Weekly
+                  </label>
+                </div>
+                <div class="app-modal-footer">
+                  <button type="submit" class="btn btn-primary waves-effect waves-light ">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

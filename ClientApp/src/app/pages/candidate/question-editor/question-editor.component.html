@@ -1,0 +1,85 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+
+    <div *ngIf="model.isDataAvailable" class="card">
+      <div class="card-header bg-primary">
+        <h5 style="color:white">QUESTIONS</h5>
+      </div>
+
+      <div class="card-body">
+        <div class="col-md-12">
+          <div *ngFor="let question of model.questions" class="form-row">
+            <div [ngSwitch]="question.controlType">
+              <div *ngSwitchCase="'textbox'">
+                <input type="{{question.type}}" id="{{question.key}}" [formControlName]="question.key">
+              </div>
+              <div *ngSwitchCase="'dropdown'">
+                <select [formControlName]="question.key">
+                  <option *ngFor="let o of question.options" [value]="o.key">{{o.value}}</option>
+                </select>
+              </div>
+              <div *ngSwitchCase="'checkbox'">
+                <div class="form-group">
+                  <div class="form-line">
+                    <h5>
+                      {{question.order}}. {{question.text}}<span style="color:red" *ngIf="question.required">*</span>
+                    </h5>
+                    <br>
+                    <br>
+                    <div class="demo-checkbox">
+
+                      <ng-template ngFor let-quest [ngForOf]="question.options" let-i="index">
+                        <div class="checkbox-fade fade-in-primary" *ngIf='quest.key != "" || quest.key == null'>
+                          <label>
+                            <input type="checkbox" (change)="onCheckboxChange(question.key,quest, $event)" #ckb>
+                            <span class="cr">
+                              <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                            </span>
+                            {{quest.key}}
+                          </label>
+                        </div>
+
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngSwitchCase="'radio'">
+                <div class="form-group">
+                  <div class="form-line">
+                    <h5>
+                      {{question.order}}. {{question.text}}<span style="color:red" *ngIf="question.required">*</span>
+                    </h5>
+                    <br>
+                    <br>
+                    <div class="form-radio">
+                      <ng-template ngFor let-quest [ngForOf]="question.options" let-i="index"  >
+                        <div class="radio radio-inline" *ngIf='quest.key != "" || quest.key == null'>
+                          <label>
+                            <input type="radio" (change)="onRadioChange(question.key,quest, $event)">
+                            <i class="helper"></i>{{quest.value}}
+                          </label>
+                        </div>
+                      </ng-template>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+
+
+
+    <button class="btn btn-primary f-right" type="submit" [disabled]="!form.valid">Apply</button>
+    <div class="form-row">
+    </div>
+  </form>
+
+</div>

@@ -1,0 +1,78 @@
+<div>
+  <form class="form-horizontal" name="leavePeriodInfoForm" #leavePeriodInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Leave Period</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>Leave Period Name
+              <input autofocus type="text" name="periodname" placeholder="LeavePeriod Name"
+                [(ngModel)]="leavePeriodEdit.name" #periodname="ngModel" class="form-control" required>
+              <span [hidden]="periodname.valid" class="messages text-danger">
+                Please enter leave period name
+              </span>
+            </p>
+
+          </div>
+        </div>
+        <div class="row" *ngIf="isEdit ;else second">
+          <div class="col-sm-6">
+            <p>Period Start Date
+              <input type="date" class="form-control" id="periodStart" name="periodstart"
+                [ngModel]="leavePeriodEdit.periodStart | date:'yyyy-MM-dd'"
+                [value]="leavePeriodEdit.periodStart | date:'yyyy-MM-dd'" #periodstart="ngModel" required
+                (ngModelChange)="leavePeriodEdit.periodStart = ($event)" [min]="minDate | date : 'shortDate'">
+              <span [hidden]="periodstart.valid" class="messages text-danger">
+                please enter period start date
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <p>Period End Date
+              <input type="date" class="form-control" id="periodEnd" name="periodend"
+                [ngModel]="leavePeriodEdit.periodEnd | date:'yyyy-MM-dd'"
+                [value]="leavePeriodEdit.periodEnd | date:'yyyy-MM-dd'" #periodend="ngModel" required
+                (ngModelChange)="leavePeriodEdit.periodEnd = ($event)">
+              <span [hidden]="periodend.valid" class="messages text-danger">
+                please enter period end date
+              </span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Close</button>
+        <button type="submit" [disabled]="!leavePeriodInfoForm.form.valid" [disabled]="isSaving"
+          class="btn btn-primary waves-effect waves-light ">
+          {{isSaving ? 'Saving in...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>
+<ng-template #second>
+  <div class="row">
+    <div class="col-sm-6">
+      <p>Period Start Date
+        <input disabled type="date" class="form-control" id="periodStart" name="periodstart"
+          [ngModel]="leavePeriodEdit.periodStart | date:'yyyy-MM-dd'"
+          [value]="leavePeriodEdit.periodStart | date:'yyyy-MM-dd'" #periodstart="ngModel" required
+          (ngModelChange)="leavePeriodEdit.periodStart = ($event)">
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p>Period End Date
+        <input disabled type="date" class="form-control" id="periodEnd" name="periodend"
+          [ngModel]="leavePeriodEdit.periodEnd | date:'yyyy-MM-dd'"
+          [value]="leavePeriodEdit.periodEnd | date:'yyyy-MM-dd'" #periodend="ngModel" required
+          (ngModelChange)="leavePeriodEdit.periodEnd = ($event)">
+      </p>
+
+    </div>
+  </div>
+</ng-template>

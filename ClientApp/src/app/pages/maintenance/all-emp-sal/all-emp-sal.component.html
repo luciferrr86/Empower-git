@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'All Employee Salary'">
+      <form>
+     <div class="row">
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label for="month">Month:</label>
+          <div class="form-line">
+            <select [(ngModel)]="empSal.month" name="month" title="Month" style="padding:0.5rem 1.75rem 4px 9px;">
+              <option *ngFor="let month of months" [value]="month.id">
+                {{month.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label for="year">Year:</label>
+          <div class="form-line">
+            <select [(ngModel)]="empSal.year" name="year" title="Year" style="padding:0.5rem 4.75rem 4px 9px;">
+              <option *ngFor="let year of years" [value]="year">
+                {{year}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="button" class="btn btn-sm btn-primary waves-effect" (click)='checkSalary()'>
+        Check Salary
+      </button>
+    </div>
+
+  </form>
+
+    </app-card>
+    <app-card>
+      <div style="width:100%; overflow-x:scroll">
+        <table style="width:100%">
+          <tr>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Name</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Code</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Leave Taken</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Ctc For Month</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Total Salary</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Net Payable</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Allowed Leaves</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">TDS</th>
+            <th style="border-bottom:1px solid;border-left:1px solid;">Action</th>
+          </tr>
+          <tbody>
+            <tr *ngFor="let emp of employees">
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.employeeName}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.employeeCode}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.leaveTaken}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.ctcForDecember}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.total}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.netPayable}}</td>
+              <td style="border-bottom:1px solid;border-left:1px solid;" *ngIf="emp.isEdit; then editable; else readOnly;"></td>
+              <ng-template #readOnly>
+                <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.allowedLeave}}</td>
+                <td style="border-bottom:1px solid;border-left:1px solid;">{{emp.tds}}</td>
+
+                <td style="border-bottom:1px solid;border-left:1px solid;">
+                  <a href="javascript:;" class="table-row-action edit-action" (click)="enableEdit(emp.employeeId)">Edit</a>
+                </td>
+              </ng-template>
+              <ng-template #editable>
+                <td style="border-bottom:1px solid;border-left:1px solid;"><input type="number" [(ngModel)]="allowedLeaves" /></td>
+                <td style="border-bottom:1px solid;border-left:1px solid;"><input type="number" [(ngModel)]="tds" /></td>
+                <td style="border-bottom:1px solid;border-left:1px solid;">
+                  <a href="javascript:;" class="table-row-action edit-action" (click)="disableEdit(emp.employeeId)">Cancel</a>
+                  <a href="javascript:;" class="table-row-action edit-action" (click)="updateSalary(emp.employeeId)" type="button">Save</a>
+                </td>
+              </ng-template>
+            </tr>
+
+
+           
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+
+
+  </div>
+</div>

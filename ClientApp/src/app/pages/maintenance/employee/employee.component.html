@@ -1,0 +1,151 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Employee List'">
+      <div class="dt-responsive" >
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+            <div>
+              <label class="label-control">
+                Show
+                <select 
+                  class="form-control input-sm full-data-show-entry" 
+                  [(ngModel)]="pageSize"
+                  (ngModelChange)="getData($event)">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="25">25</option>
+                  <option [ngValue]="50">50</option>
+                  <option [ngValue]="100">100</option>
+                </select>
+                entries
+              </label>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <div style="text-align: right;">
+              <label>
+                Search:
+                <input 
+                  type="search" 
+                  [(ngModel)]="filterQuery" 
+                  class="form-control input-sm full-data-search"
+                  (ngModelChange)="getFilteredData($event)" 
+                  placeholder="Search name">
+              </label>
+              <button type="button" class="btn btn-sm btn-primary waves-effect" (click)="newUser()">
+                Add
+                Employee
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <ngx-datatable 
+          class="data-table material" 
+          [scrollbarH]="false" 
+          [externalPaging]="true" 
+          [count]="count"
+          (page)='setPage($event)' 
+          [offset]="pageNumber" 
+          [limit]="pageSize" 
+          [loadingIndicator]="loadingIndicator"
+          [rows]="rows" 
+          [rowHeight]="35" 
+          [headerHeight]="50" 
+          [footerHeight]="35"
+          [columns]="columns"
+          [scrollbarH]="true"
+          [columnMode]="ColumnMode.force"
+          [sortType]="SortType.multi"
+          style="width:100%; overflow-x: scroll;">
+        </ngx-datatable>
+        <ng-template 
+          #proxyTemplate 
+          let-row="row" 
+          let-value="value" 
+          let-i="index">
+          <td class="action-icon">
+            <a href="javascript:;" ngbTooltip="Set proxy" container="body" (click)="setProxy(row)"
+              class="m-r-15 crm-action-edit text-muted text-primary">
+              <i class="icofont icofont-eye"></i>
+            </a>
+          </td>
+        </ng-template>
+        <ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <a href="javascript:;" ngbTooltip="Edit" container="body" (click)="editUser(row)"
+              class="m-r-15 crm-action-edit text-muted text-primary">
+              <i class="icofont icofont-ui-edit"></i>
+            </a>
+            <a href="javascript:;" ngbTooltip="View" container="body" (click)="viewUser(row)"
+              class="m-r-15 crm-action-edit text-muted text-primary">
+              <i class="icofont icofont-eye"></i>
+            </a>
+            <a href="javascript:;" ngbTooltip="Delete" container="body" (click)="deleteUser(row)"
+              class="crm-action-delete text-muted text-danger">
+              <i class="icofont icofont-delete-alt"></i>
+            </a>
+            <a href="javascript:;" ngbTooltip="Add CTC" container="body" (click)="addCtc(row)"
+              class="crm-action-delete text-muted text-danger">
+              <i class="icofont icofont-plus-circle"></i>
+            </a>
+            <a href="javascript:;" ngbTooltip="Add Salary" container="body" (click)="salaryInfo(row)"
+              class="crm-action-delete text-muted text-danger">
+              <i class="icofont icofont-cur-rupee"></i>
+            </a>
+
+            <!--<a href="javascript:;" ngbTooltip="Salary Detail View" (click)="salaryDetail(row)"
+               class="crm-action-delete text-muted text-danger">
+              <i class="icofont icofont-cur-rupee"></i>
+            </a>-->
+            <!--<a href="javascript:;" ngbTooltip="Attendance" (click)="enterAttendance(row)"
+               class="crm-action-delete text-muted text-danger">
+              <i class="icofont icofont-check-circled"></i>
+            </a>-->
+          </td>
+        </ng-template>
+        <br />
+        <!--<div>
+         <button type="button" class="btn btn-sm btn-primary waves-effect" (click)="allEmpSal()">
+           Process Salary
+         </button>
+       </div>-->
+      </div>
+    </app-card>
+  </div>
+</div>
+<!-- modal static-->
+
+<user-info #userEditor></user-info>
+<employee-details #employeeDetails></employee-details>
+
+<form name="userProxyForm" #userProxyForm="ngForm" (ngSubmit)="save()">
+  <app-modal-basic #editorModalProxy [dialogClass]="'modal-lg'">
+    <div class="app-modal-header">
+      <h4 class="modal-title">Proxy Setting</h4>
+      <button type="button" class="close basic-close" (click)="editorModalProxy.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="app-modal-body">
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <p>Choose an employee as a proxy :
+            <ng-select name="manger" placeholder="Select Employee" [options]="managerList" [(ngModel)]="managerId"
+              #manger="ngModel" required> </ng-select>
+            <span [hidden]="manger.valid" class="messages text-danger">
+              Please select employee
+            </span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" (click)="editorModalProxy.hide()" class="btn btn-default"
+        [disabled]="isSaving">Cancel</button>
+      <button type="submit" class="btn btn-primary" [ngClass]="{'disabled':userProxyForm.form.invalid}"
+        [disabled]="!userProxyForm.form.valid" [disabled]="isSaving">{{isSaving ? ('Please Wait...') : ('Save')}}
+      </button>
+    </div>
+  </app-modal-basic>
+</form>

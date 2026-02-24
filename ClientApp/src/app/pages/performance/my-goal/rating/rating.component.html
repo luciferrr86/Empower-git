@@ -1,0 +1,133 @@
+<form class="form-horizontal" name="ratingInfoForm" #ratingInfoForm="ngForm" (ngSubmit)="saveRating()">
+  <div>
+    <br />
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-header-text">Employee Feedback</h5>
+      </div>
+      <div class="card-block table-border-style">
+        <div class="table-responsive">
+          <table class="table table-styling">
+            <thead>
+              <tr>
+                <th>Organisational Behaviour</th>
+                <th>Subject Matter Expertise</th>
+                <th>Team Work</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Overall good</td>
+                <td>good</td>
+                <td>good</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="rating.checkSaveSubmit.enableMidYear">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h5>Mid Year Review Rating</h5>
+        </div>
+      </div>
+      <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel title="Review & Rating">
+          <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                <h5 class="col-blue-grey">Mid Year Rating</h5>
+                <br />
+                <div *ngFor="let rate of rating.ratingList">
+                  <input type="radio" class="form-control" name="ratings" [value]="rate.ratingId"
+                    disabled><span>{{rate.ratingName}}</span><br />
+                </div>
+              </div>
+              <div class="col-md-8 col-sm-8 col-lg-8 col-xs-12">
+                <textarea name="managerComments" placeholder="Manager Comments" class="form-control" rows="3"
+                  [ngModel]="rating.midYearRating.managerComment" disabled></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8 col-sm-8 col-lg-8 col-xs-12">
+                <input type="text" name="managerName" placeholder="Manager Name" class="form-control"
+                  [ngModel]="rating.midYearRating.managerSignature" disabled>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel title="Employee Comments">
+          <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-md-12">
+                <textarea name="employeeComments" placeholder="Employee Comments" class="form-control" rows="3"
+                  #employeeComments="ngModel" [(ngModel)]="rating.midYearRating.employeeComment"></textarea>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h5>Year End Review Rating</h5>
+        </div>
+      </div>
+      <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel title="Review & Rating">
+          <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                <h5 class="col-blue-grey">Year End Rating</h5>
+                <br />
+                <div *ngFor="let rate of rating.ratingList">
+                  <input type="radio" class="form-control" name="ratings" [value]="rate.ratingId"
+                    disabled><span>{{rate.ratingName}}</span><br />
+                </div>
+              </div>
+              <div class="col-md-8 col-sm-8 col-lg-8 col-xs-12">
+                <textarea name="managerCommentsYear" placeholder="Manager Comments" class="form-control" rows="3"
+                  [ngModel]="rating.endYearRating.managerComment" disabled></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8 col-sm-8 col-lg-8 col-xs-12">
+                <input type="text" name="managerNameYear" placeholder="Manager Name" class="form-control"
+                  #managerNameYear="ngModel" [ngModel]="rating.endYearRating.managerSignature" disabled>
+
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel title="Employee Comments">
+          <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-md-12">
+                <textarea name="employeeCommentsYear" placeholder="Employee Comments" class="form-control" rows="3"
+                  #employeeCommentsYear="ngModel" [(ngModel)]="rating.endYearRating.employeeComment"></textarea>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+  </div>
+  <div *ngIf="rating.checkSaveSubmit.enableMidYear && !rating.checkSaveSubmit.isMidYearReviewCompleted; else yearGoal ">
+    <button class="btn btn-sm btn-primary waves-effect" type="submit" [disabled]="ratingInfoForm.invalid"
+      *ngIf="!rating.checkSaveSubmit.isEmpRatingSubmit">{{isSaving ? ('Please wait...'):('Save')}}</button>
+    <button class="btn btn-sm btn-primary waves-effect" type="button" [disabled]="ratingInfoForm.invalid"
+      (click)="submitRating()"
+      *ngIf="rating.checkSaveSubmit.isEmpRatingSave && !rating.checkSaveSubmit.isEmpRatingSubmit">{{isSubmitting?('Please wait...'):('Submit')}}</button>
+  </div>
+  <ng-template #yearGoal>
+    <button class="btn btn-sm btn-primary waves-effect" type="submit" [disabled]="ratingInfoForm.invalid"
+      *ngIf="!rating.checkSaveSubmit.isEmpYearRatingSubmit">{{isSaving ? ('Please wait...'):('Save')}}</button>
+    <button class="btn btn-sm btn-primary waves-effect" type="button" [disabled]="ratingInfoForm.invalid"
+      (click)="submitRating()"
+      *ngIf="rating.checkSaveSubmit.isEmpYearRatingSave && !rating.checkSaveSubmit.isEmpYearRatingSubmit">{{isSubmitting?('Please wait...'):('Submit')}}</button>
+  </ng-template>
+
+</form>

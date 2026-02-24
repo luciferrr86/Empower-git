@@ -1,0 +1,113 @@
+<div [formGroup]="screeningQuestionForm">
+  <div class="well">
+    <button type="button" class="close basic-close pull-right"
+      (click)="removeQuestion(screeningQuestionForm.controls.id.value)">
+      <span aria-hidden="true"><i _ngcontent-c11="" class="icofont icofont-ui-delete"></i></span>
+    </button>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="col-form-label">Question</label>
+        <input type="text" class="form-control" formControlName="question" required>
+        <div [hidden]="screeningQuestionForm.controls.question.valid" class="text-danger">
+          *Required
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <label class="col-form-label">Control Type</label>
+        <select class="form-control" formControlName="controlType" required>
+          <option [ngValue]="'1'">Check Box</option>
+          <option [ngValue]="'2'">Radio Button</option>
+        </select>
+        <div [hidden]="screeningQuestionForm.controls.controlType.valid" class="text-danger">
+          *Required
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <label class="col-form-label">Weightage</label>
+        <input type="number" class="form-control" formControlName="weightage" required>
+        <div [hidden]="screeningQuestionForm.controls.weightage.valid" class="text-danger">
+          *Required
+        </div>
+      </div>
+      <div class="col-sm-2">
+
+        <div class="checkbox-fade fade-in-primary">
+          <label class="m-t-5">
+            <p class="m-b-10">Mandatory</p>
+            <input type="checkbox" name="mandatory" formControlName="mandatory">
+            <span class="cr">
+              <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+            </span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row mt-2">
+
+      <div class="col-sm-3">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox" name="mandatory" formControlName="optChk1"
+              aria-label="Checkbox for following text input">
+          </span>
+          <input type="text" class="form-control" placeholder="option 1" formControlName="option1" required
+            aria-label="Text input with dropdown button">
+        </div>
+        <div [hidden]="screeningQuestionForm.controls.option1.valid" class="text-danger">
+          *Required
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox" name="mandatory" formControlName="optChk2"
+              aria-label="Checkbox for following text input">
+          </span>
+          <input type="text" class="form-control" placeholder="option 2" formControlName="option2" required
+            aria-label="Text input with dropdown button">
+        </div>
+        <div [hidden]="screeningQuestionForm.controls.option2.valid" class="text-danger">
+          *Required
+        </div>
+      </div>
+
+
+      <div class="col-sm-3">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox" name="mandatory" formControlName="optChk3"
+              aria-label="Checkbox for following text input">
+          </span>
+          <input type="text" class="form-control" placeholder="option 3" formControlName="option3" 
+            aria-label="Text input with dropdown button">
+        </div>
+        <div [hidden]="screeningQuestionForm.controls.option3.valid" class="text-danger">
+          *Required
+        </div>
+      </div>
+
+
+
+
+      <div class="col-sm-3">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox" name="mandatory" formControlName="optChk4"
+              aria-label="Checkbox for following text input">
+          </span>
+          <input type="text" class="form-control" placeholder="option 4" formControlName="option4" 
+            aria-label="Text input with dropdown button">
+        </div>
+        <div [hidden]="screeningQuestionForm.controls.option4.valid" class="text-danger">
+          *Required
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

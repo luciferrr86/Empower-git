@@ -1,0 +1,46 @@
+<div>
+    <form class="form-horizontal" name="itemInfoForm" #itemInfoForm="ngForm" (ngSubmit)="save()">
+        <app-modal-basic #editorModal [dialogClass]="''">
+            <div class="app-modal-header">
+                <h4 class="modal-title">{{modalTitle}} Sub Category</h4>
+                <button type="button" class="close basic-close" (click)="editorModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="app-modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <p>Category
+                            <ng-select name="category" placeholder="Category" [options]="ctegoryList"
+                                [(ngModel)]="categoryItem.categoryId"
+                                (ngModelChange)="subCategoryList(categoryItem.categoryId)" #category="ngModel" required>
+                            </ng-select>
+                            <span [hidden]="category.valid" class="messages text-danger">
+                                Please select category
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-12">
+                        <p>SubCategory Name
+                            <input autofocus type="text" name="item" pattern="[a-zA-Z](.*[a-zA-Z0-9 ])?$"
+                                placeholder="SubCategory Name" [(ngModel)]="categoryItem.name" #item="ngModel"
+                                class="form-control" required>
+                            <span *ngIf="item.errors">
+                                <span class="messages text-danger" *ngIf="item.errors.required">Please enter sub
+                                    category</span>
+                                <span class="messages text-danger" *ngIf="item.errors.pattern">Only alphanumerics are
+                                    allowed</span>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="app-modal-footer">
+                <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+                <button type="submit" [disabled]="!itemInfoForm.form.valid"
+                    class="btn btn-primary waves-effect waves-light ">{{isSaving
+                  ? 'Saving...' : 'Save'}}</button>
+            </div>
+        </app-modal-basic>
+    </form>
+</div>

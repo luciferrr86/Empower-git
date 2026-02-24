@@ -1,0 +1,263 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-header-text">Interview Schedule List</h5>
+    <div class="float-right" *ngIf="allInterviewsCompleted" >
+      <button title="Select candidate" class="btn btn-warning" (click)="changeVacancyStatusForCandidate(5)">
+        Select
+      </button>
+      <button title="Reject candidate" class="btn btn-danger" (click)="changeVacancyStatusForCandidate(6)">
+        Reject
+      </button>
+    </div>
+  </div>
+ 
+  <div class="card-block table-border-style">
+
+    <ngb-accordion [closeOthers]="true" activeIds="static-1">
+
+      <ngb-panel id="static-1" *ngFor="let level of this.interviewLevelModel.interviewScheduleLevelList">
+        <ng-template ngbPanelTitle>
+
+        </ng-template>
+
+        <ng-template ngbPanelContent>
+
+          <div class="row">
+            <div class="col-md-4">
+              <h5 class="card-header-text">{{level.level}}</h5>
+            </div>
+            <div class="col-md-8" *ngIf="status">
+
+              <ng-container *ngIf="!level.isLevelCompleted && interviewLevelModel.interviewScheduleLevelList.length>0">
+                <button *ngIf="isHr " title="Schedule interview" class="btn btn-primary" (click)="addSchedule(level.levelId)">
+                  Schedule Interview
+                </button>
+                <!--<button title="Complete level" (click)="completeLevel(level.levelId)" class="btn btn-primary btn-success">
+                  Complete 
+                </button>-->
+                <button *ngIf="!level.isInterviewCompleted" title="Select" class="btn btn-warning" (click)="completeLevel(level.levelId,5)">
+                  Select
+                </button>
+                <button  *ngIf="!level.isInterviewCompleted" title="Reject" class="btn btn-danger" (click)="completeLevel(level.levelId,6)">
+                  Reject
+                </button>
+                <button *ngIf="level.interviewId!=null && level.interviewId!=''" title="Fill Weightage" class="btn btn-primary btn-success" (click)="fillWeightage(level.interviewId)">
+                  Fill Weightage
+                </button>
+              </ng-container>
+
+            </div>
+
+          </div>
+
+          <br>
+          <div class="table-responsive">
+            <table class="table table-styling">
+              <thead>
+                <tr class="table-primary">
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Manager Name</th>
+                  <th>Status</th>
+                  <th *ngIf="isHr">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let list of level.interviewScheduleModelList">
+                  <td>{{list.date| date: 'dd/MM/yyyy'}}</td>
+                  <td>{{list.time}}</td>
+                  <td>{{list.managerName}}</td>
+                  <td *ngIf="!list.interviewStatus">
+                    <label class="label label-success" *ngIf="list.interviewStatus">Completed</label>
+                    <label class="label label-danger" >Scheduled</label>
+                  </td>
+                  <td *ngIf="list.interviewStatus">
+                    {{list.IsCandidateSelected}}
+                    <label class="label label-danger" *ngIf="!list.isCandidateSelected">Reject</label>
+                    <label class="label label-success" *ngIf="list.isCandidateSelected">Select</label>
+                  </td>
+                  <td *ngIf="isHr">
+                    <a *ngIf="!list.interviewStatus" href="javascript:;" ngbTooltip="Edit" (click)="editInterview(list)"
+                       class="m-r-15 crm-action-edit text-muted text-primary">
+                      <i class="icofont icofont-ui-edit"></i>
+                    </a>
+                    <a *ngIf="list.interviewStatus" href="javascript:;" ngbTooltip="View" (click)="viewInterview(list.interviewId)"
+                       class="m-r-15 crm-action-edit text-muted text-primary">
+                      <i class="icofont icofont-eye"></i>
+                    </a>
+                    <a *ngIf="!list.interviewStatus" href="javascript:;" ngbTooltip="Delete" (click)="deleteInterview(list.interviewId)"
+                       class="crm-action-delete text-muted text-danger">
+                      <i class="icofont icofont-delete-alt"></i>
+                    </a>
+
+                  </td>
+                </tr>
+            </table>
+            <br />
+            <br />
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+  </div>
+</div>
+<!-- <interview-schedule [appId]="jobId" #ScheduleEditor></interview-schedule> -->
+
+<div>
+  <form class="form-horizontal" name="interviewScheduleInfoForm" #interviewScheduleInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">Interview Schedule</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="col-form-label">Date</label>
+              <!-- <input placeholder="Please select schedule date" class="form-control" name="scheduleDateLabel" type="date" [(ngModel)]="scheduleEdit.date"
+                    #scheduleDateLabel="ngModel" required> -->
+              <input type="date" class="form-control" id="scheduleDate" name="scheduleDate" [ngModel]="scheduleEdit.date | date:'yyyy-MM-dd'"
+                     [value]="scheduleEdit.date | date:'yyyy-MM-dd'" #scheduleDate="ngModel" (ngModelChange)="scheduleEdit.date = ($event)">
+              <div [hidden]="scheduleDate.valid" class="messages text-danger">
+                Please select date
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="col-form-label">Time</label>
+              <input placeholder="Please select schedule time" class="timepicker form-control" name="scheduleTimeLabel"
+                     type="time" [(ngModel)]="scheduleEdit.time" #scheduleTimeLabel="ngModel" required>
+              <div [hidden]="scheduleTimeLabel.valid" class="messages text-danger">
+                Please select time
+              </div>
+            </div>
+            <div *ngIf="isEdit" class="col-md-6">
+              <label class="col-form-label">Manager List</label>
+              <ng-select name="managerLabel" [multiple]="true" placeholder="--Select--" [options]="managerList"
+                         [(ngModel)]="scheduleEdit.managerIdList" #managerLabel="ngModel" required disabled></ng-select>
+            </div>
+            <div *ngIf="!isEdit" class="col-md-6">
+              <label class="col-form-label">Manager List</label>
+              <ng-select name="managerLabel" [multiple]="true" placeholder="--Select--" [options]="managerList"
+                         [(ngModel)]="scheduleEdit.managerIdList" #managerLabel="ngModel" required></ng-select>
+
+              <div [hidden]="managerLabel.valid" class="messages text-danger">
+                Please select manager
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="col-form-label">Mode of Interview</label>
+              <ng-select name="interviewtypeLabel" placeholder="--Select--" [options]="interviewTypeList" [(ngModel)]="scheduleEdit.jobInterviewTypeId"
+                         #interviewtypeLabel="ngModel" required></ng-select>
+              <div [hidden]="interviewtypeLabel.valid" class="messages text-danger">
+                Please select interviewtype
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-light" [ngClass]="{'disabled':interviewScheduleInfoForm.form.invalid}"
+                [disabled]="!interviewScheduleInfoForm.form.valid" [disabled]="isSaving">
+          Save
+        </button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>
+
+
+<div>
+  <form class="form-horizontal" name="managerComment" #managerComment="ngForm">
+    <app-modal-basic #editorModalManager [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">View Manager Comment</h4>
+        <button type="button" class="close basic-close" (click)="editorModalManager.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body" style=" max-height: 400px; overflow-y: auto; overflow-x: hidden;">
+
+        <div class="row">
+          <div class="col-sm-12">
+
+            <div class="dt-responsive">
+
+
+              <div class="col-sm-12">
+
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h5>Question</h5>
+
+                  </div>
+                  <div class="col-sm-2">
+                    <h5>Actual Weightage</h5>
+
+
+                  </div>
+                  <div class="col-sm-2">
+                    <h5>Weightage</h5>
+
+                  </div>
+
+                </div>
+                <br>
+
+
+
+                <div class="row" *ngFor="let questionAnswer of jobDetail.questionAnswerList; let i=index">
+                  <div class="col-sm-8">
+                    <label>{{questionAnswer.question}}</label>
+
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="input-group input-group-sm">
+                      <label style="color:red">{{questionAnswer.obtainedWeightage}}</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <label style="color:green">{{questionAnswer.weightage}}</label>
+                  </div>
+                </div>
+
+                <br>
+
+
+              </div>
+
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <textarea class="form-control" placeholder="Comments" rows="3">{{jobDetail.comment}}</textarea>
+
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+
+
+
+        <!-- <div class="row">
+            <div class="col-md-12">
+              <label class="col-form-label">Manager Comment</label>
+              <textarea class="form-control" cols="5" placeholder="Manager Comment" rows="5">{{managerComment}}</textarea>
+
+            </div>
+          </div> -->
+
+      </div>
+
+    </app-modal-basic>
+  </form>
+</div>

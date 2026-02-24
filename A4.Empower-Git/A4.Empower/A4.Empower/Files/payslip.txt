@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Empower360Plus | Welcome</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+<div id="MyDIv">
+  <div style="align-content:center">
+    <img src="assets/images/CompanyLogo/CompanyLogo.PNG" style="width: 1000px;" />
+  </div>
+  <div>
+    <h6>507-A/ 507-B, 5th floor, SHALIMAR TITANIUM, Shalimar Corporate Park, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh-226010.</h6>
+  </div>
+  <div class="payslip-blue-bg" style="padding: -0.25px 1.25px;" >
+    PAYSLIP
+  </div>
+
+  <br />
+  
+  <div class="payslip-blue-bg" >
+    Month Detail
+  </div>
+  <div class="card-block">
+    <div class="view-info">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="general-info">
+            <div class="row">
+              <div class="dt-responsive table-responsive">
+                <table id="simpletable"
+                       class="table nowrap" style="border:1px solid black;">
+                  <tbody>
+                    <tr>
+                      <td class="td-border"><b>EmployeeName :</b></td>
+                      <td class="td-border">{{employeeName}}</td>
+                      <td class="td-border"><b>Designation :</b></td>
+                      <td class="td-border">{{empDesignation}}</td>
+
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Month :</b></td>
+                      <td class="td-border">{{month}}</td>
+                      <td class="td-border"><b>TotalDaysOfMonth :</b></td>
+                      <td class="td-border">{{totalDaysOfMonth}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Location :</b></td>
+                      <td class="td-border">{{location}}</td>
+                      <td class="td-border"><b>DOJ :</b></td>
+                      <td class="td-border">{{doj}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Year :</b></td>
+                      <td class="td-border">{{year}}</td>
+                      <td class="td-border"></td>
+                      <td class="td-border"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="payslip-blue-bg" >
+    Leave Details
+  </div>
+  <div class="card-block">
+    <div class="view-info">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="general-info">
+            <div class="row">
+              <div class="dt-responsive table-responsive">
+                <table id="simpletable"
+                       class="table nowrap"  style="border:1px solid black;">
+                  <tbody>
+                    <tr>
+                      <td class="td-border"><b>Allowed Leaves :</b></td>
+                      <td class="td-border">{{allowedLeave}}</td>
+                      <td class="td-border"><b>Leaves Taken :</b></td>
+                      <td class="td-border">{{leaveTaken}}</td>
+
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Worked Days :</b></td>
+                      <td class="td-border">{{workedDays}}</td>
+                      <td class="td-border"></td>
+                      <td class="td-border"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="payslip-blue-bg">
+    Pay Details
+  </div>
+  <div class="card-block">
+    <div class="view-info">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="general-info">
+            <div class="row">
+              <div class="dt-responsive table-responsive">
+                <table id="simpletable"
+                       class="table nowrap"  style="border:1px solid black;">
+                  <tbody>
+                    <tr>
+                      <td class="td-border"><b>CTC :</b></td>
+                      <td class="td-border">{{ctc}}</td>
+                      <td class="td-border"><b>CTC For December :</b></td>
+                      <td class="td-border">{{ctcForDecember}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Basic Salary :</b></td>
+                      <td class="td-border">{{basicSalary}}</td>
+                      <td class="td-border"><b>DA :</b></td>
+                      <td class="td-border">{{da}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>HRA :</b></td>
+                      <td class="td-border">{{hra}}</td>
+                      <td class="td-border"><b>Conveyance :</b></td>
+                      <td class="td-border">{{conveyance}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Medical Expenses :</b></td>
+                      <td class="td-border">{{medicalExpenses}}</td>
+                      <td class="td-border"><b>Special :</b></td>
+                      <td class="td-border">{{special}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Bonus :</b></td>
+                      <td class="td-border">{{bonus}}</td>
+                      <td class="td-border"><b>TA :</b></td>
+                      <td class="td-border">{{ta}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Total :</b></td>
+                      <td class="td-border">{{total}}</td>
+                      <td class="td-border"><b>Contibution To PF :</b></td>
+                      <td class="td-border">{{contributionToPf}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Professional Tax :</b></td>
+                      <td class="td-border">{{professionTax}}</td>
+                      <td class="td-border"><b>TDS :</b></td>
+                      <td class="td-border">{{tds}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Salary Advance :</b></td>
+                      <td class="td-border">{{salaryAdvance}}</td>
+                      <td class="td-border"><b>Salary Total :</b></td>
+                      <td class="td-border">{{salaryTotal}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-border"><b>Net Payable :</b></td>
+                      <td class="td-border">{{netPayable}}</td>
+                      <td class="td-border"></td><td class="td-border"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="icon_image " title="Share As PDF" (click)="exportAsPDF('MyDIv');"><img src="assets/pdf/pdf.png"></div>-->
+<div title="Share As PDF" (click)="exportAsPDF('MyDIv');" class="btn btn-sm btn-primary waves-effect">Download pdf</div>
+
+
+
+<script>
+
+  $(function () {
+    $("td").addClass("td-border");
+  });
+</script>
+</body>
+
+</html>
+
+
+
+
+

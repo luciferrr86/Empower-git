@@ -1,0 +1,62 @@
+<div>
+  <form class="form-horizontal" name="clientInfoForm" #clientInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Client</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <p>Client Name
+              <input autofocus type="text" name="name" placeholder="Client Name" [(ngModel)]="client.name"
+                #name="ngModel" class="form-control" required>
+              <span [hidden]="name.valid" class="messages text-danger">
+                Please enter client name
+              </span>
+            </p>
+
+          </div>
+
+          <div class="col-sm-4">
+            <p>EmailId
+              <input autofocus type="text" name="emailid" placeholder="EmailId" [(ngModel)]="client.emailId"
+                #emailid="ngModel" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+              <span [hidden]="emailid.valid" class="messages text-danger">
+                Please enter valid email id
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-4">
+            <p>Contact No
+              <input autofocus type="number" name="contactNo" placeholder="Contact No" [(ngModel)]="client.contact"
+                #contactNo="ngModel" class="form-control" required>
+              <span [hidden]="contactNo.valid" class="messages text-danger">
+                Please enter contact No
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p>Address
+              <textarea autofocus type="text" name="address" rows="3" placeholder="Address" [(ngModel)]="client.address"
+                #address="ngModel" class="form-control" required></textarea>
+              <span [hidden]="address.valid" class="messages text-danger">
+                Please enter address
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Close</button>
+        <button type="submit" [disabled]="!clientInfoForm.form.valid" [disabled]="isSaving"
+          class="btn btn-primary waves-effect waves-light ">
+          {{isSaving ? 'Saving in...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

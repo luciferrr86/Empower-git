@@ -1,0 +1,166 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="dt-responsive">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-sm-6 col-md-6">
+              <h5>Company Info</h5>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="col-lg-12 col-xl-6">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Company Name :</th>
+                      <td> {{statusModal.statusCompanyModel.companyName}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Company Address : </th>
+                      <td>{{statusModal.statusCompanyModel.companyAddress}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-12 col-xl-6">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row"> Email Id : </th>
+                      <td>{{statusModal.statusCompanyModel.emailId}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Telephone Number :</th>
+                      <td>{{statusModal.statusCompanyModel.companyTelePhoneNo}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Status List'">
+      <div class="dt-responsive">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+            <div>
+              <!-- <label class="label-control">Show
+                    <select class="form-control input-sm full-data-show-entry" [(ngModel)]="pageSize" (ngModelChange)="getData($event)">
+                      <option [ngValue]="10">10</option>
+                      <option [ngValue]="25">25</option>
+                      <option [ngValue]="50">50</option>
+                      <option [ngValue]="100">100</option>
+                    </select>
+                    entries
+                  </label> -->
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <div style="text-align: right;">
+              <!-- <label>Search:
+                    <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" (ngModelChange)="getFilteredData($event)" placeholder="Search name">
+                  </label> -->
+              <button type="button" class="btn btn-sm btn-primary waves-effect" (click)="addStatus()">Add
+                Status</button>
+            </div><br>
+          </div>
+        </div>
+
+        <ngx-datatable class="data-table material" [externalPaging]="false" [offset]="pageNumber" [limit]="pageSize"
+          [loadingIndicator]="loadingIndicator" [rows]="rows" [rowHeight]="35" [headerHeight]="50" [footerHeight]="35"
+          [columns]="columns" [columnMode]="'force'">
+        </ngx-datatable>
+        <ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <a href="javascript:;" ngbTooltip="Edit" (click)="editUser(row)"
+              class="m-r-15 crm-action-edit text-muted text-primary">
+              <i class="icofont icofont-ui-edit"></i>
+            </a>
+            <a href="javascript:;" ngbTooltip="View" (click)="viewUser(row)"
+              class="m-r-15 crm-action-edit text-muted text-primary">
+              <i class="icofont icofont-eye"></i>
+            </a>
+            <a href="javascript:;" ngbTooltip="Delete" (click)="deleteUser(row)"
+              class="crm-action-delete text-muted text-danger">
+              <i class="icofont icofont-delete-alt"></i>
+            </a>
+          </td>
+        </ng-template>
+        <ng-template #callDateTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            {{row.callDateTime | date: 'dd/MM/yyyy'}}
+          </td>
+        </ng-template>
+
+      </div><br>
+      <button type="button" [routerLink]="['/sales-tracker']" class="btn btn-default f-right mb-3">Back</button>
+    </app-card>
+  </div>
+</div>
+<!-- modal static-->
+
+
+
+<div>
+  <form class="form-horizontal" name="statusForm" #statusForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="''">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Status</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <p>Sale Status
+              <ng-select name="salestatus" placeholder="Sale Status" [options]="statusListOption"
+                [(ngModel)]="status.salesStatusId" #salestatus="ngModel" required> </ng-select>
+              <span [hidden]="salestatus.valid" class="messages text-danger">
+                Please select sale status
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-12">
+            <p>Call Date
+              <input type="date" required class="form-control" name="statusdate" placeholder="Call Date"
+                [ngModel]="status.callDateTime | date:'yyyy-MM-dd'" [value]="status.callDateTime | date:'yyyy-MM-dd'"
+                #statusdate="ngModel" (ngModelChange)="status.callDateTime = ($event)">
+              <span [hidden]="statusdate.valid" class="messages text-danger">
+                Please select date
+              </span>
+
+            </p>
+          </div>
+          <div class="col-sm-12">
+            <p>Description
+              <input autofocus type="text" name="description" minlength="2" placeholder="Description"
+                [(ngModel)]="status.description" #description="ngModel" class="form-control" required>
+              <span *ngIf="description.errors">
+                <span class="messages text-danger" *ngIf="description.errors.required">Please enter description</span>
+              </span> </p>
+          </div>
+
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+        <button type="submit" [disabled]="!statusForm.form.valid" class="btn btn-primary waves-effect waves-light "> {{isSaving
+                      ? 'Saving...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

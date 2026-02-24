@@ -1,0 +1,206 @@
+<form [formGroup]="jobCreateForm" name="jobCreationForm" #jobCreationForm="ngForm" (ngSubmit)="saveJobVacancy()">
+  <div class="app-modal-body">
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label class="col-form-label">Job Title</label>
+        <input autofocus type="text" placeholder="Enter job title" class="form-control" formControlName="jobTitle" />
+        <div [hidden]="jobCreateForm.controls.jobTitle.valid" class="messages text-danger">
+          Please enter job title
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="col-form-label">Job Type</label>
+        <ng-select name="jobtype" placeholder="Select Job Type" [options]="jobTypeList" formControlName="jobTypeId">
+        </ng-select>
+        <div [hidden]="jobCreateForm.controls.jobTypeId.valid" class="messages text-danger">
+          Please select jobtype
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="col-form-label">Job Location</label>
+        <input autofocus type="text" placeholder="Enter job location" class="form-control"
+               formControlName="jobLocation" />
+        <div [hidden]="jobCreateForm.controls.jobLocation.valid" class="messages text-danger">
+          Please enter job location
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label class="col-form-label">Experience</label>
+        <input autofocus type="text" placeholder="Enter job experience" class="form-control"
+               formControlName="experience" pattern="[a-zA-Z0-9](.*[a-zA-Z0-9 ])?$" />
+        <div *ngIf="jobCreateForm.controls.experience.errors">
+          <div class="messages text-danger" *ngIf="jobCreateForm.controls.experience.errors.required">
+            Please enter job
+            experience
+          </div>
+          <div class="messages text-danger" *ngIf="jobCreateForm.controls.experience.errors.pattern">
+            Only alphanumerics
+            are allowed
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="col-form-label">No of vacancy</label>
+        <input autofocus type="text" placeholder="Enter no of vacancy" class="form-control" pattern="[0-9](.*[0-9])?$"
+               formControlName="noOfvacancies" />
+        <div *ngIf="jobCreateForm.controls.noOfvacancies.errors">
+          <div class="messages text-danger" *ngIf="jobCreateForm.controls.noOfvacancies.errors.required">
+            Please enter no
+            of vacancy
+          </div>
+          <div class="messages text-danger" *ngIf="jobCreateForm.controls.noOfvacancies.errors.range">
+            No of vacancy
+            can't be zero
+          </div>
+          <div class="messages text-danger" *ngIf="jobCreateForm.controls.noOfvacancies.errors.pattern">
+            Only numerics
+            are allowed
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <label class="col-form-label">Currency</label>
+        <input autofocus type="text" placeholder="Enter currency" class="form-control" formControlName="currency" />
+        <div [hidden]="jobCreateForm.controls.currency.valid" class="messages text-danger">
+          Please enter currency
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label class="col-form-label">Salary Range</label>
+        <input autofocus type="text" placeholder="Enter salary range" class="form-control" formControlName="salaryRange"
+               pattern="[0-9](.*[a-zA-Z0-9 -])?$" />
+
+        <div *ngIf="jobCreateForm.controls.salaryRange.errors">
+          <div class="messages text-danger" *ngIf="jobCreateForm.controls.salaryRange.errors.required">
+            Please enter
+            salary range
+          </div>
+          <div class="messages text-danger" *ngIf="jobCreateForm.controls.salaryRange.errors.pattern">
+            First character
+            cant't be an alphabet
+          </div>
+        </div>
+        <br />
+
+      </div>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <div class="well">
+          <div class="row" *ngIf="divShow=='No'">
+            <div class="col-md-10">
+              Do you have Job Description ?
+            </div>
+            <div class="col-md-1">
+              <a href="javascript:;" class='label label-danger' (click)="udpateValue()">
+                No
+              </a>
+            </div>
+            <div class="col-md-1">
+              <a class='label label-success' (click)="showDiv.next = !showDiv.next;">
+                Yes
+              </a>
+            </div>
+          </div>
+         <br/>
+          
+          <div class="card" *ngIf="showDiv.next">
+
+            <div class="card-header">
+              <h5>Job Description</h5>
+            </div>
+
+            <div class="panel-body">
+              <div class="col-sm-12">
+
+                <quill-editor class="content-editor" formControlName="jobDescription" [modules]="quillConfiguration"> </quill-editor>
+                <div [hidden]="jobCreateForm.controls.jobDescription.valid" class="messages text-danger">
+                  Please enter job description
+                </div>
+              </div>
+              <br />
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <div class="well">
+
+          <div class="card">
+            <div class="card-header">
+              <h5>Job Requirement</h5>
+
+            </div>
+            <div class="panel-body">
+              <div class="col-sm-12">
+
+                <quill-editor class="content-editor" formControlName="jobRequirements" [modules]="quillConfiguration"> </quill-editor>
+                <div [hidden]="jobCreateForm.controls.jobRequirements.valid" class="messages text-danger">
+                  Please enter job requirement
+                </div>
+              </div>
+              <br />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <div class="well">
+          <div class="card-header">
+
+            <h5>INTERVIEW LEVEL</h5>
+            <button type="button" class="btn btn-primary f-right btn-sm" (click)="addInterViewLevel()"
+                    style="cursor: default">
+              Add Level
+            </button>
+
+          </div>
+
+          <div formArrayName="jobVacancyLevel">
+            <div *ngFor="let address of  jobVacancyLevel.controls; let i=index" class="card">
+              <div [formGroupName]="i" class="panel-body">
+                <interview-level-editor (getInterviewLevelId)="removeInterviewLevel($event,i)"
+                                        [hiringManagerList]="hiringManagerList" [group]="jobCreateForm.controls.jobVacancyLevel.controls[i]">
+                </interview-level-editor>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 mb-2">
+      <div style="text-align: right;">
+
+        <button type="submit" class="btn btn-primary"
+                [disabled]="jobCreateForm.invalid">
+          {{isSaving ? ('Please Wait...') : ('Save')}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+                

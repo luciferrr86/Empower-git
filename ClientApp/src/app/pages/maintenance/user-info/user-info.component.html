@@ -1,0 +1,239 @@
+<form name="userInfoForm" #userInfoForm="ngForm" (ngSubmit)="save()">
+  <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+    <div class="app-modal-header">
+      <h4 class="modal-title">{{modalTitle}} Employee</h4>
+      <button type="button" class="close basic-close" (click)="close(userInfoForm)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="app-modal-body">
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <p>Name
+            <input 
+              autofocus 
+              type="text" 
+              name="fullName" 
+              placeholder="Enter Full Name" 
+              class="form-control"
+              pattern="[a-zA-Z](.*[a-zA-Z ])?$" 
+              minlength="3" 
+              [(ngModel)]="userEdit.fullName" 
+              #fullName="ngModel"
+              required />
+            <span *ngIf="!fullName.valid && fullName.touched">
+              <span class="messages text-danger" *ngIf="fullName.errors.required">Please Enter Name</span>
+              <span class="messages text-danger" *ngIf="fullName.errors.pattern">Only alphabets are allowed</span>
+              <span class="messages text-danger" *ngIf="fullName.errors.minlength">Please enter atleast 3 characters</span>
+            </span>
+          </p>
+        </div>
+
+        <div class="col-sm-4">
+          <p>Email
+            <input 
+              type="text" 
+              name="email" 
+              placeholder="Enter Email Id" 
+              class="form-control"
+              [(ngModel)]="userEdit.email" 
+              #email="ngModel" 
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+              required />
+            <span *ngIf="!email.valid && email.touched">
+              <span class="messages text-danger" *ngIf="email.errors.required">Please Enter Email Id</span>
+              <span class="messages text-danger" *ngIf="email.errors.pattern">Please Enter a Valid Email Id</span>
+            </span>
+          </p>
+        </div>
+        <div class="col-sm-4">
+          <p>Contact
+            <input
+              type="text" 
+              name="contact" 
+              placeholder="Enter Contact"
+              class="form-control"
+              [(ngModel)]="userEdit.phoneNumber" 
+              pattern="^((\\+91-?)|0)?[0-9]{10}$" 
+              #contact="ngModel" 
+              required />
+            <span class="messages text-danger" *ngIf="!contact.valid && contact.touched">
+              Please Enter Contact Number
+            </span>
+          </p>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <p>Group
+            <ng-select 
+              name="group" 
+              placeholder="Select Group" 
+              [options]="groupList" 
+              [(ngModel)]="userEdit.groupId"
+              #group="ngModel" 
+              required> 
+            </ng-select>
+            <span class="messages text-danger" *ngIf="!group.valid && group.touched">
+              Please Select Group
+            </span>
+          </p>
+        </div>
+
+        <div class="col-sm-4">
+          <p>Designation
+            <ng-select 
+              name="designation" 
+              placeholder="Select Designation" 
+              [options]="designationList"
+              [(ngModel)]="userEdit.designationId" 
+              #designation="ngModel" 
+              required>
+            </ng-select>
+            <span class="messages text-danger" *ngIf="!designation.valid && designation.touched">
+              Please Select Designation
+            </span>
+          </p>
+        </div>
+
+        <div class="col-sm-4">
+          <p>Title
+            <ng-select 
+              name="title" 
+              placeholder="Select Title" 
+              [options]="titleList" 
+              [(ngModel)]="userEdit.titleId" 
+              #title="ngModel" 
+              required> 
+            </ng-select>
+            <span class="messages text-danger" *ngIf="!title.valid && title.touched">
+              Please Select Title
+            </span>
+          </p>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <p>Reporting Head
+            <ng-select 
+              name="manager" 
+              placeholder="Select Reporting Head" 
+              [options]="managerList"
+              [(ngModel)]="userEdit.managerId" 
+              #manager="ngModel" 
+              required> 
+            </ng-select>
+            <span class="messages text-danger" *ngIf="!manager.valid && manager.touched">
+              Please Select Reporting Head
+            </span>
+          </p>
+        </div>
+
+        <div class="col-md-4">
+          <p>Band
+            <ng-select 
+              name="band" 
+              placeholder="Select Band" 
+              [options]="bandList" 
+              [(ngModel)]="userEdit.bandId"
+              #band="ngModel" 
+              required>
+            </ng-select>
+            <span class="messages text-danger" *ngIf="!band.valid && band.touched">
+              Please Select Band
+            </span>
+          </p>
+        </div>
+        <div class="col-sm-4">
+          <p>Role Access
+            <ng-select 
+              name="role" 
+              placeholder="Select Role Acces" 
+              [options]="roleList" 
+              [(ngModel)]="userEdit.roleId"
+              #role="ngModel" 
+              required>
+            </ng-select>
+            <span class="messages text-danger" *ngIf="!role.valid && role.touched">
+              Please Select Role
+            </span>
+          </p>
+        </div>
+
+
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <p>Employee Code
+            <input 
+              type="text" 
+              name="empCode"
+              placeholder="Enter Employee Code"
+              pattern="^A[0-9]{3}$"
+              class="form-control" 
+              [(ngModel)]="userEdit.empCode"
+              #empCode="ngModel" 
+              required />
+            <span *ngIf="!empCode.valid && empCode.touched">
+              <span class="messages text-danger" *ngIf="empCode.errors.required">Please Enter Employee Code</span>
+              <span class="messages text-danger" *ngIf="empCode.errors.pattern">Wrong Emp Code! Sample Emp Code: 'A080'</span>
+            </span>
+          </p>
+        </div>
+
+        <div class="col-sm-4">
+          <p>Date of Joining
+            <input 
+              type="date"
+              class="form-control" 
+              id="doj" 
+              name="doj"
+              [ngModel]="userEdit.doj | date:'yyyy-MM-dd'" 
+              [value]="userEdit.doj | date:'yyyy-MM-dd'" 
+              #doj="ngModel"
+              required 
+              (ngModelChange)="userEdit.doj = ($event)">
+            <span class="messages text-danger" *ngIf="!doj.valid && doj.touched">
+              Please select a Date of Joining  
+            </span>
+          </p>
+        </div>
+
+        <div class="col-sm-4">
+          <p>Location
+            <input  
+              type="text" 
+              name="location" 
+              placeholder="Enter Location" 
+              pattern="[a-zA-Z](.*[a-zA-Z ])?$"
+              class="form-control" 
+              [(ngModel)]="userEdit.location" 
+              #location="ngModel" 
+              required />
+            <span class="messages text-danger" *ngIf="!location.valid && location.touched">
+              Please Enter Location
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="app-modal-footer">
+      <button 
+        type="button" 
+        (click)="close(userInfoForm)" 
+        class="btn btn-default" 
+        [disabled]="isSaving">
+        Cancel
+      </button>
+      <button 
+        type="submit" 
+        class="btn btn-primary" 
+        [ngClass]="{'disabled':userInfoForm.form.invalid}"
+        [disabled]="!userInfoForm.form.valid" 
+        [disabled]="isSaving">{{isSaving ? ('Please Wait...') : ('Save')}}
+      </button>
+    </div>
+  </app-modal-basic>
+</form>

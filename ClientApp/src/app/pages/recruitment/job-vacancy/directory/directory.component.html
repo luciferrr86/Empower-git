@@ -1,0 +1,173 @@
+
+  <form name="directoryForm" #directoryForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}}</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label class="col-form-label">Name</label>
+            <input autofocus type="text" name="fullName" placeholder="Enter full name" class="form-control"
+                   [(ngModel)]="dir.name"  />
+          </div>
+
+          <div class="col-sm-4">
+            <label class="col-form-label">Email</label>
+            <input autofocus type="text" name="email" placeholder="Enter email id" class="form-control"
+                   [(ngModel)]="dir.email"  />
+          </div>
+
+          <div class="col-sm-4">
+            <label class="col-form-label">Phone Number</label>
+            <input autofocus type="text" name="phoneNumber" placeholder="Enter Contact" class="form-control"
+                   [(ngModel)]="dir.phoneNumber"  />
+          </div>
+
+        </div>
+    
+        <div class="form-group row">
+         
+          <div class="col-sm-4">
+            <label class="col-form-label">Designation</label>
+            <input autofocus type="text" name="designation" placeholder="Enter Designation" class="form-control"
+                   [(ngModel)]="dir.designation"  />
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" (click)="editorModal.hide()" class="btn btn-default" [disabled]="isSaving">Cancel</button>
+        <button type="submit" class="btn btn-primary"[disabled]="isSaving">
+          {{isSaving ? ('Please Wait...') : ('Save')}}
+        </button>
+      </div>
+    </app-modal-basic>
+  </form>
+  <!--<div class="row">
+    <div class="col-md-12">
+      <app-card>
+    name: string;
+  designation: string;
+  email: string;
+  phoneNumber: string;
+        <form #manageCtcForm="ngForm" (ngSubmit)="submitCtc(manageCtcForm)">
+          <div class="row panel-heading bg-primary"> Employee Ctc </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6">
+              <b>Employee Name:</b> {{employee.employeeName}}
+            </div>
+            <div class="col-md-6">
+              <b>Employee Code:</b>  {{employee.employeeCode}}
+            </div>
+          </div>
+          <br />
+          <div class="col-md-12">
+            <div class="col-md-12 ">
+              <app-card>
+                <div class="row panels-wells bg-info"> Yearly Component </div>
+                <br />
+                <div class="row">
+                  <label class="col-md-3 row" for="ctc">Ctc:</label>
+                  <div class="col-md-3 form-line"><input type="number" name="Ctc" id="ctc" [(ngModel)]="empCtc.ctc" class="form-control"></div>
+                </div>
+                <br />
+                <div class="row" *ngFor="let component of yearlyComponents;let i=index">
+                  <label class="col-md-3 row" for="amount">{{ getComponentName(component.salaryComponentId)}}:</label>-->
+  <!--<div class="col-md-3 form-line"><input type="number" class="form-control" /></div> % &nbsp;-->
+  <!--<div class="col-md-3 form-line">
+        <input type="number" name="amount[{{i}}]" id="amount_{{i}}" [(ngModel)]="component.amount" class="form-control">
+
+      </div>
+    </div>
+  </app-card>
+  <br />
+  <app-card>
+    <div class="row panels-wells bg-info"> Monthly Component </div>
+    <br />
+    <div class="row">
+      <label class="col-md-3 row" for="ctc">Monthly Intake:</label>
+      <div class="col-md-3 form-line">{{ getMonthlyIntake() }}</div>
+    </div>
+    <br />
+    <div class="row">
+      <label class="col-md-3 row" for="basicSalary">BasicSalary:</label>-->
+  <!--<div class="col-md-3 form-line"><input type="number" class="form-control" /></div> % &nbsp;-->
+  <!--<div class="col-md-3 form-line">
+      <input type="number" name="BasicSalary" id="basicSalary" [(ngModel)]="empCtc.basicSalary" class="form-control">
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <label class="col-md-3 row" for="da">DA:</label>-->
+  <!--<div class="col-md-3 form-line"><input type="number" class="form-control" /></div> % &nbsp;-->
+  <!--<div class="col-md-3 form-line">
+      <input type="number" name="DA" id="da" [(ngModel)]="empCtc.da" class="form-control">
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <label class="col-md-3 row" for="hra">HRA:</label>-->
+  <!--<div class="col-md-3 form-line"><input type="number" class="form-control" /></div> % &nbsp;-->
+  <!--<div class="col-md-3 form-line">
+      <input type="number" name="HRA" id="hra" [(ngModel)]="empCtc.hra" class="form-control">
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <label class="col-md-3 row" for="conveyance">Conveyance:</label>-->
+  <!--<div class="col-md-3 form-line"><input type="number" class="form-control" /></div> % &nbsp;-->
+  <!--<div class="col-md-3 form-line">
+      <input type="number" name="Conveyance" id="conveyance" [(ngModel)]="empCtc.conveyance" class="form-control">
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <label class="col-md-3 row" for="medicalExpenses">MedicalExpenses:</label>-->
+  <!--<div class="col-md-3 form-line"><input type="number" class="form-control" /></div> % &nbsp;-->
+  <!--<div class="col-md-3 form-line">
+      <input type="number" name="MedicalExpenses" id="medicalExpenses" [(ngModel)]="empCtc.medicalExpenses" class="form-control">
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <label class="col-md-3 row" for="special">Special:</label>-->
+  <!--<div class="col-md-3 form-line"><input type="number" class="form-control" /></div> % &nbsp;-->
+  <!--<div class="col-md-3 form-line">
+      <input type="number" name="Special" id="special" [(ngModel)]="empCtc.special" class="form-control">
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <label class="col-md-3 row" for="bonus">Bonus:</label>-->
+  <!--<div class="col-md-3 form-line"><input type="number" class="form-control" /></div> % &nbsp;-->
+  <!--<div class="col-md-3 form-line">
+      <input type="number" name="Bonus" id="bonus" [(ngModel)]="empCtc.bonus" class="form-control">
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <label class="col-md-3 row" for="total">Total:</label>-->
+  <!--<div class="col-md-3 form-line"><input type="number" class="form-control" /></div> % &nbsp;-->
+  <!--<div class="col-md-3 form-line">
+    <input type="number" name="Total" id="total" [(ngModel)]="empCtc.total" class="form-control">-->
+  <!--<div class="col-md-3 form-line">{{ getTotal() }}</div>-->
+  <!--</div>
+                </div>
+                <br />
+              </app-card>
+            </div>
+            <div>
+              <button class="btn btn-circle btn-success waves-circle waves-effect waves-float" [disabled]="isSubmit" type="submit"> <i class="material-icons">Save</i> </button>
+            </div>
+          </div>
+        </form>
+      </app-card>
+    </div>
+  </div>-->
+
+
+

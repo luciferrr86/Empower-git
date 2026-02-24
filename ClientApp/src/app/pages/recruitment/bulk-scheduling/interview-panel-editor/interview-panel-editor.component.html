@@ -1,0 +1,90 @@
+<div>
+  <form class="form-horizontal" name="interviewerInfoForm" #interviewerInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Interviewer</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <input type="text" class="form-control" [(ngModel)]="interviewEdit.name" name="panelname"
+              placeholder="Panel name" #panelname="ngModel" required>
+            <div [hidden]="panelname.valid" class="messages text-danger">
+              Please enter panel
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <ng-select name="vacancy" placeholder="Job Vacancy" [options]="allVacancy"
+              [(ngModel)]="interviewEdit.vacancyId" #vacancy="ngModel" required> </ng-select>
+            <div [hidden]="vacancy.valid" class="messages text-danger">
+              Please select job vacancy
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <ng-select name="manager" [multiple]="true" placeholder="Manager" [options]="allManager"
+              [(ngModel)]="interviewEdit.managerIdList" #manager="ngModel" required> </ng-select>
+            <div [hidden]="manager.valid" class="messages text-danger">
+              Please select manager
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <ng-select name="date" placeholder="select date" [options]="allDate"
+              [(ngModel)]="interviewEdit.interViewDateId" #date="ngModel" required> </ng-select>
+            <div [hidden]="date.valid" class="messages text-danger">
+              Please select date
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row ">
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <input type="time" class="form-control" placeholder="HH:MM" name="starttime"
+                [(ngModel)]="interviewEdit.startTime" #starttime="ngModel" required>
+            </div>
+            <div [hidden]="starttime.valid" class="messages text-danger">
+              please select starttime
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <input type="time" class="form-control" placeholder="HH:MM" name="endtime"
+                [(ngModel)]="interviewEdit.endTime" #endtime="ngModel" required>
+            </div>
+            <div [hidden]="endtime.valid" class="messages text-danger">
+              please select endtime
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <input type="time" class="form-control" placeholder="HH:MM" name="breakstarttime"
+                [(ngModel)]="interviewEdit.breakStartTime" #breakstarttime="ngModel" required>
+            </div>
+            <div [hidden]="breakstarttime.valid" class="messages text-danger">
+              please select break start time
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <input type="time" class="form-control" placeholder="HH:MM" name="breakEndtime"
+                [(ngModel)]="interviewEdit.breakEndTime" #breakEndtime="ngModel" required>
+            </div>
+            <div [hidden]="breakEndtime.valid" class="messages text-danger">
+              please select break endtime
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+        <button type="submit" [ngClass]="{ 'disabled': interviewerInfoForm.invalid}" [disabled]="isSaving"
+          class="btn btn-primary waves-effect waves-light ">{{isSaving
+            ? 'Saving in...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

@@ -1,0 +1,36 @@
+<div class="card">
+  <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+    <div class="app-modal-body">
+      <div class="card-header">
+        <h5 class="card-header-text">EMPLOYEE LEAVE DETAILS</h5>
+      </div>
+      <div class="card-block table-border-style">
+        <div class="table-responsive">
+          <table class="table table-styling">
+            <thead>
+              <tr>
+                <th>Leave Type</th>
+                <th>Allotted Leaves</th>
+                <th>Leaves Taken</th>
+                <th>Remaining Leaves</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let list of leavedetails">
+                <td>{{list.leaveType}}</td>
+                <td>{{list.allottedLeaves}}</td>
+                <td>{{list.takenLeaves}}</td>
+                <td>{{list.remainingLeave}}</td>
+              </tr>
+              <tr *ngIf="leavedetails?.length == 0 ">
+                  <td><span style="color:red">Leave is not assigned for this employee.</span></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </app-modal-basic>
+
+</div>

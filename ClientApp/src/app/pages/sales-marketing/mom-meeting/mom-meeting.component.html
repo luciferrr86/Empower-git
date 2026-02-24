@@ -1,0 +1,147 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>Next Action</h5>
+      </div>
+      <div class="card-body">
+        <div class="dt-responsive">
+          <div class="row">
+            <div class="col-lg-12 col-xl-6">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Meeting Date :</th>
+                      <td> {{momMeeting.mettingDate}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Venue : </th>
+                      <td>{{momMeeting.venue}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Subject :</th>
+                      <td>{{momMeeting.subject}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row"> MOM Description :</th>
+                      <td>
+                        <p>
+                          <input autofocus type="text" name="momdescription" minlength="2" placeholder="Mom Description"
+                            [(ngModel)]="momMeeting.momDescription" #momdescription="ngModel" class="form-control"
+                            required>
+                          <span *ngIf="momdescription.errors">
+                            <span class="messages text-danger" *ngIf="momdescription.errors.required">Please enter
+                              description</span>
+                          </span> </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-12 col-xl-6">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row"> Internal Person: </th>
+                      <td>
+                        <ng-select [disabled]="true" name="internalmail" placeholder="Internal" [multiple]="true"
+                          [options]="internalEmployee" [(ngModel)]="momMeeting.internalPerson" #internalmail="ngModel"
+                          required>
+                        </ng-select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Writer :</th>
+                      <td>{{momMeeting.writer}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Agenda :</th>
+                      <td>{{momMeeting.agenda}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<form class="form-horizontal" name="scheduleForm" #scheduleForm="ngForm" (ngSubmit)="save()">
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Next Action</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Internal Employee
+                    <ng-select name="internalmail" placeholder="Internal" [multiple]="true" [options]="internalEmployee"
+                      [(ngModel)]="momMeeting.nextActionInternalPerson" #internalmail="ngModel" required> </ng-select>
+                    <span [hidden]="internalmail.valid" class="messages text-danger">
+                      Please select employee
+                    </span>
+                  </p>
+                </div>
+                <div class="col-sm-6">
+                  <p>Due date
+                    <input type="date" required class="form-control" name="dueDate" placeholder="Due Date"
+                      [ngModel]="momMeeting.nextActionDueDate | date:'yyyy-MM-dd'"
+                      [value]="momMeeting.nextActionDueDate | date:'yyyy-MM-dd'" #dueDate="ngModel"
+                      (ngModelChange)="momMeeting.nextActionDueDate = ($event)">
+                    <span [hidden]="dueDate.valid" class="messages text-danger">
+                      Please select date
+                    </span>
+                  </p>
+                </div>
+                <div class="col-sm-6">
+                  <p>Status
+                    <input autofocus type="text" name="status" minlength="2" placeholder="status"
+                      [(ngModel)]="momMeeting.nextActionStatus" #status="ngModel" class="form-control" required>
+                    <span *ngIf="status.errors">
+                      <span class="messages text-danger" *ngIf="status.errors.required">Please enter status</span>
+                    </span> </p>
+                </div>
+                <div class="col-sm-6">
+                  <p>Description
+                    <input autofocus type="text" name="description" minlength="2" placeholder="Description"
+                      [(ngModel)]="momMeeting.nextActionDescription" #description="ngModel" class="form-control"
+                      required>
+                    <span *ngIf="description.errors">
+                      <span class="messages text-danger" *ngIf="description.errors.required">Please enter
+                        description</span>
+                    </span> </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="f-right">
+            <button type="submit" [disabled]="!scheduleForm.form.valid"
+              class="btn btn-primary waves-effect waves-light "> {{isSaving
+                            ? 'Saving...' : 'Save'}}</button>
+            <button type="button" [routerLink]="['../schedulelist']" [queryParams]="{id:companyId}"
+              class="btn btn-default pull-right">Back</button>
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</form>

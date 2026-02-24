@@ -1,0 +1,77 @@
+<section class="login p-fixed d-flex text-center bg-primary candidate-img-bg">
+  <!-- starts -->
+  <div class="auth-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- Authentication card start -->
+        <div class="login-card card-body auth-body">
+          <form class="md-float-material">
+            <div class="text-center">
+              <h4>Empower 360<sup>+</sup></h4>
+            </div>
+
+            <div class="auth-box">
+              <div class="row m-b-20">
+                <div class="col-md-12">
+                  <h3 class="text-left txt-primary">Sign In</h3>
+                </div>
+              </div>
+              <hr />
+              <form *ngIf="formResetToggle" name="loginForm" #loginForm="ngForm" (ngSubmit)="login()">
+                <div class="input-group">
+                  <input type="email" class="form-control" id="login-email" name="email" placeholder="Enter email id"
+                    [(ngModel)]="userLogin.email" #email="ngModel" required>
+
+                  <span class="md-line">
+
+                  </span>
+
+                </div>
+                <div [hidden]="email.valid || email.pristine" class="messages text-danger">
+                  Email is required
+                </div>
+                <div class="input-group">
+                  <input type="password" id="login-password" name="password" placeholder="Enter password"
+                    class="form-control" [(ngModel)]="userLogin.password" #password="ngModel" required>
+
+                  <span class="md-line">
+
+
+                  </span>
+
+                </div>
+                <div [hidden]="password.valid || password.pristine" class="messages text-danger">Password is required
+                </div>
+                <div class="row m-t-25 text-left">
+                  <div class="col-sm-7 col-xs-12">
+                    <div class="checkbox-fade fade-in-primary">
+                      <label>
+                        <input type="checkbox" name="rememberMe" [(ngModel)]="userLogin.rememberMe" value="">
+                        <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                        <span class="text-inverse">Remember me</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-5 col-xs-12 forgot-phone text-right">
+                    <a [routerLink]="['/candidate/forgot']" class="text-right f-w-600 text-inverse"> Forgot Your
+                      Password?</a>
+                  </div>
+                </div>
+                <div class="row m-t-30">
+                  <div class="col-md-12">
+                    <button type="submit" [disabled]="!loginForm.form.valid"
+                      class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"><i *ngIf="isLoading"
+                        class='fa fa-circle-o-notch fa-spin'></i> {{isLoading ? 'Loggin in...' : 'Sign in'}}</button>
+                    <p class="text-inverse m-t-25 text-left">Don't have an account? <a
+                        [routerLink]="['/candidate/registration']"> Register </a> here for free!</p>
+                  </div>
+                </div>
+                <hr />
+              </form>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

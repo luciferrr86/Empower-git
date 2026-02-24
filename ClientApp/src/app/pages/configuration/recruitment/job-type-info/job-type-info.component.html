@@ -1,0 +1,31 @@
+<form class="form-horizontal" name="jobTypeInfoForm" #jobTypeInfoForm="ngForm" (ngSubmit)="save()">
+  <app-modal-basic #editorModal [dialogClass]="'modal-default'">
+    <div class="app-modal-header">
+      <h4 class="modal-title">{{modalTitle}} Job Type</h4>
+      <button type="button" class="close basic-close" (click)="editorModal.hide()">
+
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="app-modal-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <p>Job Type Name
+            <input autofocus type="text" name="jobTypeName" pattern="[a-zA-Z](.*[a-zA-Z0-9 ])?$"
+              placeholder="Job Type Name" [(ngModel)]="jobTypeEdit.name" #jobTypeName="ngModel" class="form-control"
+              required>
+            <span *ngIf="jobTypeName.errors">
+              <span class="messages text-danger" *ngIf="jobTypeName.errors.required">Please enter job type</span>
+              <span class="messages text-danger" *ngIf="jobTypeName.errors.pattern">Only alphanumerics are
+                allowed</span>
+            </span></p>
+        </div>
+      </div>
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Close</button>
+      <button type="submit" [disabled]="!jobTypeInfoForm.form.valid" class="btn btn-primary waves-effect waves-light ">
+        {{isSaving ? 'Saving in...' : 'Save'}}</button>
+    </div>
+  </app-modal-basic>
+</form>

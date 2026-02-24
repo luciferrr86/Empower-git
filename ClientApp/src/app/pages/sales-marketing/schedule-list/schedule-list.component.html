@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="dt-responsive">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-sm-6 col-md-6">
+              <h5>Company Info</h5>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-xl-6">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Company Name :</th>
+                      <td> {{scheduleModal.statusCompanyModel.companyName}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Company Address : </th>
+                      <td>{{scheduleModal.statusCompanyModel.companyAddress}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-12 col-xl-6">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row"> Email Id : </th>
+                      <td>{{scheduleModal.statusCompanyModel.emailId}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Telephone Number :</th>
+                      <td>{{scheduleModal.statusCompanyModel.companyTelePhoneNo}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Schedule List'">
+      <div class="dt-responsive">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+            <div>
+              <label class="label-control">Show
+                <select class="form-control input-sm full-data-show-entry" [(ngModel)]="pageSize"
+                  (ngModelChange)="getData($event)">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="25">25</option>
+                  <option [ngValue]="50">50</option>
+                  <option [ngValue]="100">100</option>
+                </select>
+                entries
+              </label>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <div style="text-align: right;">
+              <label>Search:
+                <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search"
+                  (ngModelChange)="getFilteredData($event)" placeholder="Search name">
+              </label>
+              <button type="button" class="btn btn-sm btn-primary waves-effect" [routerLink]="['../schedule-meeting']"
+                [queryParams]="{id:scheduleModal.statusCompanyModel.companyId}">Schedule Meeting</button>
+            </div>
+          </div>
+        </div>
+
+        <ngx-datatable class="data-table material" [externalPaging]="true" [count]="count" (page)='setPage($event)'
+          [offset]="pageNumber" [limit]="pageSize" [loadingIndicator]="loadingIndicator" [rows]="rows" [rowHeight]="35"
+          [headerHeight]="50" [footerHeight]="35" [columns]="columns" [columnMode]="'force'">
+        </ngx-datatable>
+        <ng-template #momTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <a href="javascript:;" ngbTooltip="mom" [routerLink]="['../mom-meeting']"
+              [queryParams]="{id:row.scheduleId,companyId:scheduleModal.statusCompanyModel.companyId}"
+              [queryParams]="{companyId:scheduleModal.statusCompanyModel.companyId}"
+              class="m-r-15 crm-action-edit text-primary">
+              <i class="icofont icofont-eye f-16"></i>
+            </a>
+
+          </td>
+        </ng-template>
+        <ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <a href="{{row.file}}" target="_blank" class="m-r-15 crm-action-edit">
+              <i class="icofont icofont-arrow-down f-16 text-c-green"></i>
+            </a>
+
+          </td>
+        </ng-template>
+
+      </div>
+      <br>
+      <button type="button" [routerLink]="['/sales-tracker']"
+        class="btn btn-default pull-right f-right mb-3">Back</button>
+    </app-card>
+  </div>
+</div>
+<div>
+</div>

@@ -1,0 +1,260 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Employee Salary'">
+      <div class="row">
+        <div class="col-md-12 text-danger" *ngIf="! this.employeeSalary">Please setup CTS for This Employee</div>
+        <div class="col-md-6">
+          <b>Employee Name:</b> {{employeeSalary.employeeName}}
+        </div>
+        <div class="col-md-6">
+          <b>Employee Code:</b>  {{employeeSalary.employeeCode}}
+        </div>
+      </div>
+      <br />
+      <form>
+        <div class="row panel-heading bg-primary"> Leave Details </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="month">Month:</label>
+              <div class="form-line">
+                <select [(ngModel)]="employeeSalary.month" name="month" title="Month" style="padding:0.5rem 1.75rem 4px 9px;" (change)="ChangeSalaryMonthYear()">
+                  <option *ngFor="let month of months" [value]="month.id">
+                    {{month.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="year">Year:</label>
+              <div class="form-line">
+                <select [(ngModel)]="employeeSalary.year" name="year" title="Year" style="padding:0.5rem 4.75rem 4px 9px;" (change)="ChangeSalaryMonthYear()">
+                  <option *ngFor="let year of years" [value]="year">
+                    {{year}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="totalDaysOfMonth">Total Days Of Month:</label>
+              <div class="form-line">
+                <input type="number" name="TotalDaysOfMonth" id="totalDaysOfMonth" [(ngModel)]="employeeSalary.totalDaysOfMonth" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="allowedLeave">Allowed Leave:</label>
+              <div class="form-line">
+                <input type="number" name="AllowedLeave" id="allowedLeave" [(ngModel)]="employeeSalary.allowedLeave" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="leaveTaken">Leave Taken:</label>
+              <div class="form-line">
+                <input type="number" name="LeaveTaken" id="leaveTaken" [(ngModel)]="employeeSalary.leaveTaken" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="workedDays">Worked Days:</label>
+              <div class="form-line">
+                <input type="number" name="WorkedDays" id="workedDays" [(ngModel)]="employeeSalary.workedDays" class="form-control" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="total">Net Payable:</label>
+              <div class="form-line">
+                <input type="number" name="total" id="total" [(ngModel)]="employeeSalary.total" class="form-control" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row panel-heading bg-primary"> Earnings </div>
+        <div class="row">
+          
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="basicSalary">Basic:</label>
+              <div class="form-line">
+                <input type="number" name="BasicSalary" id="basicSalary" [(ngModel)]="employeeSalary.basicSalary" class="form-control" disabled>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="da">DA:</label>
+              <div class="form-line">
+                <input type="number" name="DA" id="da" [(ngModel)]="employeeSalary.da" class="form-control" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="hra">HRA:</label>
+              <div class="form-line">
+                <input type="number" name="HRA" id="hra" [(ngModel)]="employeeSalary.hra" class="form-control" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="conveyance">Conveyance Allowance:</label>
+              <div class="form-line">
+                <input type="number" name="Conveyance" id="conveyance" [(ngModel)]="employeeSalary.conveyance" class="form-control">
+              </div>
+            </div>
+          </div>
+        
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="medicalExpenses">Medical Allowance:</label>
+              <div class="form-line">
+                <input type="number" name="MedicalExpenses" id="medicalExpenses" [(ngModel)]="employeeSalary.medicalExpenses" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="special">Special Allowance:</label>
+              <div class="form-line">
+                <input type="number" name="Special" id="special" [(ngModel)]="employeeSalary.special" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="bonus">Bonus:</label>
+              <div class="form-line">
+                <input type="number" name="Bonus" id="bonus" [(ngModel)]="employeeSalary.bonus" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="ta">Arrears (if any):</label>
+              <div class="form-line">
+                <input type="number" name="TA" id="ta" [(ngModel)]="employeeSalary.ta" class="form-control">
+              </div>
+            </div>
+          </div>
+         
+          <div class="col-sm-3" *ngFor="let salaryPart of earnings;let i=index">
+            <div class="form-group">
+              <label>{{ getComponentName(salaryPart.ctcOtherComponentId)}}:</label>
+              <div class="form-line">
+                <input type="number" name="amount[{{i}}]" id="amount_{{i}}" [(ngModel)]="salaryPart.amount" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="total">Total Earning:</label>
+              <div class="form-line">
+                <input type="number" name="totalEarnings" id="totalEarnings" [(ngModel)]="totalEarnings" class="form-control" disabled>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row panel-heading bg-primary"> Total Deductions </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="contributionToPf">PF:</label>
+              <div class="form-line">
+                <input type="number" name="ContributionToPf" id="contributionToPf" [(ngModel)]="employeeSalary.contributionToPf" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="professionTax">Professional Tax:</label>
+              <div class="form-line">
+                <input type="number" name="ProfessionTax" id="professionTax" [(ngModel)]="employeeSalary.professionTax" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="tds">TDS:</label>
+              <div class="form-line">
+                <input type="number" name="TDS" id="tds" [(ngModel)]="employeeSalary.tds" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="salaryAdvance">Salary in Advance:</label>
+              <div class="form-line">
+                <input type="number" name="SalaryAdvance" id="salaryAdvance" [(ngModel)]="employeeSalary.salaryAdvance" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="netPayable">Other Deduction:</label>
+              <div class="form-line">
+                <input type="number" name="NetPayable" id="netPayable" [(ngModel)]="employeeSalary.netPayable" class="form-control">
+              </div>
+            </div>
+          </div>
+
+        
+          <!-- <div class="col-sm-3">
+            <div class="form-group">
+              <label for="medicalBillAmount">Medical Bill Amount:</label>
+              <div class="form-line">
+                <input type="number" name="MedicalBillAmount" id="medicalBillAmount" [(ngModel)]="employeeSalary.medicalBillAmount" class="form-control">
+              </div>
+            </div>
+          </div> -->
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="unpaidDays">Unpaid:</label>
+              <div class="form-line">
+                <input type="number" name="UnpaidDays" id="unpaidDays" [(ngModel)]="employeeSalary.unpaidDays" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3" *ngFor="let salaryPart of deductions;let i=index">
+            <div class="form-group">
+              <label>{{ getComponentName(salaryPart.ctcOtherComponentId)}}:</label>
+              <div class="form-line">
+                <input type="number" name="amount[{{i}}]" id="amount_{{i}}" [(ngModel)]="salaryPart.amount" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="salaryTotal">Total Deduction:</label>
+              <div class="form-line">
+                <input type="number" name="totalDeductions" id="totalDeductions" [(ngModel)]="totalDeductions" class="form-control" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+        <div>
+          <button type="button" class="btn btn-sm btn-primary waves-effect" [disabled]="isSubmit" (click)='submitSalary()'>
+            <i class="material-icons">Save</i>
+          </button>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>
+

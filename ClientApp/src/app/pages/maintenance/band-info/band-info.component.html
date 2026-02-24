@@ -1,0 +1,32 @@
+<div>
+  <form class="form-horizontal" name="bandInfoForm" #bandInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="''">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Band</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <p>Band Name
+              <input autofocus type="text" name="bandName" placeholder="Band Name" pattern="[a-zA-Z](.*[a-zA-Z0-9 ])?$"
+                [(ngModel)]="bandEdit.name" #bandName="ngModel" class="form-control" required>
+              <span *ngIf="bandName.errors">
+                <span class="messages text-danger" *ngIf="bandName.errors.required">Please enter band name</span>
+                <span class="messages text-danger" *ngIf="bandName.errors.pattern">Only alphanumerics are allowed</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+
+        <button type="button" class="btn btn-default waves-effect" (click)="editorModal.hide()">Cancel</button>
+        <button type="submit" [disabled]="!bandInfoForm.form.valid" class="btn btn-primary waves-effect waves-light ">{{isSaving
+          ? 'Saving...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

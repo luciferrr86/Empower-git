@@ -1,0 +1,172 @@
+<div>
+  <form class="form-control" name="personalInfoForm" #personalInfoForm="ngForm" (ngSubmit)="UpdatePersonal()">
+    <div [@fadeInOutTranslate] class="m-t-15">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-header-text">About Me</h5>
+        </div>
+        <div class="card-body">
+          <div class="view-info">
+            <div class="row">
+              <div class="col-lg-4">
+                <p>Full Name
+                  <input autofocus class="form-control" name="fullName" placeholder="Full Name" type="text"
+                    [(ngModel)]="personalEdit.fullName" #fullName="ngModel" required>
+                </p>
+                <div [hidden]="fullName.valid" class="messages text-danger">
+                  Please enter full name
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <p>ID Number
+                  <input class="form-control" placeholder="Id Number" type="text" name="idNumber"
+                    [(ngModel)]="personalEdit.idProofDetail" #idNumber="ngModel">
+                </p>
+                <div [hidden]="idNumber.valid" class="messages text-danger">
+                  Please enter id number
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div _ngcontent-c4="" class="form-radio">
+                  <div _ngcontent-c4="" class="group-add-on">
+                    <div _ngcontent-c4="" class="radio radiofill radio-inline">
+                      <label _ngcontent-c4="" class="ng-tns-c4-1">
+                        <input _ngcontent-c4="" class="ng-tns-c4-1" name="radio" value="Male" type="radio"
+                          [(ngModel)]="personalEdit.gender" (change)="personalEdit.gender =personalEdit.gender">
+                        <i _ngcontent-c4="" class="helper"></i> Male
+                      </label>
+                    </div>
+                    <div _ngcontent-c4="" class="radio radiofill radio-inline">
+                      <label _ngcontent-c4="" class="ng-tns-c4-1">
+                        <input _ngcontent-c4="" class="ng-tns-c4-1" name="radio" value="Female" type="radio"
+                          [(ngModel)]="personalEdit.gender" (change)="personalEdit.gender = personalEdit.gender">
+                        <i _ngcontent-c4="" class="helper"></i> Female
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="col-form-label">Date of Joining</label>
+                <input type="date" class="form-control" id="dateOfBirth" name="Dob"
+                  [ngModel]="personalEdit.dob | date:'yyyy-MM-dd'" [value]="personalEdit.dob | date:'yyyy-MM-dd'"
+                  #Dob="ngModel" required>
+                <div [hidden]="Dob.valid" class="messages text-danger">
+                  please enter periodStart date
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <p>Maritial Status
+                  <select name="select" class="form-control form-control-default" name="maritialStatus"
+                    [(ngModel)]="personalEdit.maritalStatus" #maritialStatus="ngModel" required>
+                    <option value="">--Maritial Status--</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                  </select>
+                </p>
+                <div [hidden]="maritialStatus.valid" class="messages text-danger">
+                  Please select maritial status
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <p>Current Address
+                  <textarea class="form-control" placeholder="Current Address" type="text" name="currentAddress"
+                    [(ngModel)]="personalEdit.currentAddress" #currentAddress="ngModel" required></textarea>
+                </p>
+                <div [hidden]="currentAddress.valid" class="messages text-danger">
+                  Please enter current address
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <p>Permanent Address
+                  <textarea class="form-control" placeholder="Permanent Address" type="text" name="permanentAddress"
+                    [(ngModel)]="personalEdit.permanentAddress" #permanentAddress="ngModel" required></textarea>
+                </p>
+                <div [hidden]="permanentAddress.valid" class="messages text-danger">
+                  Please enter permanent address
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <p> Country
+                  <input class="form-control" placeholder="Country" type="text" name="country"
+                    [(ngModel)]="personalEdit.country" #country="ngModel" required>
+                </p>
+                <div [hidden]="country.valid" class="messages text-danger">
+                  Please enter country
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <p>City
+                  <input class="form-control" placeholder="City" type="text" name="city" [(ngModel)]="personalEdit.city"
+                    #city="ngModel" required>
+                </p>
+                <div [hidden]="city.valid" class="messages text-danger">
+                  Please enter city
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <p>State
+                  <input class="form-control" placeholder="State" type="text" name="state"
+                    [(ngModel)]="personalEdit.state" #state="ngModel" required>
+                </p>
+                <div [hidden]="state.valid" class="messages text-danger">
+                  Please enter state
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <p>Zip Code
+                  <input class="form-control" placeholder="Zip Code" type="text" name="zipCode"
+                    [(ngModel)]="personalEdit.zipCode" #zipCode="ngModel" required>
+                </p>
+                <div [hidden]="zipCode.valid" class="messages text-danger">
+                  Please enter zip code
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <p>Nationality
+                  <input class="form-control" placeholder="Nationality" type="text" name="nationality"
+                    [(ngModel)]="personalEdit.nationality" #nationality="ngModel" required>
+                </p>
+                <div [hidden]="nationality.valid" class="messages text-danger">
+                  Please enter nationality
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <p>
+                  Personal contact Number
+                  <input class="form-control" placeholder="Personal contact Number" type="text" name="contactNo"
+                         [(ngModel)]="personalEdit.contactNo" #contactNo="ngModel" required>
+                </p>
+                <div [hidden]="contactNo.valid" class="messages text-danger">
+                  Please enter personal contact number
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <p>
+                  Email Id
+                  <input class="form-control" placeholder="Email Id" type="text" name="emailId"
+                         [(ngModel)]="personalEdit.emailId" #emailId="ngModel" required>
+                </p>
+                <div [hidden]="emailId.valid" class="messages text-danger">
+                  Please enter Email Id
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="app-modal-footer">
+      <button type="submit" class="btn btn-primary waves-effect waves-right " [disabled]="!personalInfoForm.form.valid">{{isSaving
+        ? 'Updating in...' : 'Update'}}</button>
+    </div>
+  </form>
+</div>

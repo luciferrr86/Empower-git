@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Approval Amount Limit List'">
+      <div class="dt-responsive">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+            <div>
+              <label class="label-control">Show
+                <select class="form-control input-sm full-data-show-entry" [(ngModel)]="pageSize"
+                  (ngModelChange)="getData($event)">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="25">25</option>
+                  <option [ngValue]="50">50</option>
+                  <option [ngValue]="100">100</option>
+                </select>
+                entries
+              </label>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <div style="text-align: right;">
+              <label>Search:
+                <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search"
+                  placeholder="Search name" (ngModelChange)="getFilteredData()">
+              </label>
+              <button type="button" class="btn btn-sm btn-primary waves-effect" (click)="newTitleAmount()">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <ngx-datatable class="data-table material" [scrollbarH]="true" [externalPaging]="true" [count]="count"
+          (page)='setPage($event)' [offset]="pageNumber" [limit]="pageSize" [loadingIndicator]="loadingIndicator"
+          [rows]="rows" [rowHeight]="35" [headerHeight]="50" [footerHeight]="35" [columns]="columns"
+          [columnMode]="'force'">
+        </ngx-datatable>
+
+        <ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <a href="javascript:;" ngbTooltip="Edit" (click)="editTitleAmount(row)"
+              class="m-r-15 crm-action-edit text-muted text-primary">
+              <i class="icofont icofont-ui-edit"></i>
+            </a>
+            <a href="javascript:;" ngbTooltip="Delete" (click)="deleteTitleAmount(row)"
+              class="crm-action-delete text-muted text-danger">
+              <i class="icofont icofont-delete-alt"></i>
+            </a>
+          </td>
+        </ng-template>
+
+      </div>
+    </app-card>
+  </div>
+</div>
+<div>
+  <form class="form-horizontal" name="titleAmountForm" #titleAmountForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="''">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Title Amount</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <p>Category
+              <ng-select name="title" placeholder="Title" [options]="titleListDropDown"
+                [(ngModel)]="titleAmount.titleId" #title="ngModel" required>
+              </ng-select>
+              <span [hidden]="title.valid" class="messages text-danger">
+                Please select title
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-12">
+            <p>Amount
+              <input autofocus type="number" pattern="^[1-9]+[0-9]*$" name="item" placeholder="Amount"
+                [(ngModel)]="titleAmount.amount" #item="ngModel" class="form-control" required>
+              <span *ngIf="item.errors">
+                <span class="messages text-danger" *ngIf="item.errors.required">Please enter amount</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+        <button type="submit" [disabled]="!titleAmountForm.form.valid"
+          class="btn btn-primary waves-effect waves-light ">{{isSaving
+                  ? 'Saving...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

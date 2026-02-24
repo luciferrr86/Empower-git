@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <div _ngcontent-c12="" draggable="true" class="dragarea" ng-reflect-ng-class="dragarea">
+          <input type="file" id="file" (change)="handleFileInput($event)" accept=".xlsx,.xls">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="f-right">
+        <a class="btn btn-inverse" href="../../../../assets/EmployeeData.xlsx" download>Download Spread Sheet</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Failed Excel Upload List'">
+      <div class="dt-responsive">
+        <ngx-datatable style="max-height: 500px; overflow:auto" class="data-table bootstrap material"
+          id="tblFailedEntry" name='testTable' [externalPaging]="true" [count]="count"
+          [loadingIndicator]="loadingIndicator" [rows]="rows" [rowHeight]="35" [headerHeight]="50" [footerHeight]="35"
+          [columns]="columns" [columnMode]="'force'">
+        </ngx-datatable>
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-sm-12">   
+    <form [formGroup]="trainingForm" (ngSubmit)="saveTrainingClasses()">
+        <div class="alert alert-primary background-primary">
+            <button class="close" type="button">
+              <i class="icofont icofont-close-line-circled text-white"></i>
+            </button>
+            <small>{{trainingForm.controls.trainingClassesInstructionText}}</small>
+          </div>
+      <div formArrayName="lstTrainingClasses">
+        <div *ngFor="let training of lstTrainingClasses.controls; let i=index">         
+          <div [formGroupName]="i" class="row">
+            <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+              <training-classes-editor [traininglist]="trainingForm.controls.lstTrainingClasses.controls[i]" [isSubmit]="trainingClasses.checkSaveSubmit.isEmpTrainingSubmitted"
+              (getTrainingClassesId)="removeTrainingClasses($event,i)" ></training-classes-editor>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <button class="btn btn-sm btn-primary waves-effect" type="button" (click)="addTrainingClasses()" *ngIf="!trainingClasses.checkSaveSubmit.isEmpTrainingSubmitted">Add</button>
+      </div>
+
+      <button class="btn btn-sm btn-primary waves-effect" type="submit" [disabled]="trainingForm.invalid" *ngIf="!trainingClasses.checkSaveSubmit.isEmpTrainingSubmitted">{{isSaving ? ('Please wait...'):('Save')}}</button>
+      <button class="btn btn-sm btn-primary waves-effect" type="button" [disabled]="trainingForm.invalid" (click)="submitTrainigClasses()"  *ngIf="trainingClasses.checkSaveSubmit.isEmpTrainingSaved && !trainingClasses.checkSaveSubmit.isEmpTrainingSubmitted">{{isSubmitting?('Please wait...'):('Submit')}}</button>
+
+    </form>
+  </div>
+</div>

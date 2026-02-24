@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-md-6 col-xl-6">
+    <h5>DASHBOARD</h5>
+  </div>
+</div>
+<br>
+<div class='row'>
+  <div class="col-md-6 col-xl-6" *ngIf="isLeave">
+    <div class="card">
+      <div class="card fb-card">
+        <div class="card-header">
+
+          <div class="d-inline-block">
+            <h5>Leave</h5>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="leaveTaskList?.length>0;else other_content" lass="card-block" style="height:200px; overflow-y:auto">
+        <div class="browser-card p-b-15 " *ngFor="let sub of leaveTaskList">
+          <p class="d-inline-block p-l-20"> <a [routerLink]="['../leave/manage-leaves']"
+              [queryParams]="{id:sub.employeeId }"> {{sub.taskName}}</a></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-md-6 col-xl-6" *ngIf="isTimesheet">
+    <div class="card">
+      <div class="card fb-card">
+        <div class="card-header">
+
+          <div class="d-inline-block">
+            <h5>Timesheet</h5>
+          </div>
+        </div>
+      </div>
+      <div class="card-block" *ngIf="timesheetTaskList?.length>0;else other_content"
+        style="height:200px; overflow-y:auto">
+        <div class="browser-card p-b-15 " *ngFor="let list of timesheetTaskList">
+          <p *ngIf="list.isManager" class="d-inline-block m-0 "> <a [routerLink]="['../timesheet/manage-timesheet']"
+              [queryParams]="{id:list.employeeId }"> {{list.taskName}}</a></p>
+          <p *ngIf="!list.isManager" class="d-inline-block m-0 "> <a [routerLink]="['../timesheet/my-timesheet']"
+              [queryParams]="{id:list.employeeId }"> {{list.taskName}}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-6 col-xl-6" *ngIf="isPerformance">
+    <div class="card">
+      <div class="card fb-card">
+        <div class="card-header">
+
+          <div class="d-inline-block">
+            <h5>Performance</h5>
+          </div>
+        </div>
+      </div>
+      <div class="card-block" *ngIf="performanceTaskList?.length>0;else other_content"
+        style="height:200px; overflow-y:auto">
+        <div class="browser-card p-b-15 " *ngFor="let sub of performanceTaskList">
+          <!-- <p class="d-inline-block m-0 "> <a [routerLink]="['./expense-booking-request']" [queryParams]="{id:sub.employeeId }"> {{sub.taskName}}</a></p> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-md-6 col-xl-6" *ngIf="isRecruitment">
+    <div class="card">
+      <div class="card fb-card">
+        <div class="card-header">
+          <div class="d-inline-block">
+            <h5>Recruitment</h5>
+          </div>
+        </div>
+      </div>
+      <div class="card-block" style="height:200px; overflow-y:auto">
+        <p class="d-inline-block p-l-20">There is no task</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #other_content>
+  <div class="browser-card p-b-15 " style="height:200px; overflow-y:auto">
+    <p class="d-inline-block p-l-20">There is no task</p>
+
+  </div>
+</ng-template>

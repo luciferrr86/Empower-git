@@ -1,0 +1,40 @@
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="card-header-left">
+      <h5>Professional Detail</h5>
+    </div>
+    <div class="card-header-right">
+      <button type="button" class="btn btn-primary" (click)="addProfessional()" style="cursor: default">
+        Add Professional
+      </button>
+    </div>
+  </div>
+  <div class="card-block">
+    <form [formGroup]="myForm" name="professionalInfoForm" #professionalInfoForm="ngForm" (ngSubmit)="save()">
+      <div formArrayName="professional">
+        <div *ngFor="let address of professional.controls; let i=index" class="panel panel-primary mb-2">
+
+          <div class="panel-heading bg-primary">
+            <span>Professional {{i + 1}}</span>
+            <button type="button" class="close basic-close pull-right"
+              *ngIf="myForm.controls.professional.controls.length > 1" (click)="removeProfessional(i)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div [formGroupName]="i" class="panel-body">
+            <candidate-workexperience-detail-editor [group]="myForm.controls.professional.controls[i]">
+            </candidate-workexperience-detail-editor>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 mb-2">
+          <div style="text-align: right;">
+            <button type="submit" [disabled]="!professionalInfoForm.form.valid"
+              class="btn btn-primary pull-right">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

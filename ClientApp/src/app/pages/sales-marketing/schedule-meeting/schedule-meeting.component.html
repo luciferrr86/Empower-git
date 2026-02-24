@@ -1,0 +1,126 @@
+<form class="form-horizontal" name="scheduleForm" #scheduleForm="ngForm" (ngSubmit)="save()">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Schedule Meeting</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <input type="checkbox" name="clientChecked" [(ngModel)]="schedule.isChecked"
+                (change)="checkValue($event)" />
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <p>Meeting date
+                    <input type="date" required class="form-control" name="mettingDate" placeholder="Meeting Date"
+                      [ngModel]="schedule.mettingDate | date:'yyyy-MM-dd'"
+                      [value]="schedule.mettingDate | date:'yyyy-MM-dd'" #mettingDate="ngModel"
+                      (ngModelChange)="schedule.mettingDate = ($event)">
+                    <span [hidden]="mettingDate.valid" class="messages text-danger">
+                      Please select date
+                    </span>
+                  </p>
+                </div>
+                <div class="col-sm-6">
+                  <p>Venue
+                    <input autofocus type="text" name="venue" minlength="2" placeholder="Venue"
+                      [(ngModel)]="schedule.venue" #venue="ngModel" class="form-control" required>
+                    <span *ngIf="venue.errors">
+                      <span class="messages text-danger" *ngIf="venue.errors.required">Please enter venue</span>
+                    </span> </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <p>Client Email Id
+                    <ng-select name="clientmail" placeholder="Client " [multiple]="true" [options]="externalClient"
+                      [(ngModel)]="schedule.clientPerson" #clientmail="ngModel" required> </ng-select>
+                    <span [hidden]="clientmail.valid" class="messages text-danger">
+                      Please select client mail
+                    </span>
+                  </p>
+                </div>
+                <div class="col-sm-6">
+                  <p>Internal Email Id
+                    <ng-select name="internalmail" placeholder="Internal" [multiple]="true" [options]="internalEmployee"
+                      [(ngModel)]="schedule.internalPerson" #internalmail="ngModel" required> </ng-select>
+                    <span [hidden]="internalmail.valid" class="messages text-danger">
+                      Please select internal mail
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <p>Writer
+                    <input autofocus type="text" name="writer" minlength="2" placeholder="Writer"
+                      [(ngModel)]="schedule.writer" #writer="ngModel" class="form-control" required>
+                    <span *ngIf="writer.errors">
+                      <span class="messages text-danger" *ngIf="writer.errors.required">Please enter writer</span>
+                    </span> </p>
+                </div>
+                <div class="col-sm-6">
+                  <p>Agenda
+                    <input autofocus type="text" name="agenda" minlength="2" placeholder="Agenda"
+                      [(ngModel)]="schedule.agenda" #agenda="ngModel" class="form-control" required>
+                    <span *ngIf="agenda.errors">
+                      <span class="messages text-danger" *ngIf="agenda.errors.required">Please enter venue</span>
+                    </span> </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <p>Subject
+                <input autofocus type="text" name="subject" minlength="2" placeholder="Subject"
+                  [(ngModel)]="schedule.subject" #subject="ngModel" class="form-control" required>
+                <span *ngIf="subject.errors">
+                  <span class="messages text-danger" *ngIf="subject.errors.required">Please enter subject</span>
+                </span> </p>
+            </div>
+            <div class="col-sm-6">
+              <p>Description
+                <input autofocus type="text" name="description" minlength="2" placeholder="Description"
+                  [(ngModel)]="schedule.description" #description="ngModel" class="form-control" required>
+                <span *ngIf="description.errors">
+                  <span class="messages text-danger" *ngIf="description.errors.required">Please enter description</span>
+                </span> </p>
+            </div>
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <app-file-upload [typeId]="201" (uploadStatus)="refreshDocument($event)" maxFiles="4" maxSize="2"
+                    fileExt="PDF, dOC, dOCX,jpg,jpeg,png,xls,xlsx">
+                  </app-file-upload>
+                </div>
+                <div class="col-md-2">
+                  <a *ngIf="url!=null" class="btn btn-block btn-out-dashed btn-primary btn-square" target="_blank"
+                    href="{{url}}">Download</a>
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </div>
+          <div class="f-right">
+            <button type="submit" [disabled]="!scheduleForm.form.valid"
+              class="btn btn-primary waves-effect waves-light "> {{isSaving
+                    ? 'Saving...' : 'Save'}}</button>
+            <button type="button" [routerLink]="['../schedulelist']" [queryParams]="{id:companyId}"
+              class="btn btn-default pull-right">Back</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

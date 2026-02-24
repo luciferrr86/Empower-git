@@ -1,0 +1,36 @@
+<div [formGroup]="professionalForm" class="mt-2 ml-2 mb-2">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label class="col-form-label">Company Name</label>
+      <input class="form-control" type="text" placeholder="Enter Company Name" formControlName="companyName">
+      <span *ngIf="!professionalForm.controls.companyName.valid && professionalForm.controls.companyName.touched">
+        <span class="messages text-danger" *ngIf="professionalForm.controls.companyName.errors.required">Please Enter
+          Company Name</span>
+      </span>
+    </div>
+    <div class="form-group col-md-6">
+      <label class="col-form-label">Designation</label>
+      <input class="form-control" placeholder="Enter Designation" type="text" formControlName="designation">
+      <span *ngIf="!professionalForm.controls.designation.valid && professionalForm.controls.designation.touched">
+        <span class="messages text-danger" *ngIf="professionalForm.controls.designation.errors.required">Please Enter
+          Designation</span>
+      </span>
+    </div>
+    <div class="form-group col-md-6">
+      <label class="col-form-label">From Date</label>
+      <input class="form-control" type="date" formControlName="doj">
+      <span *ngIf="!professionalForm.controls.doj.valid && professionalForm.controls.doj.touched">
+        <span class="messages text-danger" *ngIf="professionalForm.controls.doj.errors.required">Please Select Date of
+          Joining</span>
+      </span>
+    </div>
+    <div class="form-group col-md-6">
+      <label class="col-form-label">To Date</label>
+      <input class="form-control" type="date" formControlName="dor">
+      <span *ngIf="!professionalForm.controls.dor.valid && professionalForm.controls.dor.touched">
+        <span class="messages text-danger" *ngIf="professionalForm.controls.dor.errors.required">Please Select Date of
+          Release</span>
+      </span>
+    </div>
+  </div>
+</div>

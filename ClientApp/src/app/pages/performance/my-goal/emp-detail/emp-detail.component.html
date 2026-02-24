@@ -1,0 +1,42 @@
+
+<div class="row">
+      <div class="col-sm-12">
+        <div class="dt-responsive">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-sm-6 col-md-6">
+              <h5>EMPLOYEE DETAILS</h5>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-sm-6 col-md-6">
+              <button type="button" (click)="addFeedback()"  class="btn btn-sm btn-primary waves-effect f-right">Get External Feedback</button>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <h5 class="text-c-blue">Employee Name : {{empDetail.name}}</h5>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+
+              <h5 class="text-c-blue">Functional Department : {{empDetail.functionalDepartment}}</h5>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <h5 class="text-c-blue">Functional Group : {{empDetail.functionalGroup}}</h5>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <h5 class="text-c-blue">Date Of Review : {{empDetail.dateReview}}</h5>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <h5 class="text-c-blue">Evaluator Name : {{empDetail.evaluatorName}}</h5>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4">
+              <h5 class="text-c-blue">Title : {{empDetail.title}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <external-feedback #feedbackInfo></external-feedback>

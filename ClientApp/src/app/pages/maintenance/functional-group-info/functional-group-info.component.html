@@ -1,0 +1,46 @@
+<div>
+  <form class="form-horizontal" name="groupInfoForm" #groupInfoForm="ngForm" (ngSubmit)="save()">
+    <app-modal-basic #editorModal [dialogClass]="''">
+      <div class="app-modal-header">
+        <h4 class="modal-title">{{modalTitle}} Group</h4>
+        <button type="button" class="close basic-close" (click)="editorModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="app-modal-body">
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <p>Functional Group Name
+              <input autofocus type="text" name="groupName" placeholder="Group Name" minlength="2"
+                pattern="[a-zA-Z](.*[a-zA-Z ])?$" [(ngModel)]="groupEdit.name" #groupName="ngModel" class="form-control"
+                required />
+              <span *ngIf="groupName.errors">
+                <span class="messages text-danger" *ngIf="groupName.errors.required">Please enter group name</span>
+                <span class="messages text-danger" *ngIf="groupName.errors.pattern">Only alphabets are allowed</span>
+                <span class="messages text-danger" *ngIf="groupName.errors.minlength">Please enter atleast 2
+                  characters</span>
+              </span>
+            </p>
+            <br />
+          </div>
+
+          <div class="col-sm-12">
+            <p>Functional Department
+              <ng-select name="department" placeholder="Functional Department" [options]="departmentlist"
+                [(ngModel)]="groupEdit.departmentId" #department="ngModel" required> </ng-select>
+              <span [hidden]="department.valid" class="messages text-danger">
+                Please select functional department
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-modal-footer">
+        <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+        <button type="submit" [disabled]="!groupInfoForm.form.valid" class="btn btn-primary waves-effect waves-light ">{{isSaving
+          ? 'Saving...' : 'Save'}}</button>
+      </div>
+    </app-modal-basic>
+  </form>
+</div>

@@ -1,0 +1,45 @@
+[
+    {
+        "project": "HRMS Empower",
+        "sunday": "12/09/2018",
+        "hour": "00:00",
+        "employee":"Ali",
+        "designation":"Designer",
+        "description":"Empower Phase1",
+        "client":"A4 Technology",
+        "contact":"+1 732–798–5800",
+        "manager":"Azam",
+        "group":"CEO",
+        "status":"Not Started"
+    },
+    {
+        "project": "Sales Mettings",
+        "sunday": "12/09/2018",
+        "hour": "00:00",
+        "employee":"Rupesh",
+        "designation":"Developer",
+        "description":"Client Project",
+        "client":"ASI",
+        "contact":"8006354122",
+        "manager":"Rupesh",
+        "group":"Human Resources",
+        "status":"Fainal Review Assigned"
+    },
+    {
+        "project": "Training",
+        "sunday": "12/09/2018",
+        "hour": "00:00",
+        "employee":"Asif",
+        "designation":"QA",
+        "description":"Business Training",
+        "client":"TATA",
+        "contact":"8087643512",
+        "manager":"Ali",
+        "group":"UI",
+        "status":"Final Review Submitted to Manager"
+
+    }
+   
+
+  
+]

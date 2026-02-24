@@ -1,0 +1,154 @@
+<div class="card w-75" id="MyDIv">
+  <div class="card-body">
+    <div class="text-center">
+      <img class="img-fluid" src="assets/images/CompanyLogo/CompanyLogo.PNG" />
+    </div>
+    <br>
+    <div class="text-center">
+      <h6 *ngIf="address==='LUCKNOW'">507, 5th floor, Shalimar Titanium, Shalimar Corporate Park, Vibhuti Khand, Gomti
+        Nagar, Lucknow, Uttar Pradesh - 226010.</h6>
+      <h6 *ngIf="address==='MUMBAI'">404, Kshitij building, Veera desai road, near Azad nagar metro station, Andheri
+        west, Mumbai- 400053.</h6>
+    </div>
+    <div class="card-block">
+      <div class="row">
+        <div class="col-lg-12">
+          <table id="simpletable" class="table table-bordered nowrap">
+            <tbody class="text-center">
+              <tr>
+                <th class="text-center bg-blue" colspan="4">
+                  PAYSLIP - {{paySlip.month}} {{paySlip.year}}
+                </th>
+              </tr>
+              <tr>
+                <td class="col-md-4"><b>Employee Name :</b></td>
+                <td class="col-md-2"><b>{{paySlip.employeeName}}</b></td>
+                <td class="col-md-4"><b>Designation :</b></td>
+                <td class="col-md-2">{{paySlip.empDesignation}}</td>
+              </tr>
+              <tr>
+                <td><b>Location :</b></td>
+                <td>{{paySlip.location}}</td>
+                <td><b>DOJ :</b></td>
+                <td>{{paySlip.doj | date}}</td>
+              </tr>
+              <tr>
+                <td><b>Total Days Of Month :</b></td>
+                <td>{{paySlip.totalDaysOfMonth}}</td>
+                <td><b>Employee Code :</b></td>
+                <td>{{paySlip.empCode}}</td>
+              </tr>
+              <tr>
+                <td><b>Employee PAN :</b></td>
+                <td>{{paySlip.panNumber}}</td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <table id="simpletable" class="table table-bordered nowrap">
+            <tbody class="text-center">
+              <tr>
+                <th class="text-center bg-blue" colspan="4">
+                  Leave Details
+                </th>
+              </tr>
+              <tr>
+                <td class="col-md-4"><b>Allowed Leaves :</b></td>
+                <td class="col-md-2">{{paySlip.allowedLeave}}</td>
+                <td class="col-md-4"><b>Leaves Taken :</b></td>
+                <td class="col-md-2">{{paySlip.leaveTaken}}</td>
+              </tr>
+              <tr>
+                <td><b>Worked Days :</b></td>
+                <td>{{paySlip.workedDays}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <table id="simpletable" class="table table-bordered nowrap">
+            <tbody class="text-center">
+              <tr>
+                <th class="text-center bg-blue" colspan="4">
+                  Pay Details
+                </th>
+              </tr>
+              <tr class="bg-light-green">
+                <td class="col-md-4" colspan="2"><b>Earnings</b></td>
+                <td class="col-md-4" colspan="2"><b>Deductions</b></td>
+              </tr>
+              <tr class="bg-light-green">
+                <td><b>Components</b></td>
+                <td><b>Amount (in Rs.)</b></td>
+                <td><b>Components</b></td>
+                <td><b>Amount (in Rs.)</b></td>
+              </tr>
+              <tr>
+                <td><b>Basic :</b></td>
+                <td>{{paySlip.basicSalary}}</td>
+                <td><b>Contibution To PF :</b></td>
+                <td>{{paySlip.contributionToPf}}</td>
+
+              </tr>
+              <tr>
+                <td><b>HRA :</b></td>
+                <td>{{paySlip.hra}}</td>
+                <td><b>Professional Tax :</b></td>
+                <td>{{paySlip.professionTax}}</td>
+              </tr>
+              <tr>
+                <td><b>Medical :</b></td>
+                <td>{{paySlip.medicalExpenses}}</td>
+                <td><b>TDS :</b></td>
+                <td>{{paySlip.tds}}</td>
+              </tr>
+              <tr>
+                <td><b>Conveyance :</b></td>
+                <td>{{paySlip.conveyance}}</td>
+                <td><b>Salary in Advance :</b></td>
+                <td>{{paySlip.salaryAdvance}}</td>
+              </tr>
+              <tr>
+                <td><b>Special Allowance :</b></td>
+                <td>{{paySlip.special}}</td>
+                <td><b>Unpaid :</b></td>
+                <td>{{paySlip.unpaid}}</td>
+              </tr>
+              <tr>
+                <td><b>Bonus :</b></td>
+                <td>{{paySlip.bonus}}</td>
+                <td><b>Other Deductions :</b></td>
+                <td>{{paySlip.netPayable}}</td>
+              </tr>
+              <tr>
+                <td><b>Arrears (if any) :</b></td>
+                <td>{{paySlip.ta}}</td>
+              </tr>
+              <tr>
+                <td><b>Total Earnings</b></td>
+                <td>{{paySlip.totalEarning}}</td>
+                <td><b>Total Deductions</b></td>
+                <td>{{paySlip.totalDeduction}}</td>
+              </tr>
+              <tr>
+                <td><b>Net Payable :</b></td>
+                <td>{{paySlip.total}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>This is computer-generated salary slip. Does not require a signature.</p>
+          <p>**Comp-offs are not included in annual leaves.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div title="Share As PDF" (click)="exportAsPDF();" class="btn btn-sm btn-primary waves-effect">Download PDF</div>

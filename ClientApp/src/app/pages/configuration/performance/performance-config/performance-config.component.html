@@ -1,0 +1,137 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card mt-3">
+            <div class="card-header">
+                <div class="card-header-left">
+                    <h5>PERFORMANCE CONFIGURATION</h5>
+                </div>
+            </div>
+
+            <squeezebox>
+                <form [formGroup]="configForm" (ngSubmit)="save()">
+
+                    <sb-item [collapsed]="false" class="accordion-panel">
+                        <sb-item-head class="accordion-heading accordion-msg">My Review</sb-item-head>
+                        <sb-item-body class="accordion-content">
+                            <div class="accordion-desc">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+
+                                        <h5 class="text-c-blue">Set Instruction Text for My Review </h5>
+                                        <textarea class="form-control" cols="5"
+                                            placeholder="Set Instruction Text for My Review " rows="5"
+                                            formControlName="myGoalInstructionText" required></textarea>
+                                        <div [hidden]="configForm.controls.myGoalInstructionText.valid"
+                                            class="text-danger">
+                                            My goal instruction text is required
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </sb-item-body>
+                    </sb-item>
+                    <sb-item [collapsed]="false" class="accordion-panel">
+                        <sb-item-head class="accordion-msg">Career</sb-item-head>
+                        <sb-item-body class="accordion-content">
+                            <div class="accordion-desc">
+
+                                <br>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+
+                                        <h5 class="text-c-blue">Set Instruction Text for Career Development Plan</h5>
+                                        <textarea class="form-control" cols="5"
+                                            placeholder="Set Instruction Text for Career Development Plan" rows="5"
+                                            formControlName="careerDevInstructionText" required></textarea>
+                                        <div [hidden]="configForm.controls.careerDevInstructionText.valid"
+                                            class="text-danger">
+                                            Career development instruction text is required
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </sb-item-body>
+                    </sb-item>
+                    <sb-item [collapsed]="false" class="accordion-panel">
+                        <sb-item-head class="accordion-msg">Traning & Classes</sb-item-head>
+                        <sb-item-body class="accordion-content">
+                            <div class="accordion-desc">
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+
+                                        <h5 class="text-c-blue">Set Instruction Text for Traning & Classes completed
+                                        </h5>
+                                        <textarea class="form-control" cols="5"
+                                            placeholder="Set Instruction Text for Traning & Classes completed" rows="5"
+                                            formControlName="trainingClassesInstructionText" required></textarea>
+                                        <div [hidden]="configForm.controls.trainingClassesInstructionText.valid"
+                                            class="text-danger">
+                                            Training & classes instruction text is required
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </sb-item-body>
+                    </sb-item>
+                    <sb-item [collapsed]="false" class="accordion-panel">
+                        <sb-item-head class="accordion-msg">Employee Feedback</sb-item-head>
+                        <sb-item-body class="accordion-content">
+                            <div class="accordion-desc">
+                                <div formArrayName="performanceConfigFeebackViewModel">
+                                    <div
+                                        *ngFor="let feedback of performanceConfigFeebackViewModel.controls; let i=index">
+                                        <div [formGroupName]="i" class="panel-body well">
+                                            <!-- {{configForm.controls.performanceConfigFeebackViewModel.controls[1]}}                           -->
+                                            <feedback-editor (getFeedbackId)="removeFeedback($event,i)"
+                                                [group]="configForm.controls.performanceConfigFeebackViewModel.controls[i]"
+                                                [performanceStart]="configForm.controls.isPerformaceStart.value">
+                                            </feedback-editor>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-primary waves-effect f-right" type="button"
+                                    (click)="addFeedback()"
+                                    *ngIf="!configForm.controls.isPerformaceStart.value">Add</button><br><br>
+                            </div>
+                        </sb-item-body>
+                    </sb-item>
+                    <sb-item [collapsed]="false" class="accordion-panel">
+                        <sb-item-head class="accordion-msg">Employee Rating</sb-item-head>
+                        <sb-item-body class="accordion-content">
+                            <div class="accordion-desc">
+                                <div formArrayName="performanceConfigRatingViewModel">
+                                    <div *ngFor="let rating of performanceConfigRatingViewModel.controls; let i=index">
+                                        <div [formGroupName]="i" class="panel-body well">
+                                            <rating-editor (getRatingId)="removeRating($event,i)"
+                                                [groups]="configForm.controls.performanceConfigRatingViewModel.controls[i]"
+                                                [performanceStart]="configForm.controls.isPerformaceStart.value">
+                                            </rating-editor>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="f-right">
+                                    <button class="btn btn-sm btn-primary waves-effect" type="button"
+                                        (click)="addRating()"
+                                        *ngIf="!configForm.controls.isPerformaceStart.value">Add</button>
+                                    <button type="submit" [disabled]="configForm.invalid"
+                                        class="btn btn-sm btn-primary waves-effect waves-light ">
+                                        {{isSaving ? 'Saving ...' : 'Save'}}</button>
+                                </p>
+                            </div>
+                        </sb-item-body>
+                    </sb-item>
+                    <div>
+
+                    </div>
+                </form>
+            </squeezebox>
+        </div>
+    </div>
+</div>

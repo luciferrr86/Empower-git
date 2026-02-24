@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-card>
+      <div class="row panel-heading bg-primary">Job Vacancy</div>
+      <br />
+      <br />
+      <div class="col-md-12 ">
+        <app-card>
+          <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div style="text-align: right;">
+                <label>
+                  Search:
+                  <input type="search" [(ngModel)]="filter.name" class="form-control input-sm full-data-search"
+                         placeholder="Search name" (input)="onChange()">
+
+                </label>
+
+                <button type="button" class="btn btn-sm btn-primary waves-effect" (click)="resetFilter()">Reset</button>
+
+              </div>
+            </div>
+          </div>
+        </app-card>
+        <!--<div class="row panels-wells bg-info">Job Application Form </div>-->
+        <br />
+        <app-card>
+          <div class="table-responsive">
+            <table class="table css-serial">
+              <thead>
+                <tr>
+                  <th>S No.</th>
+                  <th data-priority="1">Job Title</th>
+                  <th data-priority="2">Location</th>
+                  <th data-priority="3">Experience</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vacancy of jobVacancyModel; index as i">
+                  <td>{{i+1}}</td>
+                  <td>{{vacancy.jobTitle}}</td>
+                  <td>{{vacancy.jobLocation}}</td>
+                  <td>{{vacancy.experience}}</td>
+                  <td class="action-icon">
+                    <button class="btn btn-primary btn-sm waves-effect" (click)="applyJob(vacancy.id)" type="submit" [routerLink]="['/candidate/login']">
+                      APPLY
+                      NOW
+                    </button>
+                  </td>
+                </tr>
+
+              </tbody>
+             
+            </table>
+          </div>
+        </app-card>
+        <br />
+        <br />
+
+      </div>
+    </app-card>
+  </div>
+</div>

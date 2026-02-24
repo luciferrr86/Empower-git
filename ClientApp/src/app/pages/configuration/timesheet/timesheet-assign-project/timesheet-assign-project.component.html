@@ -1,0 +1,63 @@
+<div>
+  <div>
+    <h4> ASSIGN PROJECT</h4>
+    <button type="button" class="close basic-close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <app-card>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <p>Project</p>
+        <ng-select name="project" placeholder="Project" [options]="projectList" [(ngModel)]="assignProject.projectId"
+          #project="ngModel" (ngModelChange)="employeelist(assignProject.projectId)" required> </ng-select>
+        <div [hidden]="project.valid" class="messages text-danger">
+          Please select project
+        </div>
+      </div>
+    </div>
+    <div class="dt-responsive">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+          <div>
+            <label class="label-control">Show
+              <select class="form-control input-sm full-data-show-entry" [(ngModel)]="pageSize"
+                (ngModelChange)="getData($event)">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+              </select>
+              entries
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6">
+          <div style="text-align: right;">
+            <label>Search:
+              <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search"
+                placeholder="Search name" (ngModelChange)="getFilteredData($event)">
+            </label>
+          </div>
+        </div>
+      </div>
+      <ngx-datatable class="data-table material" [externalPaging]="true" [count]="count" [offset]="pageNumber"
+        [limit]="pageSize" [loadingIndicator]="loadingIndicator" [rows]="rows" [rowHeight]="35" [headerHeight]="50"
+        [footerHeight]="35" [columns]="columns" [columnMode]="'force'">
+      </ngx-datatable>
+      <ng-template #selectTemplate let-row="row" let-value="value" let-i="index">
+        <td>
+          <div class="checkbox-fade fade-in-primary">
+            <input type="checkbox" [checked]="row.projectId!='0'" (change)="onSelect(row)" [value]="row.employeeId">
+
+          </div>
+        </td>
+      </ng-template>
+    </div>
+    <br />
+    <div class="app-modal-footer">
+      <button type="button" (click)="BackProjectList()" class="btn btn-default waves-effect">Back</button>
+      <button type="submit" (click)="Save()" class="btn btn-primary waves-effect waves-light ">Save</button>
+    </div>
+  </app-card>
+</div>

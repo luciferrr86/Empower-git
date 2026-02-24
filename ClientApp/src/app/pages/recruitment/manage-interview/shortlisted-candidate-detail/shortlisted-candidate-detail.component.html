@@ -1,0 +1,155 @@
+<form [formGroup]="candidateSkillForm" (ngSubmit)="save()">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="md-tabs">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-12">
+                <h5 class="card-header-text">Candidate Info</h5>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="view-info">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="general-info">
+                    <div class="row">
+                      <div class="col-lg-12 col-xl-6">
+                        <div class="table-responsive">
+                          <table class="table m-0">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Candidate name</th>
+                                <td>{{candidateSkillForm.controls.candidateName.value}}</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Email Id</th>
+                                <td>{{candidateSkillForm.controls.email.value}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-lg-12 col-xl-6">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Mobile</th>
+                                <td>{{candidateSkillForm.controls.mobile.value}}</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Screening Score</th>
+                                <td>
+                                  <label class="label label-danger">{{candidateSkillForm.controls.score.value}}
+                                    %</label>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end of row -->
+                  </div>
+                  <!-- end of general info -->
+                </div>
+                <!-- end of col-lg-12 -->
+              </div>
+              <!-- end of row -->
+            </div>
+          </div>
+          <!-- end of card-body -->
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <app-card [title]="'Question & Answer'">
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <app-card>
+                    <div class="dt-responsive">
+
+
+                      <div class="col-sm-12">
+
+
+                        <div class="row" *ngIf="IsQuestionList">
+                          <div class="col-sm-8">
+                            <h5>Question</h5>
+
+                          </div>
+                          <div class="col-sm-2">
+                            <h5>Actual Weightage</h5>
+
+
+                          </div>
+                          <div class="col-sm-2">
+                            <h5>Weightage</h5>
+
+                          </div>
+
+                        </div>
+                        <br>
+
+
+                        <div formArrayName="questionAnswerList"
+                          *ngFor="let questionAnswer of candidateSkillForm.get('questionAnswerList')['controls']; let i=index">
+                          <div [formGroupName]="i">
+                            <div class="row">
+                              <div class="col-sm-8">
+                                <label>{{questionAnswer.controls.question.value}}</label>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="input-group input-group-sm">
+                                  <input class="form-control" formControlName="obtainedWeightage" required type="number"
+                                    placeholder="1-100">
+                                  <span class="input-group-addon">%</span>
+                                </div>
+                                <div [hidden]="!questionAnswer.controls.obtainedWeightage.invalid"
+                                  class="messages text-danger">
+                                  Please enter weightage.
+                                </div>
+
+                              </div>
+                              <div class="col-sm-2">
+                                <label>{{questionAnswer.controls.weightage.value}}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <br>
+
+
+                      </div>
+
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <textarea class="form-control" formControlName="comment" placeholder="Comments" rows="3"
+                            required></textarea>
+                          <div [hidden]="candidateSkillForm.controls.comment.valid" class="messages text-danger">
+                            Please enter comments
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </app-card>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <button type="submit" [disabled]="isSaving ||  candidateSkillForm.invalid"
+                  class="btn btn-primary waves-effect waves-light ">{{isSaving
+                  ? 'Saving in...' : 'Save'}}</button>
+              </div>
+            </app-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

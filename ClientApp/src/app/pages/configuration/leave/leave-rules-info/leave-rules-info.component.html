@@ -1,0 +1,62 @@
+<div>
+    <form class="form-horizontal" name="rulesInfoForm" #rulesInfoForm="ngForm" (ngSubmit)="save()">
+        <app-modal-basic #editorModal [dialogClass]="'modal-lg'">
+            <div class="app-modal-header">
+                <h4 class="modal-title">{{modalTitle}} Leave Rule</h4>
+                <button type="button" class="close basic-close" (click)="editorModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="app-modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <p>Leave Rule Name
+                            <input autofocus type="text" name="ruleName" placeholder="Rule Name"
+                                [(ngModel)]="rulesEdit.name" pattern="[a-zA-Z](.*[a-zA-Z0-9 ])?$" #ruleName="ngModel"
+                                class="form-control" required>
+                            <span [hidden]="ruleName.valid" class="messages text-danger">
+                                Please enter rule name
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>No Of Days
+                            <input autofocus type="text" name="leavesperyear" placeholder="No Of Days"
+                                pattern="[0-9](.*[0-9 ])?$" [(ngModel)]="rulesEdit.leavesPerYear"
+                                #leavesperyear="ngModel" class="form-control" required>
+                            <span [hidden]="leavesperyear.valid" class="messages text-danger">
+                                Please enter no Of days
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>Band
+                            <ng-select name="band" placeholder="Band" [options]="bandlist"
+                                [(ngModel)]="rulesEdit.bandId" #band="ngModel" required> </ng-select>
+                            <span [hidden]="band.valid" class="messages text-danger">
+                                Please select band
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>Leave Type
+                            <ng-select name="leavetype" placeholder="Leave Type" [options]="leavetypelist"
+                                [(ngModel)]="rulesEdit.leaveTypeId" #leavetype="ngModel" required> </ng-select>
+                            <span [hidden]="leavetype.valid" class="messages text-danger">
+                                Please select Leave Type
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="app-modal-footer">
+                <button type="button" (click)="editorModal.hide()" class="btn btn-default waves-effect">Cancel</button>
+                <button type="submit" [disabled]="!rulesInfoForm.form.valid" [disabled]="isSaving"
+                    class="btn btn-primary waves-effect waves-light ">{{isSaving
+                    ? 'Saving in...' : 'Save'}}</button>
+            </div>
+        </app-modal-basic>
+    </form>
+</div>

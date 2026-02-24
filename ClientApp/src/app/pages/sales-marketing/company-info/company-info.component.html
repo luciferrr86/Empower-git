@@ -1,0 +1,122 @@
+<form [formGroup]="companyInfoForm" (ngSubmit)="save()">
+  <div class="row">
+    <div class="col-sm-12">
+      <app-card [title]="'Company Information'" [blockClass]="'accordion-block'">
+        <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12 m-b-10">
+              <p>Company Name
+                <input class="form-control" type="text" placeholder="Comapny Name" formControlName="comapnyName"
+                  required>
+                <span [hidden]="companyInfoForm.controls.comapnyName.valid" class="text-danger">
+                  Company Name is required
+                </span>
+              </p>
+              <br>
+              <p>Company Address
+                <input class="form-control" type="text" placeholder="Comapny Address" formControlName="companyAddress"
+                  required>
+                <span [hidden]="companyInfoForm.controls.companyAddress.valid" class="text-danger">
+                  Company Address is required
+                </span>
+              </p>
+            </div>
+
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4 m-b-10">
+              <p>City
+                <input class="form-control" type="text" placeholder="City" formControlName="city" required>
+                <span [hidden]="companyInfoForm.controls.city.valid" class="text-danger">
+                  City is required
+                </span>
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4 m-b-10">
+              <p>State
+                <input class="form-control" type="text" placeholder="State" formControlName="state" required>
+                <span [hidden]="companyInfoForm.controls.state.valid" class="text-danger">
+                  State is required
+                </span>
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4 m-b-10">
+              <p>Country
+                <input class="form-control" type="text" placeholder="Country" formControlName="country" required>
+                <span [hidden]="companyInfoForm.controls.country.valid" class="text-danger">
+                  Country is required
+                </span>
+              </p>
+            </div>
+
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4 m-b-10">
+              <p>Zipcode
+                <input class="form-control" type="text" placeholder="ZipCode" formControlName="zipCode" required>
+                <span [hidden]="companyInfoForm.controls.zipCode.valid" class="text-danger">
+                  ZipCode is required
+                </span>
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4 m-b-10">
+              <p>Email ID
+                <input class="form-control" type="text" placeholder="Email Id" formControlName="emailId" required>
+                <span [hidden]="companyInfoForm.controls.emailId.valid" class="text-danger">
+                  Email Id is required
+                </span>
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-sm-4 col-md-4 m-b-10">
+              <p>Telephone Number
+                <input class="form-control" type="text" placeholder="Telephone" formControlName="telephone" required>
+                <span [hidden]="companyInfoForm.controls.telephone.valid" class="text-danger">
+                  Telephone number is required
+                </span>
+              </p>
+            </div>
+          </div>
+          <br>
+        </div>
+
+      </app-card>
+
+      <div class="card mt-3">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h5>Company Contact Detail</h5>
+          </div>
+          <div class="card-header-right">
+            <button type="button" class="btn btn-primary" (click)="addContact()" style="cursor: default">
+              Add Contact
+            </button>
+          </div>
+        </div>
+        <div class="card-block-small">
+
+          <div formArrayName="lstCompanyContacts" class="well">
+            <div *ngFor="let address of lstCompanyContacts.controls; let i=index">
+
+              <div class="card">
+           
+                <div [formGroupName]="i" class="panel-body">
+                  <company-contact-editor [group]="companyInfoForm.controls.lstCompanyContacts.controls[i]"
+                    (getContactId)="removeContact($event, i)"></company-contact-editor>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 mb-2">
+              <div style="text-align: right;">
+                <button type="submit" class="btn btn-primary pull-right"
+                  [disabled]="!companyInfoForm.valid">Save</button>
+                  <button type="button" [routerLink]="['/sales-tracker']" class="btn btn-default pull-right" 
+                 >Back</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>

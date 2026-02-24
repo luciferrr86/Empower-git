@@ -1,0 +1,324 @@
+<div>
+  <form name="personalInfoForm" #personalInfoForm="ngForm" (ngSubmit)="UpdatePersonal()">
+    <div [@fadeInOutTranslate] class="m-t-15">
+      <!-- About Me Card -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-header-text">About Me</h5>
+        </div>
+        <div class="card-body">
+          <div class="view-info">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="general-info">
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label class="col-form-label">Full Name</label>
+                      <input autofocus class="form-control" placeholder="Enter Full Name" name="fullName" type="text"
+                        [(ngModel)]="personalEdit.fullName" #fullName="ngModel" required>
+                      <span *ngIf="!fullName.valid && fullName.touched">
+                        <span class="messages text-danger" *ngIf="fullName.errors.required">Please Enter Name</span>
+                        <span class="messages text-danger" *ngIf="fullName.errors.pattern">Only alphabets are
+                          allowed</span>
+                        <span class="messages text-danger" *ngIf="fullName.errors.minlength">Please enter atleast 3
+                          characters</span>
+                      </span>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label class="col-form-label">Work Email Id</label>
+                      <input class="form-control" placeholder="Enter Work Email Id" type="email" name="workEmailId"
+                        [(ngModel)]="personalEdit.workEmailId" #workEmailId="ngModel"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                      <span *ngIf="!workEmailId.valid && workEmailId.touched">
+                        <span class="messages text-danger" *ngIf="workEmailId.errors.required">Please Enter Work Email
+                          Id</span>
+                        <span class="messages text-danger" *ngIf="workEmailId.errors.pattern">Please Enter a Valid Email
+                          Id</span>
+                      </span>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label class="col-form-label">Personal Email id</label>
+                      <input class="form-control" placeholder="Enter Personal Email Id" type="email"
+                        name="personalEmailId" [(ngModel)]="personalEdit.emailId" #personalEmailId="ngModel"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                      <span *ngIf="!personalEmailId.valid && personalEmailId.touched">
+                        <span class="messages text-danger" *ngIf="personalEmailId.errors.required">Please Enter Personal
+                          Email Id</span>
+                        <span class="messages text-danger" *ngIf="personalEmailId.errors.pattern">Please Enter a Valid
+                          Email Id</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label class="col-form-label">Gender</label><br>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="radioMale" name="radioMale" value="Male"
+                          [(ngModel)]="personalEdit.gender" (change)="personalEdit.gender =personalEdit.gender">
+                        <label class="form-check-label" for="radioMale">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="radioFemale" name="radioFemale" value="Female"
+                          [(ngModel)]="personalEdit.gender" (change)="personalEdit.gender = personalEdit.gender">
+                        <label class="form-check-label" for="radioFemale">Female</label>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="dateOfBirth" class="col-form-label">Date of Birth</label>
+                      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                        [ngModel]="personalEdit.dob | date:'yyyy-MM-dd'" [value]="personalEdit.dob | date:'yyyy-MM-dd'"
+                        #dob="ngModel" required (ngModelChange)="personalEdit.dob = ($event)">
+                      <span *ngIf="!dob.valid && dob.touched">
+                        <span class="messages text-danger" *ngIf="personalEmailId.errors.required">Please select a Date
+                          of Birth</span>
+                      </span>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="maritialStatus" class="col-form-label">Marital Status</label>
+                      <select class="form-control" id="maritialStatus" name="maritialStatus"
+                        [(ngModel)]="personalEdit.maritalStatus" #maritialStatus="ngModel" required>
+                        <option value="">--Maritial Status--</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                      </select>
+                      <span class="messages text-danger" *ngIf="!maritialStatus.valid && maritialStatus.touched">
+                        Please Select Marital Status
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label class="col-form-label">Personal Contact Number</label>
+                      <input class="form-control" placeholder="Enter Personal contact Number" type="text"
+                        name="contactNo" pattern="^[6-9]\d{9}$" [(ngModel)]="personalEdit.contactNo"
+                        #contactNo="ngModel" required>
+                      <span *ngIf="!contactNo.valid && contactNo.touched">
+                        <span class="messages text-danger" *ngIf="contactNo.errors.required">Please Enter Personal
+                          Contact Number</span>
+                        <span class="messages text-danger" *ngIf="contactNo.errors.pattern">Please Enter 10 Digit Mobile
+                          Number</span>
+                      </span>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label class="col-form-label">Work Contact Number</label>
+                      <input class="form-control" placeholder="Enter Work Contact Number" type="text"
+                        name="officialContactNo" [(ngModel)]="personalEdit.officialContactNo"
+                        #officialContactNo="ngModel" required>
+                      <span *ngIf="!officialContactNo.valid && officialContactNo.touched">
+                        <span class="messages text-danger" *ngIf="officialContactNo.errors.required">Please Enter Work
+                          Contact Number</span>
+                        <span class="messages text-danger" *ngIf="officialContactNo.errors.pattern">Please Enter 10
+                          Digit Mobile Number</span>
+                      </span>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label class="col-form-label">Nationality</label>
+                      <input class="form-control" placeholder="Enter Nationality" type="text" name="nationality"
+                        [(ngModel)]="personalEdit.nationality" #nationality="ngModel" required>
+                      <span *ngIf="!nationality.valid && nationality.touched">
+                        <span class="messages text-danger" *ngIf="nationality.errors.required">Please Enter
+                          Nationality</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label class="col-form-label">PAN Card</label>
+                      <input class="form-control" placeholder="Enter PAN Card Number" type="text" name="panNumber"
+                        pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}$" [(ngModel)]="personalEdit.panNumber" #panNumber="ngModel"
+                        required>
+                      <span *ngIf="!panNumber.valid && panNumber.touched">
+                        <span class="messages text-danger" *ngIf="panNumber.errors.required">Please Enter PAN Card
+                          Number</span>
+                        <span class="messages text-danger" *ngIf="panNumber.errors.pattern">Please Enter a Valid PAN
+                          Card Number</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permanent Address Card -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-header-text">Permanent Address</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">Address</label>
+                  <textarea class="form-control" placeholder="Enter Permanent Address" type="text"
+                    name="permanentAddress" rows="3" [(ngModel)]="personalEdit.permanentAddress"
+                    #permanentAddress="ngModel" required>
+                  </textarea>
+                  <span *ngIf="!permanentAddress.valid && permanentAddress.touched">
+                    <span class="messages text-danger" *ngIf="permanentAddress.errors.required">Please Enter Permanent
+                      Address</span>
+                  </span>
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">City</label>
+                  <input class="form-control" placeholder="Enter City" type="text" name="city"
+                    [(ngModel)]="personalEdit.city" #city="ngModel" required>
+                  <span *ngIf="!city.valid && city.touched">
+                    <span class="messages text-danger" *ngIf="city.errors.required">Please Enter city</span>
+                  </span>
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">State</label>
+                  <input class="form-control" placeholder="Enter State" type="text" name="state"
+                    [(ngModel)]="personalEdit.state" #state="ngModel" required>
+                  <span *ngIf="!state.valid && state.touched">
+                    <span class="messages text-danger" *ngIf="state.errors.required">Please Enter State</span>
+                  </span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">Zip Code</label>
+                  <input class="form-control" placeholder="Enter Zip Code" type="text" name="zipCode"
+                    [(ngModel)]="personalEdit.zipCode" #zipCode="ngModel" required>
+                  <span *ngIf="!zipCode.valid && zipCode.touched">
+                    <span class="messages text-danger" *ngIf="zipCode.errors.required">Please Enter Zip Code</span>
+                  </span>
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">Country</label>
+                  <input class="form-control" placeholder="Enter Country" type="text" name="country"
+                    [(ngModel)]="personalEdit.country" #country="ngModel" required>
+                  <span *ngIf="!country.valid && country.touched">
+                    <span class="messages text-danger" *ngIf="country.errors.required">Please Enter Country</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Address Card -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-header-text">Current Address</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-row form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="sameAsPermanent" id="sameAsPermanent"
+                    (change)="fillCurrentAddress($event)">
+                  <!-- <label class="form-check-label" for="sameAsPermanent"> -->
+                  Same as Permanent Address
+                  <!-- </label> -->
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">Address</label>
+                  <textarea class="form-control" placeholder="Enter Current Address" type="text" name="currentAddress"
+                    rows="3" [(ngModel)]="personalEdit.currentAddress" #currentAddress="ngModel" required>
+                    </textarea>
+                  <span *ngIf="!currentAddress.valid && currentAddress.touched">
+                    <span class="messages text-danger" *ngIf="currentAddress.errors.required">Please Enter Current
+                      Address</span>
+                  </span>
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">City</label>
+                  <input class="form-control" placeholder="Enter City" type="text" name="currentCity"
+                    [(ngModel)]="personalEdit.currentCity" #currentCity="ngModel" required>
+                  <span *ngIf="!currentCity.valid && currentCity.touched">
+                    <span class="messages text-danger" *ngIf="currentCity.errors.required">Please Enter city</span>
+                  </span>
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">State</label>
+                  <input class="form-control" placeholder="Enter State" type="text" name="currentState"
+                    [(ngModel)]="personalEdit.currentState" #currentState="ngModel" required>
+                  <span *ngIf="!currentState.valid && state.touched">
+                    <span class="messages text-danger" *ngIf="currentState.errors.required">Please Enter State</span>
+                  </span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">Zip Code</label>
+                  <input class="form-control" placeholder="Enter Zip Code" type="text" name="currentZipCode"
+                    [(ngModel)]="personalEdit.currentZipCode" #currentZipCode="ngModel" required>
+                  <span *ngIf="!currentZipCode.valid && currentZipCode.touched">
+                    <span class="messages text-danger" *ngIf="currentZipCode.errors.required">Please Enter Zip
+                      Code</span>
+                  </span>
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="col-form-label">Country</label>
+                  <input class="form-control" placeholder="Enter Country" type="text" name="currentCountry"
+                    [(ngModel)]="personalEdit.currentCountry" #currentCountry="ngModel" required>
+                  <span *ngIf="!currentCountry.valid && currentCountry.touched">
+                    <span class="messages text-danger" *ngIf="currentCountry.errors.required">Please Enter
+                      Country</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency Contact Details Card -->
+      <div class="card ">
+        <div class="card-header">
+          <h5 class="card-header-text"> Emergency Contact Details </h5>
+        </div>
+        <div class="card-body">
+          <div class="view-desc">
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label class="col-form-label">Contact Name</label>
+                <input class="form-control" placeholder="Enter Contact Name" type="text" name="emergencyContactName"
+                  [(ngModel)]="personalEdit.emergencyContactName" #emergencyContactName="ngModel" required>
+                <span *ngIf="!emergencyContactName.valid && emergencyContactName.touched">
+                  <span class="messages text-danger" *ngIf="emergencyContactName.errors.required">Please Enter Contact
+                    Name</span>
+                </span>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="col-form-label">Contact Number</label>
+                <input class="form-control" placeholder="Enter Contact Number" type="text" name="emergencyContactNo"
+                  pattern="^[6-9]\d{9}$" [(ngModel)]="personalEdit.emergencyContactNo" #emergencyContactNo="ngModel"
+                  required>
+                <span *ngIf="!emergencyContactNo.valid && emergencyContactNo.touched">
+                  <span class="messages text-danger" *ngIf="emergencyContactNo.errors.required">Please Enter Contact
+                    No</span>
+                  <span class="messages text-danger" *ngIf="emergencyContactNo.errors.pattern">Please Enter 10 Digit
+                    Mobile Number</span>
+                </span>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="col-form-label">Relationship</label>
+                <input class="form-control" placeholder="Enter Relationship" type="text" name="emergencyContactRelation"
+                  [(ngModel)]="personalEdit.emergencyContactRelation" #emergencyContactRelation="ngModel" required>
+                <span *ngIf="!emergencyContactRelation.valid && emergencyContactRelation.touched">
+                  <span class="messages text-danger" *ngIf="emergencyContactRelation.errors.required">Please Enter
+                    Contact Relation</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="app-modal-footer clearfix">
+        <button type="submit" class="btn btn-primary waves-effect waves-right f-right"
+          [disabled]="!personalInfoForm.form.valid">{{isSaving
+          ? 'Updating...' : 'Update'}}</button>
+      </div>
+    </div>
+  </form>
+</div>

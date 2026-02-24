@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Employee Attendance'">
+      <form >
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="month">Month:</label>
+              <div class="form-line">
+                <select [(ngModel)]="empSal.month" name="month" title="Month" style="padding:0.5rem 1.75rem 4px 9px;">
+                  <option *ngFor="let month of months" [value]="month.id">
+                    {{month.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="year">Year:</label>
+              <div class="form-line">
+                <select [(ngModel)]="empSal.year" name="year" title="Year" style="padding:0.5rem 4.75rem 4px 9px;">
+                  <option *ngFor="let year of years" [value]="year">
+                    {{year}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-sm btn-primary waves-effect" (click)='checkAttendance()'>
+            Check Attendance
+          </button>
+        </div>
+      </form>
+
+    </app-card>
+    <app-card>
+      
+      <div style="width:100%; overflow-x:scroll">
+        <div class="col-md-6">
+          <table>
+            <tr><td><b>Name:</b></td><td>{{employee.employeeName}}</td></tr>
+            <tr><td><b>Code:</b></td><td>{{employee.employeeCode}}</td></tr>
+            <tr><td></td><td></td></tr>
+          </table>
+        </div>
+
+        <!--<div class="row">
+          <div class="col-md-6" style="text-align:left; vertical-align:top;">
+           Allowed Leaves <input type="number"  [(ngModel)]="allowedLeaves"/>
+            </div>
+            <div class="col-md-6" style="text-align:right; vertical-align:top;">
+              <a href="" (click)="updateAttSummary()">Update AttendanceSummary</a>
+            </div>
+          </div>-->
+
+          <table style="width:100%" *ngIf="dataAvailable">
+            <tr>
+              <th style="border-bottom:1px solid;border-left:1px solid;">Date</th>
+              <th style="border-bottom:1px solid;border-left:1px solid;">PunchIn</th>
+              <th style="border-bottom:1px solid;border-left:1px solid;">PunchOut</th>
+              <th style="border-bottom:1px solid;border-left:1px solid;">Duration</th>
+              <th style="border-bottom:1px solid;border-left:1px solid;">Leave Type</th>
+              <th style="border-bottom:1px solid;border-left:1px solid;">Action</th>
+              <!--<th style="border-bottom:1px solid;border-left:1px solid;">Attendance Summary</th>-->
+            </tr>
+            <tbody>
+              <tr *ngFor="let date of monthlyAttendence.monthDates;let i=index">
+                <td style="border-bottom:1px solid;border-left:1px solid;">{{date.mDate}}<br />{{date.mDay}}</td>
+
+                <td style="border-bottom:1px solid;border-left:1px solid;" *ngIf="GetEditStatus(date.mDate); then editable; else readOnly;"></td>
+                <ng-template #readOnly>
+                  <td style="border-bottom:1px solid;border-left:1px solid;"> {{GetPunchIn(employee.employeeId,date.mDate)}}</td>
+                  <td style="border-bottom:1px solid;border-left:1px solid;">{{GetPunchOut(employee.employeeId,date.mDate)}} </td>
+                  <td style="border-bottom:1px solid;border-left:1px solid;" innerHTML="{{GetDuration(employee.employeeId,date.mDate)}}"></td>
+                  <td style="border-bottom:1px solid;border-left:1px solid;" innerHTML="{{LeaveNameByStatus(employee.employeeId,date)}}"></td>
+                  <td style="border-bottom:1px solid;border-left:1px solid;">
+                    <a href="javascript:;" class="table-row-action edit-action" (click)="enableEdit(date.mDate)">Edit</a>
+                  </td>
+                  <!--<td style="border-bottom:1px solid;border-left:1px solid;">
+            <a href="javascript:;" class="table-row-action edit-action" (click)="updateAttSummary(employee.employeeId,date.mDate)" type="button">UpdateAttSummary</a>
+
+          </td>-->
+                </ng-template>
+                <ng-template #editable>
+                  <td style="border-bottom:1px solid;border-left:1px solid;"> <input type="text" [(ngModel)]="punchin" /></td>
+                  <td style="border-bottom:1px solid;border-left:1px solid;"> <input type="text" [(ngModel)]="punchout" /> </td>
+                  <td style="border-bottom:1px solid;border-left:1px solid;" innerHTML="{{GetDuration(employee.employeeId,date.mDate)}}"></td>
+                  <td style="border-bottom:1px solid;border-left:1px solid;">
+                    <select [(ngModel)]="leaveType">
+                      <option value="0">n/a</option>
+                      <option value="1">Approved Leave</option>
+                      <option value="2">Comp off</option>
+                      <option value="3">Full Day</option>
+                      <option value="4">Half Day</option>
+                      <option value="5">Holiday</option>
+                      <option value="6">Short Leave</option>
+                      <option value="7">Unpaid Leave</option>
+                      <option value="8">Weekly Off</option>
+                    </select>
+                  </td>
+                  <td style="border-bottom:1px solid;border-left:1px solid;">
+                    <a href="javascript:;" class="table-row-action edit-action" (click)="disableEdit(date.mDate)">Cancel</a>
+                    <a href="javascript:;" class="table-row-action edit-action" (click)="updateAttendence(employee.employeeId,date.mDate)" type="button">Save</a>
+
+                  </td>
+                  <!--<td>
+            <a href="javascript:;" class="table-row-action edit-action" (click)="updateAttSummary(employee.employeeId,date.mDate)" type="button">UpdateAttSummary</a>
+
+          </td>-->
+                </ng-template>
+
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="!dataAvailable"><span style="color: palevioletred"> No Attendence Data Available for this month. </span></div>
+        </div>
+    </app-card>
+
+
+  </div>
+</div>

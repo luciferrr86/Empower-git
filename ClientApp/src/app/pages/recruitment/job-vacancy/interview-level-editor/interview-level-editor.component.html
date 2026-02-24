@@ -1,0 +1,30 @@
+<div [formGroup]="interviewLevelForm" class="mt-2 ml-3 mr-3 mb-2">
+  <div class="panel-heading">
+    <button type="button" class="close basic-close pull-right"
+      (click)="removeInterviewLevel(interviewLevelForm.controls.id.value)">
+      <i class="icofont icofont-ui-delete"></i>
+    </button>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <label class="col-form-label">Name</label>
+      <input type="text" class="form-control" formControlName="name" required>
+      <div [hidden]="interviewLevelForm.controls.name.valid" class="text-danger">
+        Level name is required
+      </div>
+    </div>
+
+
+    <div class="col-sm-6">
+      <label class="col-form-label">Manager List</label>
+      <ng-select name="manager" placeholder="Manager" [multiple]="true" [options]="hiringManagerList"
+        formControlName="managerList" required> </ng-select>
+      <div [hidden]="interviewLevelForm.controls.managerList.valid" class="text-danger">
+        Manager is required
+      </div>
+    </div>
+
+
+  </div>
+  <br>
+</div>

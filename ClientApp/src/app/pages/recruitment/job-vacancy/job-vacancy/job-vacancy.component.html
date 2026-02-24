@@ -1,0 +1,17 @@
+<form-wizard>
+    <wizard-step  [isValid]="isJobCreated"  [title]="'1.JOB CREATION'">
+
+     <job-creation #jobCreate></job-creation>
+
+    </wizard-step>
+    <wizard-step [title]="'2.SCREENING QUESTION'">
+     <screening-question></screening-question>
+    </wizard-step>
+    <wizard-step (onNext)="loadSkillInterview()" [title]="'3.HR KPI'">
+     <hr-kpi></hr-kpi>
+    </wizard-step>
+    <wizard-step [title]="'4.SKILL INTERVIEW'" >
+      <skill-interview #skill></skill-interview>
+    </wizard-step>
+  </form-wizard>
+  

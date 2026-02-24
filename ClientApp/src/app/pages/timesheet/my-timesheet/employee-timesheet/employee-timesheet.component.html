@@ -1,0 +1,110 @@
+<form [formGroup]="employeeTimesheetForm" (ngSubmit)="save()">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <app-card>
+        <div class="dt-responsive">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+                <div>
+                  <div class="form-group row">
+                    <div class="col-sm-8">
+                      <ng-select name="inidvidual" placeholder="Week Date" [options]="lstWeekDate" (selected)="getWeekly(employeeTimesheetForm.controls.userSpanId.value)"
+                        formControlName="userSpanId" required> </ng-select>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div style="text-align:center;">
+              <div class="row">
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-3">
+                  <p>
+
+                    <span class="text-c-blue">Employee Name :</span> {{employeeTimesheetForm.controls.fullName.value}}
+                  </p>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-3">
+                  <p>
+                    <span class="text-c-blue">Designation :</span>{{employeeTimesheetForm.controls.designation.value}}
+                  </p>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-3">
+                  <p>
+                    <span class="text-c-blue">Frequency : </span>{{employeeTimesheetForm.controls.frequency.value}}
+                  </p>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-sm-4 col-md-3">
+                  <p>
+                    <span class="text-c-blue">Timesheet Total :</span>{{employeeTimesheetForm.controls.totalHour.value}}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-2">
+                <h5>Choose a Project</h5>
+              </div>
+              <div class="col-sm-1" formArrayName="dayList" *ngFor="let lstdayList of employeeTimesheetForm.get('dayList')['controls']; let i=index">
+                <div [formGroupName]="i">
+                  <h5>{{lstdayList.controls.day.value}}</h5>
+                  <br>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <h5>Total Hours</h5>
+              </div>
+            </div>
+
+            <br>
+            <ng-container formArrayName="projectList" *ngFor="let lstprojectList of projectList.controls; let i=index">
+              <div class="row" [formGroupName]="i">
+                <div class="col-sm-2">
+                  <h5>{{lstprojectList.controls.name.value}}</h5>
+
+                </div>
+                <ng-container formArrayName="projectHourList" *ngFor="let lstprojectHour of projectList.controls[i].controls.projectHourList.controls; let j=index">
+                  <ng-container [formGroupName]="j">
+                    <div class="col-sm-1">
+                      <input *ngIf="lstprojectHour.controls.isAllotted.value && lstprojectHour.controls.isAllow.value"
+                        required formControlName="hour" type="text" class="form-control" pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$">
+                      <input *ngIf="!lstprojectHour.controls.isAllotted.value || !lstprojectHour.controls.isAllow.value"
+                        disabled formControlName="hour" type="text" class="form-control">
+                      <div [hidden]="!lstprojectHour.controls.hour.invalid" class="messages text-danger">
+                        hh:mm
+                      </div>
+                    </div>
+
+
+                  </ng-container>
+                </ng-container>
+                <div class="col-sm-1">
+                  <input type="text" value="{{lstprojectList.controls.totalProjectHour.value}}" disabled class="form-control">
+                </div>
+                <div class="col-sm-2">
+                  <h5></h5>
+                </div>
+              </div>
+              <br>
+            </ng-container>
+
+
+            <br>
+
+            <div style="text-align: right;">
+              <button *ngIf="!employeeTimesheetForm.controls.isUserSaved.value" [disabled]="employeeTimesheetForm.invalid || isSaving"
+                type="submit" class="btn btn-sm btn-success waves-effect">{{isSaving ? 'Saving' : 'Save'}}</button>
+              <button *ngIf="!employeeTimesheetForm.controls.isUserSubmit.value " type="button" class="btn btn-sm btn-primary waves-effect"
+                [disabled]="employeeTimesheetForm.invalid || isSubmit" (click)="Sumbit()">{{isSubmit? 'Submitting' :
+                'Submit'}}</button>
+            </div>
+          </div>
+        </div>
+      </app-card>
+    </div>
+  </div>
+</form>

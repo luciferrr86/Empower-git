@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="alert alert-primary background-primary">
+      <small>{{trainingClasses.instructionText}}</small>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12"
+        *ngFor="let training of trainingClasses.lstTrainingClasses; let i=index">
+        <textarea class="form-control" cols="5" placeholder="Looking forward to learn AngularJS" rows="5"
+          disabled>{{training.trainingClass}}</textarea>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>

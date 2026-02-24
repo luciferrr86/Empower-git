@@ -1,0 +1,90 @@
+<div style="    background: url(/assets/images/a4techheader.png) no-repeat 0px 0px;
+    background-size: cover;
+    min-height: 370px;
+    width: 100%;">
+</div>
+<br>
+<div class="row mx-2">
+  <div class="col-md-12">
+    <app-card class="">      
+      <!--<form #manageCtcForm="ngForm" (ngSubmit)="submitCtc(manageCtcForm)">-->
+      <div class="row panel-heading bg-primary h5"> Apply Job </div>
+      <br />
+      <div *ngIf="isSuccess" id="dvSuccess" class="alert alert-block alert-success" style="padding-top:12px;">Thank you for considering a career at A4 Technology Solution. Your application has been submitted successfully, One of our team will be in contact with you shortly.</div>
+      <div *ngIf="isError" id="dvErr" class="alert alert-danger" style="padding-top:12px;">There is some error occuered, Please try Again.</div>
+      <br />
+      <div class="row">
+        <div class="col-md-8">
+          <b>Job Title:</b> {{jobName}}
+          </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-8">
+          <b>Job Description:</b>
+          <div innerHTML="{{jobDescription}}"></div>
+        </div>
+      </div>
+      <br />
+      <!-- <div class="row">
+        <div class="col-md-8">
+          <span>
+            <i>
+              Thank you for considering a career at A4 Technology Solution. Please take a minute to fill out the following form.
+              After you have completed your application an email will be sent to you with information about how to check the status of your application.
+            </i>
+          </span>
+        </div>
+      </div> -->
+      <br />
+
+      <div class="row">
+        <div class="col-md-12">
+          <app-card>
+            <h4 class="h4 text-danger">Job Application Form</h4>
+            <hr>
+            <div class="row">
+              <label class="col-md-2" for="ctc">Name:</label>
+              <div class="col-md-4 form-line"><input type="text" name="name" [(ngModel)]="jobApplyModel.name" class="form-control"></div>
+            </div>
+            <br />
+            <div class="row">
+              <label class="col-md-2" for="ctc">Email:</label>
+              <div class="col-md-4 form-line"><input type="text" name="email" [(ngModel)]="jobApplyModel.email" class="form-control"></div>
+            </div>
+            <br />
+            <div class="row">
+              <label class="col-md-2" for="basicSalary">Phone:</label>
+              <div class="col-md-4 form-line">
+                <input type="text" name="phone" [(ngModel)]="jobApplyModel.phone" class="form-control">
+              </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+              <label class="col-md-2" for="basicSalary">Upload Resume:</label>
+              <div class="col-md-4 form-line">
+                <input #file type="file" id="customFile" accept="" multiple />
+              </div>
+              <!--<div class="progress">
+                <div class="progress-bar" role="progressbar" [style.width.%]="progress"></div>
+              </div>-->
+            </div>
+            <br>
+            <div>
+              <button class="btn btn-circle btn-success waves-circle waves-effect waves-float " (click)="submit(file.files)"
+                type="submit">
+                <i class="material-icons">Apply</i>
+              </button>
+            </div>
+
+          </app-card>
+          </div>
+       </div>
+      <!--</form>-->
+    </app-card>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-lg-3">
+    <div class="cover-profile">
+      <div class="profile-bg-img">
+        <div class="card">
+          <div class="card-body user-info">
+            <candidate-profile-picture [isCandidatePic]="isCandidateProfilePic"></candidate-profile-picture>
+            <div class="col-md-12 text-center">
+              <br />
+              <br />
+              <div class="user-title">
+                <h2>{{fullName}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card twitter-card">
+      <div class="card-header">
+        <i class="icofont icofont icofont-ebook"></i>
+        <div class="d-inline-block">
+          <h5>Resume</h5>
+        </div>
+      </div>
+      <div class="card-block text-center">
+        <app-candidate-resume></app-candidate-resume>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="md-tabs">
+      <ngb-tabset>
+
+        <ngb-tab title="Personal Info">
+          <ng-template ngbTabContent>
+            <candidate-personal-detail #personalEditor></candidate-personal-detail>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Educational Detail">
+          <ng-template ngbTabContent>
+            <candidate-educational-detail #educationalEditor></candidate-educational-detail>
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Professional Details">
+          <ng-template ngbTabContent>
+            <candidate-workexperience-detail #workexperienceEditor></candidate-workexperience-detail>
+          </ng-template>
+        </ngb-tab>
+
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

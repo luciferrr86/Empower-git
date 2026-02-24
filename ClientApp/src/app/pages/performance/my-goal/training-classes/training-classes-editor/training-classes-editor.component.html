@@ -1,0 +1,16 @@
+<div [formGroup]="trainingClassesForm" class="row">
+  <div class="col-xs-12 col-sm-12 col-sm-12 col-md-12">
+    <button type="button" class="close basic-close pull-right"
+      (click)="removeTrainingClasses(trainingClassesForm.controls.trainingClassId.value)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <textarea class="form-control" cols="5" placeholder="Looking forward to learn Angular" rows="5"
+      formControlName="trainingClass" required></textarea>
+    <input type="hidden" formControlName="trainingClassId">
+    <div *ngIf="trainingClassesForm.controls.trainingClass.invalid" class="messages text-danger">
+      Please enter training classes
+    </div>
+
+
+  </div>
+</div>

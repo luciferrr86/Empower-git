@@ -1,0 +1,56 @@
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="card-header-left">
+      <h5>Interviewer Panel</h5>
+    </div>
+    <div class="card-header-right">
+      <button type="button" class="btn btn-primary" *ngIf="this.massId!=''" (click)="newInterviewer()"
+        data-dismiss="modal">add</button>
+    </div>
+  </div>
+  <div class="card-block">
+    <form name="hrKpiForm">
+      <div>
+        <div *ngFor="let list of listPanel; let i=index" class="panel panel-primary mb-2">
+
+          <div class="panel-heading bg-primary">
+            <span>{{list.name}}</span>
+          </div>
+          <div class="panel-body">
+            <div class="mt-2 ml-2 mb-2">
+              <div class="row">
+                <div class="col-sm-2">
+                  <label class="col-form-label">Vacancy</label>
+                  <label>{{list.vacancy}}</label>
+                </div>
+                <div class="col-sm-2">
+                  <label class="col-form-label">Date</label><br>
+                  <label>{{list.interViewDate}}</label>
+                </div>
+                <div class="col-sm-2">
+                  <label class="col-form-label">Start Time</label><br>
+                  <span>{{list.startTime}}</span>
+                </div>
+                <div class="col-sm-2">
+                  <label class="col-form-label">End Time</label><br>
+                  <span>{{list.endTime}}</span>
+                </div>
+                <div class="col-sm-2">
+                  <label class="col-form-label">Break Start Time</label>
+                  <span>{{list.breakStartTime}}</span>
+                </div>
+                <div class="col-sm-2">
+                  <label class="col-form-label">Break End Time</label>
+                  <span>{{list.breakEndTime}}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<interview-panel-editor #interviewEditor></interview-panel-editor>

@@ -1,0 +1,37 @@
+<form name="jobDetailInfoForm" (ngSubmit)="save()">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-header-text">Workingday List</h5>
+    </div>
+    <div class="card-block">
+      <table class="table table-styling">
+        <thead>
+          <tr class="">
+            <th>Working Days</th>
+            <th>Select</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let list of workingdayList">
+            <td>{{list.workingDay}}</td>
+            <td>
+
+              <div class="checkbox-color checkbox-primary">
+                <input id="{{list.workingDay}}" type="checkbox" [checked]="list.workingDayValue==='1'"
+                  (change)="changeCheckBoxValue($event,list.id)">
+                <label for="{{list.workingDay}}">
+                </label>
+              </div>
+
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <div class="f-right">
+        <button type="submit" class="btn btn-primary waves-effect waves-light ">Save</button>
+      </div>
+    </div>
+  </div>
+</form>

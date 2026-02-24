@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card>
+      <form #manageSalComponentForm="ngForm" (ngSubmit)="submitSalComponent(manageSalComponentForm)">
+        <div class="row panel-heading bg-primary"> Salary Component </div>
+       
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <div class="form-line">
+                <input type="text" name="Name" id="name" [(ngModel)]="salaryComponent.name" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="isEarnings">Earning/Deduction:</label>
+              <div class="form-line">
+                <input type="radio" [value]="true" name="isEarnings" [ngModel]="salaryComponent.isEarnings"> Earning
+            
+              </div>
+              <div class="form-line">
+                <input type="radio" [value]="false" name="isEarnings" [ngModel]="salaryComponent.isEarnings"> Deduction
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="isActive">IsActive:</label>
+              <div class="form-line">
+                <input type="checkbox" name="isActive" [ngModel]="salaryComponent.isActive">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="isMonthly">IsMonthly:</label>
+              <div class="form-line">
+                <input type="checkbox" name="isMonthly" [ngModel]="salaryComponent.isMonthly">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-circle btn-success waves-circle waves-effect waves-float" [disabled]="isSubmit" type="submit"> <i class="material-icons">Save</i> </button>
+        </div>
+      </form>
+</app-card>
+</div>
+</div>

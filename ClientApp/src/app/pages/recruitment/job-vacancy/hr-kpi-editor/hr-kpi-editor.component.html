@@ -1,0 +1,28 @@
+<div [formGroup]="hrQuestionForm">
+    <div class="well">
+        <button type="button" class="close basic-close pull-right"  (click)="removeHrKpi(hrQuestionForm.controls.id.value)">
+          <span aria-hidden="true"><i _ngcontent-c11="" class="icofont icofont-ui-delete"></i></span>
+        </button>       
+     
+    <div class="row">
+      <div class="col-sm-8">
+          <label class="col-form-label">Question</label>
+        <textarea type="text" class="form-control" formControlName="question" required></textarea>
+        <div [hidden]="hrQuestionForm.controls.question.valid" class="text-danger">
+          Question is required
+        </div>
+      </div>
+  
+    
+      <div class="col-sm-4">
+          <label class="col-form-label">Weightage</label>
+        <input type="number" class="form-control" formControlName="weightage" required>
+        <div [hidden]="hrQuestionForm.controls.weightage.valid" class="text-danger">
+          Weightage is required
+        </div>
+      </div>
+    </div>
+  
+    </div>
+  </div>
+  

@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="A4.Empower/A4.BAL/A4.BAL.csproj" />
+    <Project Path="A4.Empower/A4.Empower/A4.Empower.csproj" />
+    <Project Path="A4.Empower/DAL/A4.DAL.csproj" />
+  </Folder>
+</Solution>

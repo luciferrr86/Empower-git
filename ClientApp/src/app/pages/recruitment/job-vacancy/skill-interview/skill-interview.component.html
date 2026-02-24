@@ -1,0 +1,30 @@
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="card-header-left">
+      <h5>SKILL INTERVIEW</h5>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm f-right" (click)="addSkillQuestion()" style="cursor: default">
+        Add Question
+      </button>
+  </div>
+  <div class="card-block">
+    <form [formGroup]="skillQuestionForm" (ngSubmit)="save()">
+      <!--addresses-->
+
+      <div formArrayName="skillQuestion">
+        <div *ngFor="let skill of skillQuestion.controls; let i=index">
+          <div [formGroupName]="i" class="panel-body">
+            <skill-interview-editor  [group]="skillQuestionForm.controls.skillQuestion.controls[i]" [level]="levelList" (skillId)="removeSkillQuestion($event,i)"></skill-interview-editor>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 mb-2">
+            <div style="text-align: right;">
+                  <button type="submit" class="btn btn-primary pull-right" [disabled]="skillQuestionForm.invalid">{{isSaving ? ('Please Wait...') : ('Save')}}</button>
+            </div>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>

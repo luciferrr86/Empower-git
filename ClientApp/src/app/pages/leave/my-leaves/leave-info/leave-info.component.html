@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+    <div class="card widget-card-1">
+      <div class="card-block-small">
+        <i class="icofont icofont-calendar bg-c-blue card1-icon"></i>
+        <span class="text-c-blue f-w-600">ALL LEAVES</span>
+        <h4>{{entitlement.allLeave}}</h4>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+    <div class="card widget-card-1">
+      <div class="card-block-small">
+        <i class="icofont icofont-checked bg-c-pink card1-icon"></i>
+        <span class="text-c-pink f-w-600">APPROVED</span>
+        <h4>{{entitlement.approved}}</h4>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+    <div class="card widget-card-1">
+      <div class="card-block-small">
+        <i class="icofont icofont-close-squared bg-c-green card1-icon"></i>
+        <span class="text-c-green f-w-600">REJECTED</span>
+        <h4>{{entitlement.rejected}}</h4>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+    <div class="card widget-card-1">
+      <div class="card-block-small">
+        <i class="icofont icofont-exclamation-square bg-c-yellow card1-icon"></i>
+        <span class="text-c-yellow f-w-600">REMAINING</span>
+        <h4>{{entitlement.remaining}}</h4>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <table class="table table-styling table-border-style table-responsive">
+      <thead>
+        <tr>
+          <th>Leave Type</th>
+          <th>Days</th>
+          <th>Approved</th>
+          <th>Rejected</th>
+          <th>Remaining</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let list of entitlement.listLeaveInfo">
+          <td>{{list.leaveType}}</td>
+          <td>{{list.noOfDays}}</td>
+          <td>{{list.approved}}</td>
+          <td>{{list.rejected}}</td>
+          <td>{{list.remaining}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

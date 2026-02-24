@@ -1,0 +1,122 @@
+<div>
+    <section class="login p-fixed d-flex text-center bg-primary candidate-img-bg">
+      <!-- starts -->
+      <div class="auth-fluid">
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Authentication card start -->
+            <div class="login-card card-body auth-body">
+                <form class="form-horizontal" name="candidateInfoForm" #candidateInfoForm="ngForm" (ngSubmit)="save()">
+              <!-- <form class="md-float-material"> -->
+                  <div class="text-center">
+                      <h4>Empower 360<sup>+</sup></h4>
+                    </div> 
+                <div class="auth-box">
+                  <!-- <div class="row m-b-20">
+                    <div class="col-md-12">
+                      <h3 class="text-center txt-primary">Sign up. It is fast and easy.</h3>
+                    </div>
+                  </div>
+                  <p class="text-inverse b-b-default text-left p-b-5">Sign in easily with your social account:</p>
+                  <div class="row m-b-20">
+                    <div class="col-md-6">
+                      <button class="btn btn-facebook m-b-5"><i class="icofont icofont-social-facebook"></i>facebook</button>
+                    </div>
+                    <div class="col-md-6">
+                      <button class="btn btn-google-plus m-b-5"><i class="icofont icofont-social-google-plus"></i>google</button>
+                    </div>
+                  </div> -->
+                  <p class="text-inverse b-b-default text-left p-b-5">Sign Up your account</p>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" placeholder="Full Name" name="candidateName" [(ngModel)]="candidateRegister.fullName"
+                        #candidateName="ngModel" required>
+                      <!-- <span class="md-line"></span> -->
+                      <div [hidden]="candidateName.valid" class="messages text-danger">
+                        Please enter fullName
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" placeholder="Email Address" name="candidateEmail" [(ngModel)]="candidateRegister.email"
+                        #candidateEmail="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                      <span class="md-line"></span>
+                      <div [hidden]="candidateEmail.valid" class="messages text-danger">
+                        Please enter valid email id
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="password" class="form-control" placeholder="Password" name="candidatePassword" [(ngModel)]="candidateRegister.password"
+                        #candidatePassword="ngModel" required>
+                      <span class="md-line"></span>
+                      <div [hidden]="candidatePassword.valid" class="messages text-danger">
+                        Please enter password
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" placeholder="Contact No" name="candidatePhNo" [(ngModel)]="candidateRegister.phoneNumber"
+                        #candidatePhNo="ngModel" pattern="^((\\+91-?)|0)?[0-9]{10}$" required>
+                      <span class="md-line"></span>
+                      <div [hidden]="candidatePhNo.valid" class="messages text-danger">
+                        Please enter phoneNumber
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="row m-t-25 text-left">
+                    <div class="col-md-12">
+                      <div class="checkbox-fade fade-in-primary">
+                        <label>
+                          <input type="checkbox" value="">
+                          <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                          <span class="text-inverse">I read and accept <a href="javascript:;">Terms &amp; Conditions.</a></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="checkbox-fade fade-in-primary">
+                        <label>
+                          <input type="checkbox" value="">
+                          <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                          <span class="text-inverse">Send me the <a href="javascript:;">Newsletter</a> weekly.</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="row m-t-30">
+                    <div class="col-md-12">
+                      <button type="submit" [disabled]="!candidateInfoForm.form.valid" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">{{isSaving ? 'Signup...' : 'Sign up now'}}</button>
+                      <span class="text-inverse">Already have an account?
+                        <a [routerLink]="['/candidate/login']"> Login here!</a>
+                      </span>
+                    </div>
+                  </div>
+                  <hr/>
+                  <!-- <div class="row">
+                    <div class="col-md-10">
+                      <p class="text-inverse text-left m-b-0">Thank you and enjoy our website.</p>
+                      <p class="text-inverse text-left"><b>Your Autentification Team</b></p>
+                    </div>
+                 
+                  </div> -->
+                </div>
+              </form>
+              <!-- end of form -->
+            </div>
+            <!-- Authentication card end -->
+          </div>
+          <!-- end of col-sm-12 -->
+        </div>
+        <!-- end of row -->
+      </div>
+      <!-- end of -->
+    </section>
+</div>

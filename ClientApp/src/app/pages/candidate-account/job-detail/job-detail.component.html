@@ -1,0 +1,76 @@
+<div>
+  <section class="common-img-bg">  <br>
+    <div class="auth-fluid">
+      <form class="form-horizontal">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="card pcoded-main-container">
+              <div class="card-header bg-primary">
+                <h4 class="card-header-text" style="color:white;">Job Details</h4>
+              </div>
+              <div class="card-block"><br>
+                <div class="row">
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card visitor-card">
+                      <div class="card-block">
+                        <h5 class="text-primary">JOB TITLE</h5><br>
+                        <h5 class="p-t-15 p-b-40 m-0">{{jobDetail.jobTitle}}</h5>
+                        <i class="icofont icofont-ui-user text-c-blue"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card visitor-card">
+                      <div class="card-block">
+                        <h5 class="text-danger">JOB TYPE</h5><br>
+                        <h5 class="p-t-15 p-b-40 m-0">{{jobDetail.jobType}}</h5>
+                        <i class="icofont  icofont-check text-c-pink"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card visitor-card">
+                      <div class="card-block">
+                        <h5 class="text-success">JOB LOCATION</h5><br/>
+                        <h5 class="p-t-15 p-b-40 m-0">{{jobDetail.jobLocation}}</h5>
+                        <i class="icofont icofont-location-pin text-c-green"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card visitor-card">
+                      <div class="card-block">
+                        <h5 class="text-warning">PUBLISHED DATE</h5><br/>
+                        <h5 class="p-t-15 p-b-40 m-0">{{jobDetail.publishedDate| date: 'dd/MM/yyyy'}}</h5>
+                        <i class="icofont icofont-calendar text-warning"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="well">
+                  <div class="header">
+                    <h5>JOB REQIREMENT :</h5>
+                  </div>
+                  <br/>
+                  <textarea autofocus type="text" name="jobreqirement" class="form-control" [(ngModel)]="jobDetail.jobRequirements" #jobreqirement="ngModel"
+                    disabled></textarea>
+                </div>
+                <div class="well">
+                  <div class="header">
+                    <h5>JOB DESCRIPTION :</h5>
+                  </div>
+                  <br/>
+                  <textarea autofocus type="text" name="jobdescription" class="form-control" [(ngModel)]="jobDetail.jobDescription" #jobdescription="ngModel"
+                    disabled></textarea>
+                </div>
+                <button class="btn btn-primary waves-effect" (click)="applyJob()" type="submit" [routerLink]="['/candidate/login']">APPLY
+                  NOW
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

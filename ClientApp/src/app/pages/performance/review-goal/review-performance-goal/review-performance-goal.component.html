@@ -1,0 +1,109 @@
+<div>
+  <form #goalForm="ngForm" (ngSubmit)="saveGoal()">
+    <div class="card" *ngIf="currentYearGoal.checkSaveSubmit.enableMidYear">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h5>Mid Year Goal</h5>
+        </div>
+      </div>
+      <ngb-accordion>
+        <ngb-panel *ngFor="let mid of currentYearGoal.midYearGoalMeasureList;let i=index" [title]="mid.goalName"
+          id="mid-{{i}}">
+          <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                <div class="form-group">
+                  <h5>Start Date &amp; Time: {{mid.startTime}}</h5>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                <div class="form-group">
+                  <h5>End Date &amp; Time: {{mid.endTime}}</h5>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p>{{mid.measure}}</p>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-12">
+                <p>{{mid.accomplishment}}</p>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-12">
+                <textarea name="midmanagerComments" placeholder="Manager Comments" class="form-control" rows="3"
+                  [disabled]="currentYearGoal.checkSaveSubmit.isMgrGoalSubmit"
+                  [(ngModel)]="currentYearGoal.midYearGoalMeasureList[i].managerComments"></textarea>
+              </div>
+            </div>
+          </ng-template>
+
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <h5>Year End Goal</h5>
+        </div>
+      </div>
+      <ngb-accordion #acc="ngbAccordion" *ngFor="let list of currentYearGoal.endYearGoalMeasureList">
+        <ngb-panel title="{{list.goalName}}">
+          <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                <div class="form-group">
+                  <h5>Start Date &amp; Time: {{list.startTime}}</h5>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                <div class="form-group">
+                  <h5>End Date &amp; Time: {{list.endTime}}</h5>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <textarea name="Questions" placeholder="Questions" class="form-control" rows="3"
+                  (ngModel)="list.measure" disabled></textarea>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-12">
+                <textarea name="employeeComments" placeholder="Employee Comments" class="form-control" rows="3"
+                  (ngModel)="list.accomplishment" disabled></textarea>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-12">
+                <textarea name="managerComments" placeholder="Manager Comments" class="form-control" rows="3"
+                  [(ngModel)]="list.managerComments"
+                  [disabled]="currentYearGoal.checkSaveSubmit.isMgrYearGoalSubmit"></textarea>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+    <div
+      *ngIf="currentYearGoal.checkSaveSubmit.enableMidYear && currentYearGoal.checkSaveSubmit.isMidYearReviewCompleted; else yearGoal ">
+      <button class="btn btn-sm btn-primary waves-effect" type="submit"
+        *ngIf="!currentYearGoal.checkSaveSubmit.isMgrGoalSubmit">Save</button>
+      <button class="btn btn-sm btn-primary waves-effect" type="button" (click)="submitGoal()"
+        *ngIf="currentYearGoal.checkSaveSubmit.isMgrGoalSave && !currentYearGoal.checkSaveSubmit.isMgrGoalSubmit">Submit</button>
+    </div>
+    <ng-template #yearGoal>
+      <button class="btn btn-sm btn-primary waves-effect" type="submit"
+        *ngIf="!currentYearGoal.checkSaveSubmit.isMgrYearGoalSubmit">Save</button>
+      <button class="btn btn-sm btn-primary waves-effect" type="button" (click)="submitGoal()"
+        *ngIf="currentYearGoal.checkSaveSubmit.isMgrYearGoalSave && !currentYearGoal.checkSaveSubmit.isMgrYearGoalSubmit">Submit</button>
+    </ng-template>
+  </form>
+</div>

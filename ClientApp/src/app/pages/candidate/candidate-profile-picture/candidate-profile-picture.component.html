@@ -1,0 +1,4 @@
+<img [src]="profileEdit.imageUrl" class="img-thumbnail">
+<app-file-upload  *ngIf="!isCandidatePic" [typeId]="1" [userId]="profileEdit.userId" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG"
+  (uploadStatus)="refreshImages($event)">
+</app-file-upload>

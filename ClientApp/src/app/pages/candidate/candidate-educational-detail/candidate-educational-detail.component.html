@@ -1,0 +1,183 @@
+<div>
+  <form class="form-control" name="educationalInfoForm" #educationalInfoForm="ngForm" (ngSubmit)="UpdateEducational()">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-header-text"> Educational Details </h5>
+      </div>
+      <div class="card-body user-desc">
+        <div class="view-desc">
+          <div class="row">
+            <div class="col-lg-4">
+              <p>Qualification
+                <input class="form-control" placeholder="Qualification" type="text" name="higherQualification"
+                  [(ngModel)]="educationalEdit.highestQualification" #higherQualification="ngModel" required>
+              </p>
+              <div [hidden]="higherQualification.valid" class="messages text-danger">
+                Please enter higher qualification
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <p>Specialization
+                <input class="form-control" placeholder="Specialization" type="text" name="higherSpecialization"
+                  [(ngModel)]="educationalEdit.hdSpecialization" #higherSpecialization="ngModel" required>
+              </p>
+              <div [hidden]="higherSpecialization.valid" class="messages text-danger">
+                Please enter higher specialization
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <p>Passing Year
+                <input class="form-control" placeholder="Passing Year" type="text" name="hdPassingYear"
+                  [(ngModel)]="educationalEdit.hdPassingYear" #hdPassingYear="ngModel" required>
+              </p>
+              <div [hidden]="hdPassingYear.valid" class="messages text-danger">
+                Please enter higher passing year
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <p>Institute
+                <input class="form-control" placeholder="Institute" type="text" name="higherDegreeInstitue"
+                  [(ngModel)]="educationalEdit.higherDegreeInstitue" #higherDegreeInstitue="ngModel" required>
+              </p>
+              <div [hidden]="higherDegreeInstitue.valid" class="messages text-danger">
+                Please enter higher institute
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <p>Percentage/Grade
+                <input class="form-control" placeholder="Percentage/Grade" type="text" name="hdPercentage"
+                  [(ngModel)]="educationalEdit.hdPercentage" #hdPercentage="ngModel" required>
+              </p>
+              <div [hidden]="hdPercentage.valid" class="messages text-danger">
+                Please enter higher percentage
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-header-text"> Higher Secondary / Diploma </h5>
+      </div>
+      <div class="card-body user-desc">
+        <div class="view-desc">
+          <div class="row">
+            <div class="col-lg-4">
+              <p>Qualification
+                <input class="form-control" placeholder="Qualification" type="text" name="secondaryQualification"
+                  [(ngModel)]="educationalEdit.secondaryQualification" #secondaryQualification="ngModel" required>
+              </p>
+              <div [hidden]="secondaryQualification.valid" class="messages text-danger">
+                Please enter secondary qualification
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <p>Specialization
+                <input class="form-control" placeholder="Specialization" type="text" name="secondarySpecialization"
+                  [(ngModel)]="educationalEdit.sdSpecialization" #secondarySpecialization="ngModel" required>
+              </p>
+              <div [hidden]="secondarySpecialization.valid" class="messages text-danger">
+                Please enter secondary specialization
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <p>Passing Year
+                <input class="form-control" placeholder="Passing Year" type="text" name="secondaryPassingYear"
+                  [(ngModel)]="educationalEdit.sdPassingYear" #secondaryPassingYear="ngModel" required>
+              </p>
+              <div [hidden]="secondaryPassingYear.valid" class="messages text-danger">
+                Please enter secondary passing year
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <p>Institute
+                <input class="form-control" placeholder="Institute" type="text" name="secondaryInstitute"
+                  [(ngModel)]="educationalEdit.secondaryInstitue" #secondaryInstitute="ngModel" required>
+              </p>
+              <div [hidden]="secondaryInstitute.valid" class="messages text-danger">
+                Please enter secondary institute
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <p>Percentage/Grade
+                <input class="form-control" placeholder="Percentage/Grade" type="text" name="secondaryPercentage"
+                  [(ngModel)]="educationalEdit.sdPercentage" #secondaryPercentage="ngModel" required>
+              </p>
+              <div [hidden]="secondaryPercentage.valid" class="messages text-danger">
+                Please enter secondary percentage
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-header-text"> Secondary (S.S.C.) </h5>
+      </div>
+      <div class="card-body user-desc">
+        <div class="view-desc">
+          <div class="row">
+            <div class="col-lg-4">
+              <p>Qualification
+                <input class="form-control" placeholder="Qualification" type="text" name="sscQualification"
+                  [(ngModel)]="educationalEdit.sscQualification" #sscQualification="ngModel" required>
+              </p>
+              <div [hidden]="sscQualification.valid" class="messages text-danger">
+                Please enter ssc qualification
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <p>Specialization
+                <input class="form-control" placeholder="Specialization" type="text" name="sscSpecialization"
+                  [(ngModel)]="educationalEdit.sscSpecialization" #sscSpecialization="ngModel" required>
+              </p>
+              <div [hidden]="sscSpecialization.valid" class="messages text-danger">
+                Please enter ssc specialization
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <p>Passing Year
+                <input class="form-control" placeholder="Passing Year" type="text" name="sscPassingYear"
+                  [(ngModel)]="educationalEdit.sscPassingYear" #sscPassingYear="ngModel" required>
+              </p>
+              <div [hidden]="sscPassingYear.valid" class="messages text-danger">
+                Please enter ssc passing year
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <p>Institute
+                <input class="form-control" placeholder="Institute" type="text" name="sscInstitute"
+                  [(ngModel)]="educationalEdit.sscInstitue" #sscInstitute="ngModel" required>
+              </p>
+              <div [hidden]="sscInstitute.valid" class="messages text-danger">
+                Please enter ssc institute
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <p>Percentage/Grade
+                <input class="form-control" placeholder="Percentage/Grade" type="text" name="sscPercentage"
+                  [(ngModel)]="educationalEdit.sscPercentage" #sscPercentage="ngModel" required>
+              </p>
+              <div [hidden]="sscPercentage.valid" class="messages text-danger">
+                Please enter ssc percentage
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="app-modal-footer">
+      <button type="submit" class="btn btn-primary waves-effect waves-right"
+        [disabled]="!educationalInfoForm.form.valid">{{isSaving ? 'Updating in...' : 'Update'}}</button>
+    </div>
+    <!-- </div> -->
+  </form>
+</div>

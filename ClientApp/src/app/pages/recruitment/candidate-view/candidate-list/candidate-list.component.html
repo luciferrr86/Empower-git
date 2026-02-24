@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-md-12 col-xl-12">
+    <h4>{{position}}</h4>
+  </div>
+  <div class="col-lg-12">
+    <div class="md-tabs">
+      <ngb-tabset #t="ngbTabset">
+
+        <ng-container *ngFor="let level of interviewLevelModel">
+
+          <ngb-tab [attr.id]="level.name">
+            <ng-template ngbTabTitle>
+              <div (click)="getApplicationData(level.id)">{{level.name}}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate] class="m-t-15">
+                <app-card [title]="level.name">
+                  <div class="dt-responsive">
+                    <div class="row">
+
+                    </div>
+                    <div class="table-responsive">
+                      <ngx-datatable class="data-table material" [externalPaging]="true" [count]="count"
+                        (page)='setPage($event)' [offset]="pageNumber" [limit]="pageSize"
+                        [loadingIndicator]="loadingIndicator" [rows]="rows" [rowHeight]="35" [headerHeight]="90"
+                        [footerHeight]="35" [columns]="columns" [columnMode]="'force'">
+                      </ngx-datatable>
+                    </div>
+                  </div>
+                </app-card>
+
+
+              </div>
+            </ng-template>
+          </ngb-tab>
+
+        </ng-container>
+        <ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <a href="javascript:;" (click)="applicationDetail(row.applicationId)"
+               class="m-r-15 crm-action-edit text-muted text-primary">
+              <i class="icofont icofont-eye-alt"></i>
+            </a>
+            <a href="javascript:;" (click)="deleteApplication(row.applicationId)"
+               class="crm-action-delete text-muted text-danger">
+              <i class="icofont icofont-delete-alt"></i>
+            </a>&nbsp;
+            <a *ngIf="row.resume!=''" target="_blank" class="label label-primary" title="Resume" href="{{row.resume}}">
+              <i class="ti-download" aria-hidden="true"></i>
+            </a>
+
+          </td>
+
+        </ng-template>
+        <ng-template #screeningScoreTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <label class="label label-info">{{row.screeningScore}}%</label>
+          </td>
+        </ng-template>
+        <!--<ng-template #hrScoreTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <label class="label label-warning">{{row.hrScore}}%</label>
+          </td>
+        </ng-template>-->
+        <ng-template #skillScoreTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <label class="label label-danger">{{row.skillScore}}%</label>
+          </td>
+        </ng-template>
+        <ng-template #overAllScoreTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <label class="label label-success">{{row.overAllScore}}%</label>
+          </td>
+        </ng-template>
+        <ng-template #jobStatusTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+            <label class="label label-danger">{{row.jobStatus}}</label>
+          </td>
+        </ng-template>
+        <!--<ng-template #resumeTemplate let-row="row" let-value="value" let-i="index">
+          <td class="action-icon">
+
+            <a *ngIf="row.resume!=''" target="_blank" class="label label-primary" href="{{row.resume}}"><i
+                class="ti-download" aria-hidden="true"></i></a>
+          </td>
+        </ng-template>-->
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

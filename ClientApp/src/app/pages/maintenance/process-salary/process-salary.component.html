@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'Process Salary For All Employees'">
+      <form #manageProcessSalaryForm="ngForm" (ngSubmit)="allEmpSal(manageProcessSalaryForm)">
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="month">Month:</label>
+              <div class="form-line">
+                <select [(ngModel)]="empSal.month" name="month" title="Month" style="padding:0.5rem 1.75rem 4px 9px;">
+                  <option  *ngFor="let month of months" [value]="month.id">
+                    {{month.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label for="year">Year:</label>
+              <div class="form-line">
+                <select [(ngModel)]="empSal.year" name="year" title="Year" style="padding:0.5rem 4.75rem 4px 9px;">
+                  <option *ngFor="let year of years" [value]="year">
+                    {{year}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-sm btn-primary waves-effect">
+            Process Salary
+          </button>
+        </div>
+        <br />
+        <div class="row col-md-4">
+          <div class="form-group" *ngIf="message">
+            <div class="alert-success">
+              <strong>{{message}}</strong>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </app-card>
+</div>
+</div>
