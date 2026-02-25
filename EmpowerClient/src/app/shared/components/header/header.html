@@ -10,7 +10,7 @@
             <!-- Start::header-element -->
             <div class="header-element">
                 <div class="horizontal-logo">
-                    <a routerLink="/dashboards/sales" class="header-logo">
+                    <a routerLink="/" class="header-logo">
                         <img src="./assets/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
                         <img src="./assets/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark">
                         <img src="./assets/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark">
@@ -29,12 +29,13 @@
 
             <div class="header-element header-search d-md-block d-none custom-header-searchInput">
                 <!-- Start::header-link -->
-                <div class="autoComplete_wrapper" role="combobox" aria-owns="autoComplete_list_1" aria-haspopup="true" aria-expanded="false">
-                  <input type="text" class="header-search-bar form-control bg-white" id="header-search"
-                  placeholder="Search" spellcheck=false autocomplete="off" autocapitalize="off"
-                  (click)="SearchHeader()" [(ngModel)]="text" [ngModelOptions]="{ standalone: true }"
-                  (keyup)="Search(text)">
-                 </div>
+                <div class="autoComplete_wrapper" role="combobox" aria-owns="autoComplete_list_1" aria-haspopup="true"
+                    aria-expanded="false">
+                    <input type="text" class="header-search-bar form-control bg-white" id="header-search"
+                        placeholder="Search" spellcheck=false autocomplete="off" autocapitalize="off"
+                        (click)="SearchHeader()" [(ngModel)]="text" [ngModelOptions]="{ standalone: true }"
+                        (keyup)="Search(text)">
+                </div>
 
                 @if(menuItems && menuItems.length > 0) {
                 <div class="search_drop list-group" (click)="clearSearch()">
@@ -265,58 +266,63 @@
                     </div>
                     <div class="dropdown-divider"></div>
                     <overlay-scrollbars>
-                        <ul class="list-unstyled mb-0" id="header-cart-items-scroll" >
-                          @for (item of cartItems; track item.id) {
-                            <li ngbDropdownItem id="row1" class="dropdown-item" (click)="handleCardClick($event)"  [id]="item.id">
-                              <div class="d-flex align-items-start cart-dropdown-item gap-3">
-                                  <div class="lh-1">
-                                      <span class="avatar avatar-xl bg-gray-300">
-                                        <img [src]="item.image" alt="img">
-                                      </span>
-                                  </div>
-                                  <div class="flex-fill w-75">
-                                      <div class="d-flex align-items-start justify-content-between mb-3">
-                                          <div class="fs-14 fw-medium w-75">
-                                              <div class="text-truncate">
-                                                  <a routerLink="/dashboards/ecommerce/cart">{{ item.name }}</a>
-                                              </div>
-                                              <div class="fs-11 text-muted text-truncate">
-                                                  <span>{{ item.subname }}</span>
-                                              </div>
-                                          </div>
-                                          <div class="text-end">
-                                              <a (click)="removeCart(item.id)" href="javascript:void(0);"
-                                                  class="header-cart-remove dropdown-item-close"><i
-                                                      class="ri-delete-bin-line"></i></a>
-                                          </div>
-                                      </div>
-                                      <div class="d-flex align-items-center justify-content-between">
-                                          <div class="flex-fill">
-                                              <div class="lh-1 fs-12 mb-1">
-                                                  <span
-                                                      class="text-muted fw-normal d-inline-block text-decoration-line-through">${{ item.price }}</span><span
-                                                      class="text-success ms-1">{{item.OfferPrice }}% off</span>
-                                              </div>
-                                              <h6 class="fw-medium mb-0">${{item.originalPrice }}</h6>
-                                          </div>
-                                          <div class="d-flex rounded align-items-center flex-nowrap order-qnt gap-2">
-                                              <a href="javascript:void(0);"
-                                                  class="badge bg-white p-1 border text-muted fs-13 product-quantity-minus" (click)="updateQuantity(item.id, -1)">
-                                                  <i class="ri-subtract-line"></i>
-                                              </a>
-                                              <input type="text"
-                                                  class="form-control form-control-cart border-0 text-center w-100"
-                                                  aria-label="quantity" id="product-qty-1"[value]="item.quantity" readonly>
-                                              <a href="javascript:void(0);"
-                                                  class="badge bg-white p-1 border text-muted fs-13 product-quantity-plus" (click)="updateQuantity(item.id, 1)">
-                                                  <i class="ri-add-line"></i>
-                                              </a>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </li>
-                          }
+                        <ul class="list-unstyled mb-0" id="header-cart-items-scroll">
+                            @for (item of cartItems; track item.id) {
+                            <li ngbDropdownItem id="row1" class="dropdown-item" (click)="handleCardClick($event)"
+                                [id]="item.id">
+                                <div class="d-flex align-items-start cart-dropdown-item gap-3">
+                                    <div class="lh-1">
+                                        <span class="avatar avatar-xl bg-gray-300">
+                                            <img [src]="item.image" alt="img">
+                                        </span>
+                                    </div>
+                                    <div class="flex-fill w-75">
+                                        <div class="d-flex align-items-start justify-content-between mb-3">
+                                            <div class="fs-14 fw-medium w-75">
+                                                <div class="text-truncate">
+                                                    <a routerLink="/dashboards/ecommerce/cart">{{ item.name }}</a>
+                                                </div>
+                                                <div class="fs-11 text-muted text-truncate">
+                                                    <span>{{ item.subname }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="text-end">
+                                                <a (click)="removeCart(item.id)" href="javascript:void(0);"
+                                                    class="header-cart-remove dropdown-item-close"><i
+                                                        class="ri-delete-bin-line"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="flex-fill">
+                                                <div class="lh-1 fs-12 mb-1">
+                                                    <span
+                                                        class="text-muted fw-normal d-inline-block text-decoration-line-through">${{
+                                                        item.price }}</span><span
+                                                        class="text-success ms-1">{{item.OfferPrice }}% off</span>
+                                                </div>
+                                                <h6 class="fw-medium mb-0">${{item.originalPrice }}</h6>
+                                            </div>
+                                            <div class="d-flex rounded align-items-center flex-nowrap order-qnt gap-2">
+                                                <a href="javascript:void(0);"
+                                                    class="badge bg-white p-1 border text-muted fs-13 product-quantity-minus"
+                                                    (click)="updateQuantity(item.id, -1)">
+                                                    <i class="ri-subtract-line"></i>
+                                                </a>
+                                                <input type="text"
+                                                    class="form-control form-control-cart border-0 text-center w-100"
+                                                    aria-label="quantity" id="product-qty-1" [value]="item.quantity"
+                                                    readonly>
+                                                <a href="javascript:void(0);"
+                                                    class="badge bg-white p-1 border text-muted fs-13 product-quantity-plus"
+                                                    (click)="updateQuantity(item.id, 1)">
+                                                    <i class="ri-add-line"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            }
 
 
                         </ul>

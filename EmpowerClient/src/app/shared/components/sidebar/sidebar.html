@@ -3,7 +3,7 @@
 
   <!-- Start::main-sidebar-header -->
   <div class="main-sidebar-header">
-    <a routerLink="/dashboards/sales" class="header-logo">
+    <a routerLink="/" class="header-logo">
       <img src="./assets/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
       <img src="./assets/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark">
       <img src="./assets/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark">
@@ -65,20 +65,16 @@
             <span class="iconclick" [appSvgReplace]="menuItem.icon"></span>
             }
             <span class="side-menu__label">{{menuItem.title}}
-              </span>
+            </span>
             <i class="fe fe-chevron-right side-menu__angle"></i>
           </a>
           }
           @if (menuItem.children) {
-            <ul
-            class="slide-menu child1 "
-            [ngClass]="{
+          <ul class="slide-menu child1 " [ngClass]="{
               'active': menuItem.active,
               'double-menu-active': menuItem.active,
               'force-left': menuItem.dirchange
-            }"
-            [ngStyle]="{ display: menuItem.active ? 'block' : 'none' }"
-          >
+            }" [ngStyle]="{ display: menuItem.active ? 'block' : 'none' }">
             <li class="slide side-menu__label1">
               <a href="javascript:void(0)">
                 {{ menuItem.title }}
@@ -86,38 +82,27 @@
               </a>
             </li>
             @for (childrenItem of menuItem.children; track childrenItem) {
-            <li
-              class="slide"
-              [ngClass]="{ 'active': childrenItem.selected }"
-              appDropdownPosition
-              [ngClass]="{
+            <li class="slide" [ngClass]="{ 'active': childrenItem.selected }" appDropdownPosition [ngClass]="{
                 open: childrenItem.active,
                 'has-sub': childrenItem.type === 'sub',
                 'active': childrenItem.selected
-              }"
-            >
+              }">
               <!-- link -->
               @if (childrenItem.type === 'link') {
-              <a
-                class="side-menu__item"
-                [routerLink]="!childrenItem.type ? null : [childrenItem.path]"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="setNavActive($event, childrenItem.path ?? '')"
-              >
-              @if (childrenItem.subIcon) {
+              <a class="side-menu__item" [routerLink]="!childrenItem.type ? null : [childrenItem.path]"
+                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                (click)="setNavActive($event, childrenItem.path ?? '')">
+                @if (childrenItem.subIcon) {
                 <span class="iconclick" [appSvgReplace]="childrenItem.subIcon"></span>
                 }
-                {{ childrenItem.title }} <span class="badge {{childrenItem.badgeClass}} ms-2">{{childrenItem.badgeValue}}</span>
+                {{ childrenItem.title }} <span
+                  class="badge {{childrenItem.badgeClass}} ms-2">{{childrenItem.badgeValue}}</span>
               </a>
               }
               <!-- empty -->
               @if (childrenItem.type === 'empty' ) {
-              <a
-                class="side-menu__item"
-                (click)="setNavActive($event, childrenItem.path ?? '')"
-              >
-              @if (childrenItem.subIcon) {
+              <a class="side-menu__item" (click)="setNavActive($event, childrenItem.path ?? '')">
+                @if (childrenItem.subIcon) {
                 <span class="iconclick" [appSvgReplace]="childrenItem.subIcon"></span>
                 }
                 {{ childrenItem.title }}
@@ -125,41 +110,33 @@
               }
               <!-- sub -->
               @if (childrenItem.type === 'sub') {
-              <a
-                class="side-menu__item"
-                [ngClass]="{ 'active': childrenItem.selected }"
+              <a class="side-menu__item" [ngClass]="{ 'active': childrenItem.selected }"
                 [routerLink]="childrenItem.type ? null : [childrenItem.path]"
-                (click)="toggleNavActive($event, childrenItem)"
-              >
-              @if (childrenItem.subIcon) {
+                (click)="toggleNavActive($event, childrenItem)">
+                @if (childrenItem.subIcon) {
                 <span class="iconclick" [appSvgReplace]="childrenItem.subIcon"></span>
                 }
-                <span class="">{{ childrenItem.title }}</span><span class="badge {{childrenItem.badgeClass}} ms-2">{{childrenItem.badgeValue}}</span>
+                <span class="">{{ childrenItem.title }}</span><span
+                  class="badge {{childrenItem.badgeClass}} ms-2">{{childrenItem.badgeValue}}</span>
                 <i class="ri-arrow-right-s-line side-menu__angle"></i>
               </a>
               }
               <!-- 3rd Level menu -->
               @if (childrenItem.children) {
-              <ul
-                class="slide-menu child2"
-                [ngClass]="{ 'force-left': childrenItem.dirchange }"
+              <ul class="slide-menu child2" [ngClass]="{ 'force-left': childrenItem.dirchange }"
                 [ngStyle]="{display: childrenItem.active ? 'block' : 'none',}">
                 @for (childrenSubItem of childrenItem.children; track
                 childrenSubItem) {
-                <li class="slide"
-                  appDropdownPosition
-                  [ngClass]="{
+                <li class="slide" appDropdownPosition [ngClass]="{
                     open: childrenSubItem.active,
                     'has-sub': childrenSubItem.type === 'sub',
                     active: childrenSubItem.selected
                   }">
                   @if (childrenSubItem.type === 'link') {
-                  <a class="side-menu__item"
-                    routerLinkActive="active"
+                  <a class="side-menu__item" routerLinkActive="active"
                     [routerLink]="!childrenSubItem.type ? null : [childrenSubItem.path]"
                     [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="setNavActive($event, childrenSubItem.path ?? '')"
-                  >
+                    (click)="setNavActive($event, childrenSubItem.path ?? '')">
                     {{ childrenSubItem.title }}
                   </a>
                   }
@@ -169,9 +146,7 @@
                   </a>
                   }
                   @if (childrenSubItem.type === 'sub') {
-                  <a
-                    class="side-menu__item"
-                    [ngClass]="{ active: childrenSubItem.selected }"
+                  <a class="side-menu__item" [ngClass]="{ active: childrenSubItem.selected }"
                     [routerLink]="childrenSubItem.type ? null : [childrenSubItem.path]"
                     (click)="toggleNavActive($event, childrenSubItem)">
                     <span class="">{{ childrenSubItem.title }}</span>
@@ -180,22 +155,20 @@
                   }
                   <!-- 3rd Level menu -->
                   @if (childrenSubItem.children) {
-                  <ul
-                    class="slide-menu child3"
-                    [ngClass]="{ 'force-left': childrenItem.dirchange }"
+                  <ul class="slide-menu child3" [ngClass]="{ 'force-left': childrenItem.dirchange }"
                     [ngStyle]="{display: childrenSubItem.active ? 'block' : 'none',}">
                     @for (childrenSubItem1 of childrenSubItem.children; track
                     childrenSubItem1) {
                     <li class="slide" [ngClass]="{ open: childrenSubItem1.active }">
                       @if (childrenSubItem1.type === 'link') {
-                      <a class="side-menu__item"
-                        routerLinkActive="active"
-                        [routerLink]=" !childrenSubItem1.type ? null : [childrenSubItem1.path]" [routerLinkActiveOptions]="{ exact: true }">
+                      <a class="side-menu__item" routerLinkActive="active"
+                        [routerLink]=" !childrenSubItem1.type ? null : [childrenSubItem1.path]"
+                        [routerLinkActiveOptions]="{ exact: true }">
                         <span class="badge {{childrenItem.badgeClass}} ms-2">{{childrenItem.badgeValue}}</span>
                         {{ childrenSubItem1.title }}
                       </a>
                       }
-                       @if (childrenSubItem1.type === 'empty') {
+                      @if (childrenSubItem1.type === 'empty') {
                       <a class="side-menu__item"> {{ childrenSubItem1.title }} </a>
                       }
                     </li>
@@ -224,7 +197,7 @@
           </span>
         </a>
         }
-       }
+        }
         <!-- End::slide -->
         <li>
           <ul class="slide-menu child1 doublemenu_slide-menu">

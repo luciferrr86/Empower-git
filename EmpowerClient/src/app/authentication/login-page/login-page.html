@@ -10,7 +10,7 @@
       <div class="card custom-card border-0 my-4">
         <div class="card-body ">
           <div class="mb-4">
-            <a [routerLink]="['/dashboards/sales']">
+            <a [routerLink]="['/']">
               <img src="./assets/images/brand-logos/toggle-logo.png" alt="logo" class="desktop-dark">
             </a>
           </div>
@@ -20,10 +20,10 @@
           </div>
           <form [formGroup]="loginForm" (ngSubmit)="Submit()">
             @if(errorMessage.length > 0){
-              <p class="text-danger">{{errorMessage}}</p>
+            <p class="text-danger">{{errorMessage}}</p>
             }
             @if(_error.message.length > 0){
-              <p class="text-danger">{{_error.message}}</p>
+            <p class="text-danger">{{_error.message}}</p>
             }
             <div class="row gy-3">
               <div class="col-xl-12">
@@ -34,11 +34,11 @@
               <div class="col-xl-12 mb-2">
                 <label for="signin-password" class="form-label text-default d-block">Password</label>
                 <div class="position-relative">
-                  <input class="form-control create-password-input" id="signin-password"
-                    autocomplete="current-password" placeholder="password" [type]="showPassword ? 'text' : 'password'"
-                    formControlName="password" [(ngModel)]="password" required>
-                  <a href="javascript:void(0);" class="show-password-button text-muted"
-                    (click)="togglePassword()" id="button-addon2">
+                  <input class="form-control create-password-input" id="signin-password" autocomplete="current-password"
+                    placeholder="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                    [(ngModel)]="password" required>
+                  <a href="javascript:void(0);" class="show-password-button text-muted" (click)="togglePassword()"
+                    id="button-addon2">
                     <i class="{{toggleClass}} align-middle"></i>
                   </a>
                 </div>
@@ -59,26 +59,6 @@
                 [class.loader--text]="authservice.showLoader" class="btn btn-primary {{ disabled }}">Sign In</button>
             </div>
           </form>
-          <div class="text-center my-3 authentication-barrier">
-            <span class="op-4 fs-13">OR</span>
-          </div>
-          <div class="d-grid mb-3">
-            <button class="btn btn-white btn-w-lg border d-flex align-items-center justify-content-center flex-fill mb-3">
-              <span class="avatar avatar-xs">
-                <img src="./assets/images/media/apps/google.png" alt="">
-              </span>
-              <span class="lh-1 ms-2 fs-13 text-default fw-medium">Signup with Google</span>
-            </button>
-            <button class="btn btn-white btn-w-lg border d-flex align-items-center justify-content-center flex-fill">
-              <span class="avatar avatar-xs">
-                <img src="./assets/images/media/apps/facebook.png" alt="">
-              </span>
-              <span class="lh-1 ms-2 fs-13 text-default fw-medium">Signup with Facebook</span>
-            </button>
-          </div>
-          <div class="text-center mt-3 fw-medium">
-            Don't have an account? <a [routerLink]="['/pages/authentication/sign-up/basic']" class="text-primary">Sign Up</a>
-          </div>
         </div>
       </div>
     </div>

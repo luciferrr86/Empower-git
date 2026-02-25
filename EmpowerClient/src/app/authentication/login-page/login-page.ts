@@ -190,7 +190,7 @@ export class LoginPage implements OnInit {
       this.authservice
         .loginWithEmail(this.email, this.password)
         .then(() => {
-          this.router.navigate(['/dashboards/sales']);
+          this.router.navigate(['/']);
           console.clear();
           this.toastr.success('login successful', 'Vyzor', {
             timeOut: 3000,
@@ -245,7 +245,7 @@ export class LoginPage implements OnInit {
       this.loginForm.controls['username'].value === 'spruko@admin.com' &&
       this.loginForm.controls['password'].value === 'sprukoadmin'
     ) {
-      this.router.navigate(['/dashboards/sales']);
+      this.router.navigate(['/']);
       this.toastr.success('login successful', 'Vyzor', {
         timeOut: 3000,
         positionClass: 'toast-top-right',
