@@ -1,8 +1,5 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit, Renderer2 } from '@angular/core';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, RouterModule } from '@angular/router';
@@ -12,28 +9,26 @@ import { Container, Engine } from '@tsparticles/engine'; // Updated imports
 import { NgParticlesService } from '@tsparticles/angular';
 import { loadFull } from 'tsparticles';
 import { NgxParticlesModule } from "@tsparticles/angular";
-import { FirebaseService } from '../../shared/services/firebase.service';
 import { SharedModule } from '../../shared/shared.module';
 import { AuthService } from '../../shared/services/auth.service';
 @Component({
-    selector: 'app-login-page',
-    standalone: true,
-    imports: [RouterModule,NgbModule,FormsModule,ReactiveFormsModule ,AngularFireModule,SharedModule,NgxParticlesModule ,
-      AngularFireDatabaseModule,
-      AngularFirestoreModule,ToastrModule
+  selector: 'app-login-page',
+  standalone: true,
+  imports: [RouterModule, NgbModule, FormsModule, ReactiveFormsModule, SharedModule, NgxParticlesModule,
+    ToastrModule
   ],
-  providers: [FirebaseService,{ provide: ToastrService, useClass: ToastrService }],
-    templateUrl: './login-page.html',
-    styleUrls: ['./login-page.scss'],
+  providers: [{ provide: ToastrService, useClass: ToastrService }],
+  templateUrl: './login-page.html',
+  styleUrls: ['./login-page.scss'],
 
 })
 export class LoginPage implements OnInit {
   disabled = '';
-  active: any="Angular";
-  showLoader:boolean | undefined;
+  active: any = "Angular";
+  showLoader: boolean | undefined;
   id = "tsparticles";
 
-  particlesOptions:any  = {
+  particlesOptions: any = {
     particles: {
       number: {
         value: 200,
@@ -106,7 +101,7 @@ export class LoginPage implements OnInit {
     interactivity: {
       detect_on: 'canvas',
       events: {
-          onHover: {
+        onHover: {
           enable: true,
           mode: 'grab'
         },
@@ -117,52 +112,48 @@ export class LoginPage implements OnInit {
         resize: true
       },
       modes: {
-        grab:{
+        grab: {
           distance: 100,
-          line_linked:{
+          line_linked: {
             opacity: 1
           }
         },
-        bubble:{
+        bubble: {
           distance: 200,
           size: 80,
           duration: 0.4
         },
-        repulse:{
+        repulse: {
           distance: 200,
           duration: 0.4
         },
-        push:{
+        push: {
           particles_nb: 4
         },
-        remove:{
+        remove: {
           particles_nb: 2
         }
       },
-      mouse:{}
+      mouse: {}
     },
     retina_detect: false,
   };
 
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,private elementRef: ElementRef,
-   private sanitizer: DomSanitizer,
+    @Inject(DOCUMENT) private document: Document, private elementRef: ElementRef,
+    private sanitizer: DomSanitizer,
     public authservice: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
     private renderer: Renderer2,
-    private firebaseService: FirebaseService,
-    private toastr: ToastrService,private readonly ngParticlesService: NgParticlesService
+    private toastr: ToastrService, private readonly ngParticlesService: NgParticlesService
   ) {
     // AngularFireModule.initializeApp(environment.firebase);
 
-     const bodyElement = this.renderer.selectRootElement('body', true);
+    const bodyElement = this.renderer.selectRootElement('body', true);
     //  this.renderer.setAttribute(bodyElement, 'class', 'cover1 justify-center');
   }
-  firestoreModule: any;
-  databaseModule: any;
-  authModule: any;
   ngOnInit(): void {
     this.renderer.addClass(this.document.body, 'authentication-background');
 
@@ -175,14 +166,10 @@ export class LoginPage implements OnInit {
       password: ['sprukoadmin', Validators.required],
     });
 
-    this.firestoreModule = this.firebaseService.getFirestore();
-    this.databaseModule = this.firebaseService.getDatabase();
-    this.authModule = this.firebaseService.getAuth();
-
   }
   particlesLoaded(container: Container): void {
     console.log(container);
-}
+  }
   // firebase
   email = 'spruko@admin.com';
   password = 'sprukoadmin';
@@ -205,7 +192,7 @@ export class LoginPage implements OnInit {
         .then(() => {
           this.router.navigate(['/dashboards/sales']);
           console.clear();
-          this.toastr.success('login successful','Vyzor', {
+          this.toastr.success('login successful', 'Vyzor', {
             timeOut: 3000,
             positionClass: 'toast-top-right',
           });
@@ -217,7 +204,7 @@ export class LoginPage implements OnInit {
 
     }
     else {
-      this.toastr.error('Invalid details','Vyzor', {
+      this.toastr.error('Invalid details', 'Vyzor', {
         timeOut: 3000,
         positionClass: 'toast-top-right',
       });
@@ -259,12 +246,12 @@ export class LoginPage implements OnInit {
       this.loginForm.controls['password'].value === 'sprukoadmin'
     ) {
       this.router.navigate(['/dashboards/sales']);
-      this.toastr.success('login successful','Vyzor', {
+      this.toastr.success('login successful', 'Vyzor', {
         timeOut: 3000,
         positionClass: 'toast-top-right',
       });
     } else {
-      this.toastr.error('Invalid details','Vyzor', {
+      this.toastr.error('Invalid details', 'Vyzor', {
         timeOut: 3000,
         positionClass: 'toast-top-right',
       });
@@ -277,7 +264,7 @@ export class LoginPage implements OnInit {
     this.renderer.removeAttribute(bodyElement, 'class');
   }
 
- public showPassword: boolean = false;
+  public showPassword: boolean = false;
 
   toggleClass = 'ri-eye-off-line';
   public togglePassword() {
@@ -287,5 +274,5 @@ export class LoginPage implements OnInit {
     } else {
       this.toggleClass = 'ri-eye-line';
     }
-}
+  }
 }
